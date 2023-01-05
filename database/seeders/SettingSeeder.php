@@ -17,15 +17,15 @@ class SettingSeeder extends Seeder
     {
         Setting::create([
             'key'       => 'app_name',
-            'value'     => 'Laravel RBAC Starter',
-            'name'      => 'Application Short Name',
+            'value'     => 'SMAN 6 Cimahi',
+            'name'      => 'SMAN 6 Cimahi',
             'type'      => 'text',
             'category'  => 'information'
         ]);
         Setting::create([
             'key'       => 'app_short_name',
-            'value'     => 'Laravel',
-            'name'      => 'Application Name',
+            'value'     => 'SMAN 6 Cimahi',
+            'name'      => 'SMAN 6 Cimahi',
             'type'      => 'text',
             'category'  => 'information'
         ]);
@@ -54,7 +54,7 @@ class SettingSeeder extends Seeder
         ]);
         Setting::create([
             'key'       => 'app_map_loaction',
-            'value'     => 'https://www.google.com/maps/place/Kajen,+Kec.+Kajen,+Kabupaten+Pekalongan,+Jawa+Tengah/@-7.0319606,109.5291791,13z/data=!3m1!4b1!4m5!3m4!1s0x2e6fe01fab873f61:0xc109484cee38731e!8m2!3d-7.0269252!4d109.5811772',
+            'value'     => 'https://www.google.com/maps/place/SMA+Negeri+6+Cimahi/@-6.9244285,107.5628454,15z/data=!4m2!3m1!1s0x0:0x3664e0b526e78036?sa=X&ved=2ahUKEwiV_ZDL97D8AhW-0nMBHSTrBokQ_BJ6BAhCEAg&hl=id',
             'name'      => 'Application Map Location',
             'type'      => 'textarea',
             'category'  => 'contact'

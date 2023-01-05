@@ -111,6 +111,12 @@
                         $("#name").val(data.name);
                         $("#email").val(data.email);
                         $("#old_email").val(data.email);
+                        $("#nip").val(data.nip);
+                        $("#old_nip").val(data.nip);
+                        $("#nips").val(data.nips);
+                        $("#old_nips").val(data.nips);
+                        $("#jabatan").val(data.jabatan);
+                        $("#golongan").val(data.golongan);
                         $("#role").val(data.role);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
@@ -156,7 +162,7 @@
                         <div class="input-group">
                             <label>Email</label>
                             <div class="input-group">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email">
                                 @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -165,7 +171,7 @@
                         <div class="input-group">
                             <label>Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ old('password') }}">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password">
                                 @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -273,6 +279,42 @@
                             </div>
                         </div>
                         <div class="input-group">
+                            <label>NIP</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" placeholder="NIP" name="nip" id="nip" value="{{ old('nip') }}">
+                                @error('nip')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>NIPS</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nips') is-invalid @enderror" placeholder="NIPS" name="nips" id="nips" value="{{ old('nips') }}">
+                                @error('nips')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Jabatan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Jabatan" name="jabatan" id="jabatan" value="{{ old('jabatan') }}">
+                                @error('jabatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Golongan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('golongan') is-invalid @enderror" placeholder="Golongan" name="golongan" id="golongan" value="{{ old('golongan') }}">
+                                @error('golongan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
                             <label>Role</label>
                             <div class="input-group">
                                 <select class="form-control" name="role" id="role">
@@ -289,6 +331,8 @@
                 <div class="modal-footer justify-content-between">
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="old_email" id="old_email">
+                    <input type="hidden" name="old_nip" id="old_nip">
+                    <input type="hidden" name="old_nips" id="old_nips">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

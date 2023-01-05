@@ -29,7 +29,7 @@ class UserController extends Controller
             'password'  => ['required', 'string'],
             'role'      => ['required'],
             'nip'       => ['required', 'string'],
-            'nips'      => ['requiired', 'string'],
+            'nips'      => ['required', 'string'],
             'jabatan'   => ['required', 'string'],
             'golongan'  => ['required', 'string']
         ]);
@@ -66,6 +66,7 @@ class UserController extends Controller
             'message'   => 'Data user by id',
             'data'      => $user[0]
         ], Response::HTTP_OK);
+        
     }
 
     public function update(Request $request)
@@ -73,7 +74,9 @@ class UserController extends Controller
         $rules = [
             'name'      => ['required', 'string', 'max:255'],
             'password'  => ['nullable', 'string'],
-            'role'      => ['required']
+            'role'      => ['required'],
+            'jabatan'   => ['required', 'string'],
+            'golongan'  => ['required', 'string']
         ];
 
         if ($request->email != $request->old_email) {
@@ -81,6 +84,22 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), $rules);
         } else {
             $rules['email'] = ['required', 'string', 'email', 'max:255'];
+            $validator = Validator::make($request->all(), $rules);
+        }
+
+        if ($request->nip != $request->old_nip) {
+            $rules['nip'] = ['required', 'numeric', 'unique:users'];
+            $validator = Validator::make($request->all(), $rules);
+        } else {
+            $rules['nip'] = ['required', 'numeric'];
+            $validator = Validator::make($request->all(), $rules);
+        }
+
+        if ($request->nips != $request->old_nips) {
+            $rules['nips'] = ['required', 'numeric', 'unique:users'];
+            $validator = Validator::make($request->all(), $rules);
+        } else {
+            $rules['nips'] = ['required', 'numeric'];
             $validator = Validator::make($request->all(), $rules);
         }
 

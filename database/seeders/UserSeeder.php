@@ -18,21 +18,33 @@ class UserSeeder extends Seeder
         $superadmin = User::create([
             'name'      => 'Superadmin',
             'email'     => 'superadmin@superadmin.com',
-            'password'  => bcrypt('superadmin')
+            'password'  => bcrypt('superadmin'),
+            'nip'       => '12345678',
+            'nips'      => '12345678',
+            'jabatan'   => 'Kepala TU',
+            'golongan'  => 'Karya'
         ]);
         $superadmin->assignRole('superadmin');
 
         $admin = User::create([
             'name'      => 'Admin',
             'email'     => 'admin@admin.com',
-            'password'  => bcrypt('admin')
+            'password'  => bcrypt('admin'),
+            'nip'       => '123456781',
+            'nips'      => '123456781',
+            'jabatan'   => 'Wakil TU',
+            'golongan'  => 'Karya'
         ]);
         $admin->assignRole('admin');
 
         $operator = User::create([
             'name'      => 'Operator',
             'email'     => 'operator@operator.com',
-            'password'  => bcrypt('operator')
+            'password'  => bcrypt('operator'),
+            'nip'       => '123456789',
+            'nips'      => '123456789',
+            'jabatan'   => 'Wakil Wakil Kepala TU',
+            'golongan'  => 'Karya'
         ]);
         $operator->assignRole('operator');
     }
