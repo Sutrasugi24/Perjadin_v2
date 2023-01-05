@@ -9,6 +9,12 @@ class Perjadin extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id', 'leave_date', 'return_date', 'plan',
+        'destination', 'description', 'transport',
+        'coordinator', 'user_id'];
+
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_student', 'user_id', 'perjadin_id');

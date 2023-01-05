@@ -126,6 +126,8 @@
                 $("#delete-data").html(name);
                 $('#modal-delete').modal({backdrop: 'static', keyboard: false, show: true});
             });
+
+            $('#datetimepicker1').datetimepicker();
         });
     </script>
 @endsection
@@ -145,23 +147,25 @@
                     <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
-                            <label>Name</label>
+                            <label>Tanggal Pergi</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" value="{{ old('name') }}">
-                                @error('name')
+                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="leave_date" value="{{ old('leave_date') }}">
+                                @error('leave_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{-- Input leave date  --}}
                         <div class="input-group">
-                            <label>Email</label>
+                            <label>Tanggal Kembali</label>
                             <div class="input-group">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}">
+                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="email" value="{{ old('email') }}">
                                 @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{-- End Input date --}}
                         <div class="input-group">
                             <label>Password</label>
                             <div class="input-group">

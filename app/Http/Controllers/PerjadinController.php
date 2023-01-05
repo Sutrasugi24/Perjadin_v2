@@ -29,7 +29,7 @@ class PerjadinController extends Controller
     public function create()
     {
         $validator = Validator::make($request->all(), [
-            'name'      => ['required', 'string', 'max:255'],
+            'leave_date'      => ['required', 'string', 'max:255'],
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'  => ['required', 'string'],
             'role'      => ['required'],

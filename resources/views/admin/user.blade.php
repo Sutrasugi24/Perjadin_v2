@@ -41,8 +41,11 @@
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>NIP</th>
+                                            <th>NIPS</th>
+                                            <th>Jabatan</th>
+                                            <th>Golongan</th>
                                             <th>Role</th>
-                                            <th>Updated</th>
                                             @canany(['update user', 'delete user'])
                                                 <th>Action</th>
                                             @endcanany
@@ -54,8 +57,11 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->name }}</td>
                                                 <td>{{ $i->email }}</td>
+                                                <td>{{ $i->nip}}</td>
+                                                <td>{{ $i->nips}}</td>
+                                                <td>{{ $i->jabatan}}</td>
+                                                <td>{{ $i->golongan }}</td>
                                                 <td>{{ implode(",", $i->getRoleNames()->toArray()) }}</td>
-                                                <td>{{ $i->updated_at }}</td>
                                             @canany(['update user', 'delete user'])
                                                     <td>
                                                         <div class="btn-group">
@@ -161,6 +167,42 @@
                             <div class="input-group">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ old('password') }}">
                                 @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>NIP</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" placeholder="NIP" name="nip" value="{{ old('nip') }}">
+                                @error('nip')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>NIPS</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nips') is-invalid @enderror" placeholder="NIPS" name="nips" value="{{ old('nips') }}">
+                                @error('nips')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Jabatan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Jabatan" name="jabatan" value="{{ old('jabatan') }}">
+                                @error('jabatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Golongan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('golongan') is-invalid @enderror" placeholder="Golongan" name="golongan" value="{{ old('golongan') }}">
+                                @error('golongan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
