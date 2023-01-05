@@ -22,7 +22,7 @@ return new class extends Migration
 
         Schema::table('kuitansis', function (Blueprint $table) {
             $table->foreignId('biaya_id')->constrained('biayas');
-            $table->foreignId('perjadin_id')->constrained('perjadins');
+            $table->foreignId('perjadin_id')->constrained('perjadins')->onDelete('restrict');
         });
     }
 

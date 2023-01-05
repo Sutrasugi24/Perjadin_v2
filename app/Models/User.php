@@ -47,4 +47,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+    public function perjadins()
+    {
+        return $this->belongsToMany(Perjadin::class, 'user_perjadin', 'user_id', 'perjadin_id');
+    }
 }

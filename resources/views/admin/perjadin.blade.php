@@ -58,14 +58,17 @@
                                                 <td>{{ $i->leave_date }}</td>
                                                 <td>{{ $i->return_date }}</td>
                                                 <td>{{ $i->plan }}</td>
-                                                <td>{{ $i-> }}</td>
-                                            @canany(['update user', 'delete user'])
+                                                <td>{{ $i->destination }}</td>
+                                                <td>{{ $i->description }}</td>
+                                                <td>{{ $i->transport }}</td>
+                                                <td>{{ $i->coordinator }}</td>
+                                            @canany(['update perjadin', 'delete perjadin'])
                                                     <td>
                                                         <div class="btn-group">
-                                                            @can('update user')
+                                                            @can('update perjadin')
                                                                 <button class="btn btn-sm btn-primary btn-edit" data-id="{{ $i->id }}"><i class="fas fa-pencil-alt"></i></button>
                                                             @endcan
-                                                            @can('delete user')
+                                                            @can('delete perjadin')
                                                                 <button class="btn btn-sm btn-danger btn-delete" data-id="{{ $i->id }}" data-name="{{ $i->name }}"><i class="fas fa-trash"></i></button>
                                                             @endcan
                                                         </div>
@@ -96,7 +99,7 @@
                 let id = $(this).attr("data-id");
                 $('#modal-loading').modal({backdrop: 'static', keyboard: false, show: true});
                 $.ajax({
-                    url: "{{ route('user.show') }}",
+                    url: "{{ route('perjadin.show') }}",
                     type: "POST",
                     dataType: "JSON",
                     data: {

@@ -5,31 +5,62 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePerjadinRequest;
 use App\Http\Requests\UpdatePerjadinRequest;
 use App\Models\Perjadin;
+use App\Http\Resources\PerjadinResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+use RealRashid\SweetAlert\Facades\Alert;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Controller;
 
 class PerjadinController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $x['title'] = 'Perjadin';
-        $x['data'] = Perjadin::get();
+        $x['data'] = Perjadin::with('users')->get();
         $x['role'] = Role::get();
 
-        return view('admin.perjadin',[$x]);
+        return view('admin.perjadin', $x);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name'      => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'  => ['required', 'string'],
+            'role'      => ['required'],
+            'nip'       => ['required', 'string'],
+            'nips'      => ['requiired', 'string'],
+            'jabatan'   => ['required', 'string'],
+            'golongan'  => ['required', 'string']
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'leave_date'      => $request->leave_date,
+                'return_date'     => $request->return_date,
+                'plan'  => $request->plan,
+                'destination'       => $request->destination,
+                'description'      => $request->description,
+                'transport'   => $request->transport,
+                'coordinator'  => $request->coordinator
+            ]);
+            $user->assignRole($request->role);
+            DB::commit();
+            Alert::success('Pemberitahuan', 'Data <b>' . $user->name . '</b> berhasil dibuat')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::error('Pemberitahuan', 'Data <b>' . $user->name . '</b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 
     /**

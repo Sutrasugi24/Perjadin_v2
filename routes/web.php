@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FileManagerController;
-use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PerjadinController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\FileManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +47,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('user', 'destroy')->middleware(['permission:delete user'])->name('user.destroy');
     });
 
-    Route::controller(Perjadin::class)->group(function () {
+    Route::controller(PerjadinController::class)->group(function () {
         Route::get('perjadin', 'index')->middleware(['permission:read perjadin'])->name('perjadin.index');
         // Route::post('perjadin', 'store')->middleware(['permission:create perjadin'])->name('perjadin.store');
-        // Route::post('perjadin/show', 'show')->middleware(['permission:read perjadin'])->name('perjadin.show');
+        Route::post('perjadin/show', 'show')->middleware(['permission:read perjadin'])->name('perjadin.show');
         // Route::put('perjadin', 'update')->middleware(['permission:update perjadin'])->name('perjadin.update');
         // Route::delete('perjadin', 'destroy')->middleware(['permission:delete perjadin'])->name('perjadin.destroy');
     });

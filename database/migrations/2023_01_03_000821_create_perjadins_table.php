@@ -24,10 +24,6 @@ return new class extends Migration
             $table->date('return_date')->required();
             $table->string('description')->required();
         });
-
-        Schema::table('perjadins', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users');
-        });
     }
 
     /**
@@ -38,8 +34,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('perjadins');
-        Schema::table('perjadins', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-        });
     }
 };
