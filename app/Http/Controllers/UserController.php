@@ -27,7 +27,11 @@ class UserController extends Controller
             'name'      => ['required', 'string', 'max:255'],
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'  => ['required', 'string'],
-            'role'      => ['required']
+            'role'      => ['required'],
+            'nip'       => ['required', 'string'],
+            'nips'      => ['requiired', 'string'],
+            'jabatan'   => ['required', 'string'],
+            'golongan'  => ['required', 'string']
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)
@@ -38,7 +42,11 @@ class UserController extends Controller
             $user = User::create([
                 'name'      => $request->name,
                 'email'     => $request->email,
-                'password'  => bcrypt($request->password)
+                'password'  => bcrypt($request->password),
+                'nip'       => $request->nip,
+                'nips'      => $request->nips,
+                'jabatan'   => $request->jabatan,
+                'golongan'  => $request->golongan
             ]);
             $user->assignRole($request->role);
             DB::commit();
@@ -83,6 +91,10 @@ class UserController extends Controller
         $data = [
             'name'      => $request->name,
             'email'     => $request->email,
+            'nip'     => $request->nip,
+            'nips'     => $request->nips,
+            'jabatan'     => $request->jabatan,
+            'golongan'     => $request->golongan,
         ];
         if (!empty($request->password)) {
             $data['password']   = bcrypt($request->password);

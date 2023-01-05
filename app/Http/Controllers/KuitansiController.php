@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreKwitansiRequest;
-use App\Http\Requests\UpdateKwitansiRequest;
-use App\Models\Kwitansi;
+use App\Http\Requests\StoreKuitansiRequest;
+use App\Http\Requests\UpdateKuitansiRequest;
+use App\Models\Kuitansi;
 
-class KwitansiController extends Controller
+class KuitansiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class KwitansiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreKwitansiRequest  $request
+     * @param  \App\Http\Requests\StoreKuitansiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreKwitansiRequest $request)
+    public function store(StoreKuitansiRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class KwitansiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kwitansi  $kwitansi
+     * @param  \App\Models\Kuitansi  $kuitansi
      * @return \Illuminate\Http\Response
      */
-    public function show(Kwitansi $kwitansi)
+    public function show(Kuitansi $kuitansi)
     {
         //
     }
@@ -53,10 +53,10 @@ class KwitansiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kwitansi  $kwitansi
+     * @param  \App\Models\Kuitansi  $kuitansi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kwitansi $kwitansi)
+    public function edit(Kuitansi $kuitansi)
     {
         //
     }
@@ -64,11 +64,11 @@ class KwitansiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateKwitansiRequest  $request
-     * @param  \App\Models\Kwitansi  $kwitansi
+     * @param  \App\Http\Requests\UpdateKuitansiRequest  $request
+     * @param  \App\Models\Kuitansi  $kuitansi
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateKwitansiRequest $request, Kwitansi $kwitansi)
+    public function update(UpdateKuitansiRequest $request, Kuitansi $kuitansi)
     {
         //
     }
@@ -76,10 +76,10 @@ class KwitansiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kwitansi  $kwitansi
+     * @param  \App\Models\Kuitansi  $kuitansi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kwitansi $kwitansi)
+    public function destroy(Kuitansi $kuitansi)
     {
         //
     }

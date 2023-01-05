@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('perjadins', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('coordinator')->required();
             $table->string('plan')->required();
             $table->string('destination')->required();
             $table->enum('transport', ['darat', 'laut', 'udara'])->required();
@@ -25,7 +26,6 @@ return new class extends Migration
         });
 
         Schema::table('perjadins', function (Blueprint $table) {
-            $table->dropForeign('user_id');
             $table->foreignId('user_id')->constrained('users');
         });
     }

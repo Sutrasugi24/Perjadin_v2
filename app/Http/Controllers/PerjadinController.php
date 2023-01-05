@@ -15,7 +15,11 @@ class PerjadinController extends Controller
      */
     public function index()
     {
-        //
+        $x['title'] = 'Perjadin';
+        $x['data'] = Perjadin::get();
+        $x['role'] = Role::get();
+
+        return view('admin.perjadin',[$x]);
     }
 
     /**

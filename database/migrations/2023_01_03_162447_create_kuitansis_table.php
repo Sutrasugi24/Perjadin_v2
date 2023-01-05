@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('surats', function (Blueprint $table) {
+        Schema::create('kuitansis', function (Blueprint $table) {
             $table->id();
-            $table->string('document_number')->required();
-            $table->string('document_date')->required();
+            $table->string('kuitansi_number')->required();
+            $table->string('kuitansi_date')->required();
             $table->timestamps();
         });
 
-        Schema::table('surats', function (Blueprint $table) {
+        Schema::table('kuitansis', function (Blueprint $table) {
+            $table->foreignId('biaya_id')->constrained('biayas');
             $table->foreignId('perjadin_id')->constrained('perjadins');
         });
     }
@@ -32,8 +33,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surats');
-        Schema::table('surats', function (Blueprint $table) {
+        Schema::dropIfExists('kuitansis');
+        Schema::table('kuitansis', function (Blueprint $table) {
+            $table->dropColumn('biaya_id');
             $table->dropColumn('perjadin_id');
         });
     }
