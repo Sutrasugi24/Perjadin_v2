@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="{{ asset('template/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <!-- DataTables -->
         <link rel="stylesheet" href="{{ asset('template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('template/admin/plugins/select2/css/select2.css')}}">
+        <link rel="stylesheet" href="{{ asset('template/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('template/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
         @stack('style')
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -69,6 +72,10 @@
         <script src="{{ asset('template/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('template/admin/dist/js/adminlte.js') }}"></script>
+        <!-- Select2 -->
+        <script src="{{ asset('template/admin/plugins/select2/js/select2.full.min.js') }}"></script>
+        <!--Tempus Dominus-->
+        <script src="{{ asset('template/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
         @stack('script')
     </body>
 </html>

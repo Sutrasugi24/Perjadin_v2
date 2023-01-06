@@ -17,6 +17,6 @@ class Perjadin extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_student', 'user_id', 'perjadin_id');
+        return $this->belongsToMany(User::class, 'user_perjadin', 'user_id', 'perjadin_id');
     }
 }

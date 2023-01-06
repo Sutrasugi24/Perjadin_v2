@@ -127,14 +127,25 @@
                 $('#modal-delete').modal({backdrop: 'static', keyboard: false, show: true});
             });
 
-            $('#datetimepicker1').datetimepicker();
+            $("#single-input").select2({
+                dropDownParent: $("#modal-tambah"),
+                placeholder: "Pilih Koordinator",
+                theme: 'bootstrap4'
+            });
+
+            $("#multiple-input").select2({
+                dropDownParent: $("#modal-tambah"),
+                placeholder: "Pilih Anggota",
+                theme: 'bootstrap4',
+            });
+            $('.select2-search__field').css('width', '100%');
         });
     </script>
 @endsection
 
 @section('modal')
     {{-- Modal tambah --}}
-    <div class="modal fade" id="modal-tambah">
+    <div class="modal fade" id="modal-tambah" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -146,6 +157,7 @@
                 <div class="modal-body">
                     <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        {{-- Input leave date  --}}
                         <div class="input-group">
                             <label>Tanggal Pergi</label>
                             <div class="input-group">
@@ -155,39 +167,83 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- End Input date --}}
                         {{-- Input leave date  --}}
                         <div class="input-group">
                             <label>Tanggal Kembali</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="email" value="{{ old('email') }}">
-                                @error('email')
+                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="return_date" value="{{ old('return_date') }}">
+                                @error('return_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         {{-- End Input date --}}
                         <div class="input-group">
-                            <label>Password</label>
+                            <label>Tujuan</label>
                             <div class="input-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ old('password') }}">
-                                @error('password')
+                                <input type="string" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" name="plan" value="{{ old('plan') }}">
+                                @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{--Start: Input destination --}}
                         <div class="input-group">
-                            <label>Role</label>
+                            <label>Tempat Tujuan</label>
                             <div class="input-group">
-                                <select class="form-control" name="role">
-                                    @foreach ($role as $i)
-                                        <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                <input type="string" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" name="destination" value="{{ old('destination') }}">
+                                @error('destination')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- End: Input destination --}}
+                        {{--Start: Input destination --}}
+                        {{-- <div class="input-group">
+                            <label>Transport</label>
+                            <div class="input-group">
+                                <select class="form-control" name="transport">
+                                    @foreach ($data->users as $i)
+                                        <option value="{{ $i->transport }}">{{ $i->transport }}</option>
                                     @endforeach
                                 </select>
                                 @error('role')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                        </div> --}}
+                        {{-- End: Input destination --}}
+                        {{--Start: Input description --}}
+                        <div class="input-group">
+                            <label>Deskripsi</label>
+                            <div class="input-group">
+                                <input type="string" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" name="description" value="{{ old('description') }}">
+                                @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
+                        {{-- End: Input description --}}
+                        {{--Start: Input koordinator --}}
+                        <label>Koordinator</label>
+                        <div class="input-group">
+                            <select id="single-input" class="form-control js-states">
+                                <option></option>
+                                <option>Shugi</option>
+                                <option>Superadmin</option>
+                            </select>
+                        </div>
+                        {{-- End: Input koordinator --}}
+                        {{--Start: Input koordinator --}}
+                        <label>Anggota</label>
+                        <div class="input-group">
+                            <select id="multiple-input" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states">
+                                <option>Shugi</option>
+                                <option>Superadmin</option>
+                            </select>
+                        </div>
+                        {{-- End: Input Anggota --}}
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

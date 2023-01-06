@@ -18,6 +18,7 @@ class UserController extends Controller
         $x['title']     = 'User';
         $x['data']      = User::with('perjadins')->get();
         $x['role']      = Role::get();
+        dd($x);
         return view('admin.user', $x);
     }
 
