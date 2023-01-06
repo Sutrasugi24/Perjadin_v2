@@ -108,13 +108,13 @@
                     },
                     success: function(data) {
                         var data = data.data;
-                        $("#name").val(data.name);
-                        $("#email").val(data.email);
-                        $("#old_email").val(data.email);
-                        $("#role").val(data.role);
-                        $("#id").val(data.id);
-                        $('#modal-loading').modal('hide');
-                        $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
+                        // $("#name").val(data.name);
+                        // $("#email").val(data.email);
+                        // $("#old_email").val(data.email);
+                        // $("#role").val(data.role);
+                        // $("#id").val(data.id);
+                        // $('#modal-loading').modal('hide');
+                        // $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
                     },
                 });
             });
@@ -200,11 +200,11 @@
                         </div>
                         {{-- End: Input destination --}}
                         {{--Start: Input destination --}}
-                        {{-- <div class="input-group">
+                        <div class="input-group">
                             <label>Transport</label>
                             <div class="input-group">
                                 <select class="form-control" name="transport">
-                                    @foreach ($data->users as $i)
+                                    @foreach ($data as $i)
                                         <option value="{{ $i->transport }}">{{ $i->transport }}</option>
                                     @endforeach
                                 </select>
@@ -212,7 +212,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
                         {{-- End: Input destination --}}
                         {{--Start: Input description --}}
                         <div class="input-group">
@@ -230,8 +230,9 @@
                         <div class="input-group">
                             <select id="single-input" class="form-control js-states">
                                 <option></option>
-                                <option>Shugi</option>
-                                <option>Superadmin</option>
+                                <@foreach ($data->users as $i)
+                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         {{-- End: Input koordinator --}}

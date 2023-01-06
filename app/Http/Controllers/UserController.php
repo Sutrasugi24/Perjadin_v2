@@ -18,7 +18,6 @@ class UserController extends Controller
         $x['title']     = 'User';
         $x['data']      = User::with('perjadins')->get();
         $x['role']      = Role::get();
-        dd($x);
         return view('admin.user', $x);
     }
 
@@ -29,8 +28,8 @@ class UserController extends Controller
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'  => ['required', 'string'],
             'role'      => ['required'],
-            'nip'       => ['required', 'string'],
-            'nips'      => ['required', 'string'],
+            'nip'       => ['required', 'string', 'unique:users'],
+            'nips'      => ['required', 'string', 'unique:users'],
             'jabatan'   => ['required', 'string'],
             'golongan'  => ['required', 'string']
         ]);
