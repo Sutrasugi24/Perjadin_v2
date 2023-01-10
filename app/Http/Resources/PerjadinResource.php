@@ -23,6 +23,7 @@ class PerjadinResource extends JsonResource
             'description'   => $this->description,
             'transport'     => $this->transport,
             'coordinator'   => $this->coordinator,
+            'members'        => $this->members,
             'created_at'    => date('d-m-Y H:i:s', strtotime($this->created_at)),
             'updated_at'    => date('d-m-Y H:i:s', strtotime($this->updated_at))
         ];

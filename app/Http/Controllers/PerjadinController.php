@@ -2,42 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePerjadinRequest;
-use App\Http\Requests\UpdatePerjadinRequest;
+use App\Models\User;
 use App\Models\Perjadin;
-use App\Http\Resources\PerjadinResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
-use RealRashid\SweetAlert\Facades\Alert;
-use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PerjadinResource;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StorePerjadinRequest;
+use App\Http\Requests\UpdatePerjadinRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class PerjadinController extends Controller
 {
     public function index()
     {
         $x['title'] = 'Perjadin';
-        $x['data'] = Perjadin::with('users')->get();
+        $x['data'] = Perjadin::get();
+        // $x['user'] = User::get();
         $x['role'] = Role::get();
+
         dd($x);
 
         return view('admin.perjadin', $x);
     }
 
     
-    public function create()
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'leave_date'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'  => ['required', 'string'],
-            'role'      => ['required'],
-            'nip'       => ['required', 'string'],
-            'nips'      => ['requiired', 'string'],
-            'jabatan'   => ['required', 'string'],
-            'golongan'  => ['required', 'string']
+            'leave_date'      => ['required'],
+            'return_date'   => ['required'],
+            'plan'          => ['required', 'max:255'],
+            'destination'   => ['required'],
+            'description'   => ['required', 'max:255'],
+            'transport'     => ['required', 'in:darat,laut,udara'],
+            'coordinator'   => ['required', 'max:255'],
+            'members'       => ['required', 'array'],
+
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)
@@ -45,76 +49,46 @@ class PerjadinController extends Controller
         }
         DB::beginTransaction();
         try {
-            $user = User::create([
-                'leave_date'      => $request->leave_date,
-                'return_date'     => $request->return_date,
-                'plan'  => $request->plan,
-                'destination'       => $request->destination,
-                'description'      => $request->description,
-                'transport'   => $request->transport,
-                'coordinator'  => $request->coordinator
+            $perjadin = Perjadin::create([
+                'leave_date'    => $request->leave_date,
+                'return_date'   => $request->return_date,
+                'plan'          => $request->plan,
+                'destination'   => $request->destination,
+                'description'   => $request->description,
+                'transport'     => $request->transport,
             ]);
-            $user->assignRole($request->role);
+            $perjadin->assignRole($request->role);
+            $perjadin->coordinator()->sync(request('coordinator'));
+            $perjadin->members()->sync(request('members'));
             DB::commit();
-            Alert::success('Pemberitahuan', 'Data <b>' . $user->name . '</b> berhasil dibuat')->toToast()->toHtml();
+            Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil dibuat')->toToast()->toHtml();
         } catch (\Throwable $th) {
             DB::rollback();
-            Alert::error('Pemberitahuan', 'Data <b>' . $user->name . '</b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
+            Alert::error('Pemberitahuan', 'Data <b></b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
         }
         return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePerjadinRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePerjadinRequest $request)
+    public function show(Request $request)
     {
-        //
+        $perjadin = PerjadinResource::collection(Perjadin::where(['id' => $request->id])->get());
+        return response()->json([
+            'status'    => Response::HTTP_OK,
+            'message'   => 'Data perjadin by id',
+            'data'      => $perjadin[0]
+        ], Response::HTTP_OK);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Perjadin  $perjadin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Perjadin $perjadin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Perjadin  $perjadin
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Perjadin $perjadin)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePerjadinRequest  $request
-     * @param  \App\Models\Perjadin  $perjadin
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdatePerjadinRequest $request, Perjadin $perjadin)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Perjadin  $perjadin
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Perjadin $perjadin)
     {
         //

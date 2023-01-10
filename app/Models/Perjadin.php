@@ -4,15 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Perjadin extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles;
 
     protected $fillable = [
         'id', 'leave_date', 'return_date', 'plan',
         'destination', 'description', 'transport',
-        'coordinator', 'user_id'];
+        'coordinator', 'members', 'user_id'];
 
 
     public function users()

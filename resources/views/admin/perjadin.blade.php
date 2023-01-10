@@ -45,7 +45,8 @@
                                             <th>Tujuan</th>
                                             <th>Keterangan</th>
                                             <th>Angkutan</th>
-                                            <th>Koordinator</th>
+                                            {{-- <th>Koordinator</th>
+                                            <th>Anggota</th> --}}
                                             @canany(['update perjadin', 'delete perjadin'])
                                                 <th>Action</th>
                                             @endcanany
@@ -61,7 +62,8 @@
                                                 <td>{{ $i->destination }}</td>
                                                 <td>{{ $i->description }}</td>
                                                 <td>{{ $i->transport }}</td>
-                                                <td>{{ $i->coordinator }}</td>
+                                                {{-- <td>{{ $i->coordinator }}</td> --}}
+                                                {{-- <td>{{ $i->members }}</td> --}}
                                             @canany(['update perjadin', 'delete perjadin'])
                                                     <td>
                                                         <div class="btn-group">
@@ -108,13 +110,13 @@
                     },
                     success: function(data) {
                         var data = data.data;
-                        // $("#name").val(data.name);
-                        // $("#email").val(data.email);
-                        // $("#old_email").val(data.email);
-                        // $("#role").val(data.role);
-                        // $("#id").val(data.id);
-                        // $('#modal-loading').modal('hide');
-                        // $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
+                        $("#leave_date").val(data.name);
+                        $("#email").val(data.email);
+                        $("#old_email").val(data.email);
+                        $("#role").val(data.role);
+                        $("#id").val(data.id);
+                        $('#modal-loading').modal('hide');
+                        $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
                     },
                 });
             });
@@ -137,6 +139,7 @@
                 dropDownParent: $("#modal-tambah"),
                 placeholder: "Pilih Anggota",
                 theme: 'bootstrap4',
+                tags: true
             });
             $('.select2-search__field').css('width', '100%');
         });
@@ -155,7 +158,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('perjadin.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{-- Input leave date  --}}
                         <div class="input-group">
@@ -204,11 +207,11 @@
                             <label>Transport</label>
                             <div class="input-group">
                                 <select class="form-control" name="transport">
-                                    @foreach ($data as $i)
-                                        <option value="{{ $i->transport }}">{{ $i->transport }}</option>
-                                    @endforeach
+                                    <option value="darat">Darat</option>
+                                    <option  value="laut">Laut</option>
+                                    <option value="udara">Udara</option>
                                 </select>
-                                @error('role')
+                                @error('transport')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -220,7 +223,7 @@
                             <div class="input-group">
                                 <input type="string" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" name="description" value="{{ old('description') }}">
                                 @error('description')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -228,7 +231,7 @@
                         {{--Start: Input koordinator --}}
                         <label>Koordinator</label>
                         <div class="input-group">
-                            <select id="single-input" class="form-control js-states">
+                            <select id="single-input" class="form-control js-states" name="coordinator">
                                 <option></option>
                                 <@foreach ($data->users as $i)
                                     <option value="{{ $i->name }}">{{ $i->name }}</option>
@@ -239,9 +242,10 @@
                         {{--Start: Input koordinator --}}
                         <label>Anggota</label>
                         <div class="input-group">
-                            <select id="multiple-input" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states">
-                                <option>Shugi</option>
-                                <option>Superadmin</option>
+                            <select id="multiple-input" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states" name="members[]">
+                                <@foreach ($data->users as $i)
+                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         {{-- End: Input Anggota --}}

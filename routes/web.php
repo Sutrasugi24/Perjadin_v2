@@ -49,7 +49,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::controller(PerjadinController::class)->group(function () {
         Route::get('perjadin', 'index')->middleware(['permission:read perjadin'])->name('perjadin.index');
-        // Route::post('perjadin', 'store')->middleware(['permission:create perjadin'])->name('perjadin.store');
+        Route::post('perjadin', 'store')->middleware(['permission:create perjadin'])->name('perjadin.store');
         Route::post('perjadin/show', 'show')->middleware(['permission:read perjadin'])->name('perjadin.show');
         // Route::put('perjadin', 'update')->middleware(['permission:update perjadin'])->name('perjadin.update');
         // Route::delete('perjadin', 'destroy')->middleware(['permission:delete perjadin'])->name('perjadin.destroy');
