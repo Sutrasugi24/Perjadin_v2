@@ -12,17 +12,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FileManagerController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
@@ -51,8 +40,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('perjadin', 'index')->middleware(['permission:read perjadin'])->name('perjadin.index');
         Route::post('perjadin', 'store')->middleware(['permission:create perjadin'])->name('perjadin.store');
         Route::post('perjadin/show', 'show')->middleware(['permission:read perjadin'])->name('perjadin.show');
-        // Route::put('perjadin', 'update')->middleware(['permission:update perjadin'])->name('perjadin.update');
-        // Route::delete('perjadin', 'destroy')->middleware(['permission:delete perjadin'])->name('perjadin.destroy');
+        Route::put('perjadin', 'update')->middleware(['permission:update perjadin'])->name('perjadin.update');
+        Route::delete('perjadin', 'destroy')->middleware(['permission:delete perjadin'])->name('perjadin.destroy');
     });
     
 

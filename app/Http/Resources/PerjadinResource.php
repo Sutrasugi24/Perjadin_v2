@@ -16,14 +16,13 @@ class PerjadinResource extends JsonResource
     {
         return [
             'id'            => $this->id,
-            'leave_date'    => $this->leave_date,
-            'return_date'   => $this->return_date,
+            'leave_date'    => date('d-m-Y', strtotime($this->leave_date)),
+            'return_date'   => date('d-m-Y', strtotime($this->return_date)),
             'plan'          => $this->plan,
             'destination'   => $$this->destination,
             'description'   => $this->description,
             'transport'     => $this->transport,
             'coordinator'   => $this->coordinator,
-            'members'        => $this->members,
             'created_at'    => date('d-m-Y H:i:s', strtotime($this->created_at)),
             'updated_at'    => date('d-m-Y H:i:s', strtotime($this->updated_at))
         ];

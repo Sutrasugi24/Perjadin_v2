@@ -64,7 +64,7 @@ class PerjadinController extends Controller
             Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil dibuat')->toToast()->toHtml();
         } catch (\Throwable $th) {
             DB::rollback();
-            Alert::error('Pemberitahuan', 'Data <b></b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
+            Alert::error('Pemberitahuan', 'Data <b>'. $perjadin->coordinator . '</b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
         }
         return back();
     }
@@ -79,18 +79,57 @@ class PerjadinController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function edit(Perjadin $perjadin)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'leave_date'    => ['required'],
+            'return_date'   => ['required'],
+            'plan'          => ['required', 'max:255'],
+            'destination'   => ['required'],
+            'description'   => ['required', 'max:255'],
+            'transport'     => ['required', 'in:darat,laut,udara'],
+            'coordinator'   => ['required', 'max:255'],
+            'members'       => ['required', 'array'],
+        ];
+
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
+        $data = [
+            'leave_date'    => $request->leave_date,
+            'return_date'   => $request->return_date,
+            'plan'          => $request->plan,
+            'destination'   => $request->destination,
+            'description'   => $request->description,
+            'transport'     => $request->transport,
+            'coordinator'   => $request->coordinator
+        ];
+
+        DB::beginTransaction();
+        try {
+            $perjadin = Perjadin::findOrFail($request->id);
+            $perjadin->update($data);
+            $user->syncRoles($request->role);
+            DB::commit();
+            Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil disimpan')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::error('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> gagal disimpan : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 
-    public function update(UpdatePerjadinRequest $request, Perjadin $perjadin)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    public function destroy(Perjadin $perjadin)
-    {
-        //
+        try {
+            $perjadin = Perjadin::findOrFail($request->id);
+            $perjadin->delete();
+            Alert::success('Pemberitahuan', 'Data <b>' . $user->coordinator . '</b> berhasil dihapus')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            Alert::error('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> gagal dihapus : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 }
