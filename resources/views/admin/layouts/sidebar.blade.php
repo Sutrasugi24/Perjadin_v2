@@ -84,6 +84,14 @@
                         </a>
                     </li>
                 @endcan
+                @can('read user')
+                    <li class="nav-item">
+                        <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.index') ? 'active':'' }}">
+                            <i class="fas fa-user nav-icon"></i>
+                            <p>User</p>
+                        </a>
+                    </li>
+                @endcan
                 @can('read role')
                     <li class="nav-item">
                         <a href="{{ route('role.index') }}" class="nav-link {{ request()->routeIs('role.index') ? 'active':'' }}">
