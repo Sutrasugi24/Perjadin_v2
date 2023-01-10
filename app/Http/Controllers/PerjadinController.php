@@ -21,10 +21,10 @@ class PerjadinController extends Controller
     {
         $x['title'] = 'Perjadin';
         $x['data'] = Perjadin::get();
-        // $x['user'] = User::get();
+        $x['user'] = User::get();
         $x['role'] = Role::get();
 
-        dd($x);
+        
 
         return view('admin.perjadin', $x);
     }
@@ -56,10 +56,10 @@ class PerjadinController extends Controller
                 'destination'   => $request->destination,
                 'description'   => $request->description,
                 'transport'     => $request->transport,
+                'coordinator'   => $request->coordinator
             ]);
             $perjadin->assignRole($request->role);
-            $perjadin->coordinator()->sync(request('coordinator'));
-            $perjadin->members()->sync(request('members'));
+            $perjadin->users()->sync(request('members'));
             DB::commit();
             Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil dibuat')->toToast()->toHtml();
         } catch (\Throwable $th) {

@@ -78,9 +78,9 @@
                 @endcanany
                 @can('read user')
                     <li class="nav-item">
-                        <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.index') ? 'active':'' }}">
-                            <i class="fas fa-user nav-icon"></i>
-                            <p>User</p>
+                        <a href="{{ route('perjadin.index') }}" class="nav-link {{ request()->routeIs('perjadin.index') ? 'active':'' }}">
+                            <i class="fas fa-business-time nav-icon"></i>
+                            <p>Perjadin</p>
                         </a>
                     </li>
                 @endcan

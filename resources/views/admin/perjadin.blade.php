@@ -45,8 +45,8 @@
                                             <th>Tujuan</th>
                                             <th>Keterangan</th>
                                             <th>Angkutan</th>
-                                            {{-- <th>Koordinator</th>
-                                            <th>Anggota</th> --}}
+                                            <th>Koordinator</th>
+                                            <th>Anggota</th>
                                             @canany(['update perjadin', 'delete perjadin'])
                                                 <th>Action</th>
                                             @endcanany
@@ -62,8 +62,8 @@
                                                 <td>{{ $i->destination }}</td>
                                                 <td>{{ $i->description }}</td>
                                                 <td>{{ $i->transport }}</td>
-                                                {{-- <td>{{ $i->coordinator }}</td> --}}
-                                                {{-- <td>{{ $i->members }}</td> --}}
+                                                <td>{{ $i->coordinator }}</td>
+                                                <td>{{ $i->users()->get()->implode('name', ', ') }}</td>
                                             @canany(['update perjadin', 'delete perjadin'])
                                                     <td>
                                                         <div class="btn-group">
@@ -233,7 +233,7 @@
                         <div class="input-group">
                             <select id="single-input" class="form-control js-states" name="coordinator">
                                 <option></option>
-                                <@foreach ($data->users as $i)
+                                <@foreach ($user as $i)
                                     <option value="{{ $i->name }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
@@ -243,8 +243,8 @@
                         <label>Anggota</label>
                         <div class="input-group">
                             <select id="multiple-input" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states" name="members[]">
-                                <@foreach ($data->users as $i)
-                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                <@foreach ($user as $i)
+                                    <option value="{{ $i->id }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                         </div>
