@@ -20,11 +20,9 @@ class PerjadinController extends Controller
     public function index()
     {
         $x['title'] = 'Perjadin';
-        $x['data'] = Perjadin::get();
+        $x['data'] = Perjadin::with('users')->get();
         $x['user'] = User::get();
         $x['role'] = Role::get();
-
-        
 
         return view('admin.perjadin', $x);
     }
@@ -58,7 +56,7 @@ class PerjadinController extends Controller
                 'transport'     => $request->transport,
                 'coordinator'   => $request->coordinator
             ]);
-            $perjadin->assignRole($request->role);
+            // $perjadin->assignRole($request->role);
             $perjadin->users()->sync(request('members'));
             DB::commit();
             Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil dibuat')->toToast()->toHtml();
@@ -71,7 +69,7 @@ class PerjadinController extends Controller
 
     public function show(Request $request)
     {
-        $perjadin = PerjadinResource::collection(Perjadin::where(['id' => $request->id])->get());
+        $perjadin = PerjadinResource::collection(Perjadin::with('users')->where(['id' => $request->id])->get());
         return response()->json([
             'status'    => Response::HTTP_OK,
             'message'   => 'Data perjadin by id',
@@ -104,12 +102,13 @@ class PerjadinController extends Controller
             'destination'   => $request->destination,
             'description'   => $request->description,
             'transport'     => $request->transport,
-            'coordinator'   => $request->coordinator
+            'coordinator'   => $request->coordinator,
+            // 'members'       => $request->members
         ];
 
         DB::beginTransaction();
         try {
-            $perjadin = Perjadin::findOrFail($request->id);
+            $perjadin = Perjadin::with('users')->findOrFail($request->id);
             $perjadin->update($data);
             $user->syncRoles($request->role);
             DB::commit();
@@ -126,7 +125,7 @@ class PerjadinController extends Controller
         try {
             $perjadin = Perjadin::findOrFail($request->id);
             $perjadin->delete();
-            Alert::success('Pemberitahuan', 'Data <b>' . $user->coordinator . '</b> berhasil dihapus')->toToast()->toHtml();
+            Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil dihapus')->toToast()->toHtml();
         } catch (\Throwable $th) {
             Alert::error('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> gagal dihapus : ' . $th->getMessage())->toToast()->toHtml();
         }

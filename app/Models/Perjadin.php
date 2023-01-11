@@ -16,9 +16,9 @@ class Perjadin extends Model
     use HasRoles;
 
     protected $fillable = [
-        'id', 'leave_date', 'return_date', 'plan',
+        'leave_date', 'return_date', 'plan',
         'destination', 'description', 'transport',
-        'coordinator', 'members', 'user_id'];
+        'coordinator'];
 
 
     public function users()

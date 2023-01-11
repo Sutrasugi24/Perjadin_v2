@@ -110,6 +110,7 @@
                     },
                     success: function(data) {
                         var data = data.data;
+                        console.log(data.id);
                         $("#leave_date").val(data.leave_date);
                         $("#return_date").val(data.leave_date);
                         $("#plan").val(data.plan);
@@ -188,7 +189,7 @@
                         <div class="input-group">
                             <label>Tujuan</label>
                             <div class="input-group">
-                                <input type="string" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" name="plan" value="{{ old('plan') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" name="plan" value="{{ old('plan') }}">
                                 @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -198,7 +199,7 @@
                         <div class="input-group">
                             <label>Tempat Tujuan</label>
                             <div class="input-group">
-                                <input type="string" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" name="destination" value="{{ old('destination') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" name="destination" value="{{ old('destination') }}">
                                 @error('destination')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -224,7 +225,7 @@
                         <div class="input-group">
                             <label>Deskripsi</label>
                             <div class="input-group">
-                                <input type="string" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" name="description" value="{{ old('description') }}">
+                                <input type="text" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" name="description" value="{{ old('description') }}">
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -281,7 +282,7 @@
                         <div class="input-group">
                             <label>Tanggal Pergi</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="leave_date" value="{{ old('leave_date') }}">
+                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" placeholder="dd-mm-yyyy" id="leave_date" name="leave_date" value="{{ old('leave_date') }}">
                                 @error('leave_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -292,7 +293,7 @@
                         <div class="input-group">
                             <label>Tanggal Kembali</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="return_date" value="{{ old('return_date') }}">
+                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" placeholder="dd-mm-yyyy"  id="return_date" name="return_date" value="{{ old('return_date') }}">
                                 @error('return_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -302,7 +303,7 @@
                         <div class="input-group">
                             <label>Tujuan</label>
                             <div class="input-group">
-                                <input type="string" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" name="plan" value="{{ old('plan') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" id="plan" name="plan" value="{{ old('plan') }}">
                                 @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -312,7 +313,7 @@
                         <div class="input-group">
                             <label>Tempat Tujuan</label>
                             <div class="input-group">
-                                <input type="string" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" name="destination" value="{{ old('destination') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" id="destination" name="destination" value="{{ old('destination') }}">
                                 @error('destination')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -323,10 +324,15 @@
                         <div class="input-group">
                             <label>Transport</label>
                             <div class="input-group">
-                                <select class="form-control" name="transport">
-                                    <option value="darat">Darat</option>
-                                    <option  value="laut">Laut</option>
-                                    <option value="udara">Udara</option>
+                                <select class="form-control" id="transport" name="transport">
+                                    <option value="{{ 'transport' }}">{{ ucfirst(trans('transport')) }}</option>
+                                    @if ( 'darat' == 'darat')
+                                        <option value="darat">Darat</option>
+                                    @elseif( 'laut' == 'laut')
+                                        <option value="laut">Laut</option>
+                                    @else
+                                        <option value="udara"> Udara </option>
+                                    @endif
                                 </select>
                                 @error('transport')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -338,7 +344,7 @@
                         <div class="input-group">
                             <label>Deskripsi</label>
                             <div class="input-group">
-                                <input type="string" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" name="description" value="{{ old('description') }}">
+                                <input type="text" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" id="description" name="description" value="{{ old('description') }}">
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -350,8 +356,8 @@
                         <div class="input-group">
                             <select id="single-input" class="form-control js-states" name="coordinator">
                                 <option></option>
-                                <@foreach ($user as $i)
-                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                <@foreach ($data as $i)
+                                    <option value="{{ old('coordinator') }}">{{ old('coordinator') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -360,9 +366,9 @@
                         <label>Anggota</label>
                         <div class="input-group">
                             <select id="multiple-input" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states" name="members[]">
-                                <@foreach ($user as $i)
-                                    <option value="{{ $i->id }}">{{ $i->name }}</option>
-                                @endforeach
+                                {{-- <@foreach ($user as $i)
+                                    <option {{ $data->users()->find($i->id) ? 'selected' : '' }}  value="{{ $i->name }}">{{ $i->name }}</option>
+                                @endforeach --}}
                             </select>
                         </div>
                         {{-- End: Input Anggota --}}
