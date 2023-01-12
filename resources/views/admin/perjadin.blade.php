@@ -100,6 +100,7 @@
             $(document).on("click", '.btn-edit', function() {
                 let id = $(this).attr("data-id");
                 $('#modal-loading').modal({backdrop: 'static', keyboard: false, show: true});
+
                 $.ajax({
                     url: "{{ route('perjadin.show') }}",
                     type: "POST",
@@ -110,7 +111,6 @@
                     },
                     success: function(data) {
                         var data = data.data;
-                        console.log(data.id);
                         $("#leave_date").val(data.leave_date);
                         $("#return_date").val(data.leave_date);
                         $("#plan").val(data.plan);
@@ -118,6 +118,7 @@
                         $("#transport").val(data.transport);
                         $("#coordinator").val(data.coordinator);
                         $("#description").val(data.description);
+                        $("#members").val(data.members);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
                         $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
@@ -139,8 +140,21 @@
                 theme: 'bootstrap4'
             });
 
+            $("#single-edit").select2({
+                dropDownParent: $("#modal-edit"),
+                placeholder: "Pilih Koordinator",
+                theme: 'bootstrap4'
+            });
+
             $("#multiple-input").select2({
                 dropDownParent: $("#modal-tambah"),
+                placeholder: "Pilih Anggota",
+                theme: 'bootstrap4',
+                tags: true
+            });
+            
+            $("#multiple-edit").select2({
+                dropDownParent: $("#modal-edit"),
                 placeholder: "Pilih Anggota",
                 theme: 'bootstrap4',
                 tags: true
@@ -211,9 +225,9 @@
                             <label>Transport</label>
                             <div class="input-group">
                                 <select class="form-control" name="transport">
-                                    <option value="darat">Darat</option>
-                                    <option  value="laut">Laut</option>
-                                    <option value="udara">Udara</option>
+                                    @foreach($transport as $i)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                   @endforeach
                                 </select>
                                 @error('transport')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -282,7 +296,7 @@
                         <div class="input-group">
                             <label>Tanggal Pergi</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" placeholder="dd-mm-yyyy" id="leave_date" name="leave_date" value="{{ old('leave_date') }}">
+                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" id="leave_date" name="leave_date" value="{{date('Y-m-d', strtotime('leave_date'))}}">
                                 @error('leave_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -293,7 +307,7 @@
                         <div class="input-group">
                             <label>Tanggal Kembali</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" placeholder="dd-mm-yyyy"  id="return_date" name="return_date" value="{{ old('return_date') }}">
+                                <input type="date" class="form-control @error('return_date') is-invalid @enderror" id="return_date" name="return_date" value="{{ old('return_date') }}">
                                 @error('return_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -325,14 +339,13 @@
                             <label>Transport</label>
                             <div class="input-group">
                                 <select class="form-control" id="transport" name="transport">
-                                    <option value="{{ 'transport' }}">{{ ucfirst(trans('transport')) }}</option>
-                                    @if ( 'darat' == 'darat')
-                                        <option value="darat">Darat</option>
-                                    @elseif( 'laut' == 'laut')
-                                        <option value="laut">Laut</option>
-                                    @else
-                                        <option value="udara"> Udara </option>
-                                    @endif
+                                    @foreach($transport as $i)
+                                        @if($i == $data[0]->transport)
+                                            <option selected value="{{ $data[0]->transport }}">{{ ucfirst(trans($data[0]->transport)) }}</option>
+                                        @else
+                                            <option value="{{ $i }}">{{ ucfirst(trans($i)) }}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                                 @error('transport')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -354,21 +367,23 @@
                         {{--Start: Input koordinator --}}
                         <label>Koordinator</label>
                         <div class="input-group">
-                            <select id="single-input" class="form-control js-states" name="coordinator">
-                                <option></option>
-                                <@foreach ($data as $i)
-                                    <option value="{{ old('coordinator') }}">{{ old('coordinator') }}</option>
+                            <select id="single-edit" class="form-control js-states" name="coordinator" id="coordinator">
+                                <@foreach ($user as $i)
+                                    <option {{ $data[0]->coordinator ? '' : 'selected' }}  value="{{ $i->name }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
+                            @error('coordinator')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         {{-- End: Input koordinator --}}
                         {{--Start: Input koordinator --}}
                         <label>Anggota</label>
                         <div class="input-group">
-                            <select id="multiple-input" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states" name="members[]">
-                                {{-- <@foreach ($user as $i)
-                                    <option {{ $data->users()->find($i->id) ? 'selected' : '' }}  value="{{ $i->name }}">{{ $i->name }}</option>
-                                @endforeach --}}
+                            <select id="multiple-edit" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states" name="members[]">
+                                <@foreach ($user as $i)
+                                    <option {{ $data[0]->users()->find($i->id) ? 'selected' : '' }}  value="{{ $i->id }}">{{ $i->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         {{-- End: Input Anggota --}}

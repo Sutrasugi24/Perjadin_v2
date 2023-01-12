@@ -23,6 +23,7 @@ class PerjadinController extends Controller
         $x['data'] = Perjadin::with('users')->get();
         $x['user'] = User::get();
         $x['role'] = Role::get();
+        $x['transport'] = ['darat', 'laut', 'udara'];
 
         return view('admin.perjadin', $x);
     }
@@ -41,6 +42,9 @@ class PerjadinController extends Controller
             'members'       => ['required', 'array'],
 
         ]);
+
+        $validator = Validator::make($request->all(), $rules);
+        
         if ($validator->fails()) {
             return back()->withErrors($validator)
                 ->withInput();
@@ -90,6 +94,7 @@ class PerjadinController extends Controller
             'members'       => ['required', 'array'],
         ];
 
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)
@@ -109,8 +114,8 @@ class PerjadinController extends Controller
         DB::beginTransaction();
         try {
             $perjadin = Perjadin::with('users')->findOrFail($request->id);
+            $perjadin->users()->sync(request('members'));
             $perjadin->update($data);
-            $user->syncRoles($request->role);
             DB::commit();
             Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil disimpan')->toToast()->toHtml();
         } catch (\Throwable $th) {
