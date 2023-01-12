@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Perjadin;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PerjadinSeeder extends Seeder
 {
@@ -14,6 +15,14 @@ class PerjadinSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $perjadin = Perjadin::create([
+            'leave_date'      => '2023-01-10',
+            'return_date'     => '2023-01-10',
+            'coordinator'  => 'Admin',
+            'plan'       => 'Perjalanan Dinas ke Kota Garut',
+            'destination'      => 'Kota Garut',
+            'transport'   => 'darat',
+            'description'  => 'Keberangkatan ke Garut'
+        ]);
     }
 }

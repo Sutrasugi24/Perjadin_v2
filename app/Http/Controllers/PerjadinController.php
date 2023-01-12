@@ -42,8 +42,6 @@ class PerjadinController extends Controller
             'members'       => ['required', 'array'],
 
         ]);
-
-        $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
             return back()->withErrors($validator)

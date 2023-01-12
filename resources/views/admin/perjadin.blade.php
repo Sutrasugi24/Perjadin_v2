@@ -61,7 +61,7 @@
                                                 <td>{{ $i->plan }}</td>
                                                 <td>{{ $i->destination }}</td>
                                                 <td>{{ $i->description }}</td>
-                                                <td>{{ $i->transport }}</td>
+                                                <td>{{ ucfirst(trans($i->transport)) }}</td>
                                                 <td>{{ $i->coordinator }}</td>
                                                 <td>{{ $i->users()->get()->implode('name', ', ') }}</td>
                                             @canany(['update perjadin', 'delete perjadin'])
@@ -226,7 +226,7 @@
                             <div class="input-group">
                                 <select class="form-control" name="transport">
                                     @foreach($transport as $i)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{ $i }}">{{ ucfirst(trans($i)) }}</option>
                                    @endforeach
                                 </select>
                                 @error('transport')
@@ -296,7 +296,7 @@
                         <div class="input-group">
                             <label>Tanggal Pergi</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" id="leave_date" name="leave_date" value="{{date('Y-m-d', strtotime('leave_date'))}}">
+                                <input type="date" class="form-control @error('leave_date') is-invalid @enderror" id="leave_date" name="leave_date" value="{{ old('leave_date') }}">
                                 @error('leave_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -340,11 +340,7 @@
                             <div class="input-group">
                                 <select class="form-control" id="transport" name="transport">
                                     @foreach($transport as $i)
-                                        @if($i == $data[0]->transport)
-                                            <option selected value="{{ $data[0]->transport }}">{{ ucfirst(trans($data[0]->transport)) }}</option>
-                                        @else
-                                            <option value="{{ $i }}">{{ ucfirst(trans($i)) }}</option>
-                                        @endif
+                                        <option {{ $data[0]->transport ? 'selected' : '' }}  value="{{ $i }}">{{ $i}}</option>
                                     @endforeach
                                 </select>
                                 @error('transport')

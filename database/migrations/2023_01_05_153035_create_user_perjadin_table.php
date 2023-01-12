@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_perjadin', function (Blueprint $table) {
-            $table->unsignedBigInteger('perjadin_id');
-            $table->foreign('perjadin_id')->references('id')->on('perjadins')->onDelete('restrict');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            // $table->foreignId('perjadin_id')->constrained('perjadins')->onDelete('restrict');
-            // $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
+            // $table->unsignedBigInteger('perjadin_id');
+            // $table->foreign('perjadin_id')->references('id')->on('perjadins')->onDelete('cascade');
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('perjadin_id')->constrained('perjadins')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
 

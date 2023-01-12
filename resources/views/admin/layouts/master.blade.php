@@ -74,6 +74,8 @@
         <script src="{{ asset('template/admin/dist/js/adminlte.js') }}"></script>
         <!-- Select2 -->
         <script src="{{ asset('template/admin/plugins/select2/js/select2.full.min.js') }}"></script>
+        <!-- Moment JS -->
+        <script src="{{ asset('template/admin/plugins/moment/moment.min.js') }}"></script>
         <!--Tempus Dominus-->
         <script src="{{ asset('template/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
         @stack('script')
