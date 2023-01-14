@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SuratController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PerjadinController;
@@ -34,6 +35,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('user/show', 'show')->middleware(['permission:read user'])->name('user.show');
         Route::put('user', 'update')->middleware(['permission:update user'])->name('user.update');
         Route::delete('user', 'destroy')->middleware(['permission:delete user'])->name('user.destroy');
+    });
+
+    Route::controller(SuratController::class)->group(function () {
+        Route::get('surat', 'index')->middleware(['permission:read surat'])->name('surat.index');
+        Route::post('surat', 'store')->middleware(['permission:create surat'])->name('surat.store');
+        Route::post('surat/show', 'show')->middleware(['permission:read surat'])->name('surat.show');
+        Route::put('surat', 'update')->middleware(['permission:update surat'])->name('surat.update');
+        Route::delete('surat', 'destroy')->middleware(['permission:delete surat'])->name('surat.destroy');
     });
 
     Route::controller(PerjadinController::class)->group(function () {

@@ -73,14 +73,22 @@
                         @endforeach
                     @endif
                 @endforeach
-                @canany(['read user', 'read role', 'read permission'])
+                @canany(['read user', 'read role', 'read permission', 'read perjadin', 'read surat'])
                     <li class="nav-header ml-2">ACCESS</li>
                 @endcanany
-                @can('read user')
+                @can('read perjadin')
                     <li class="nav-item">
                         <a href="{{ route('perjadin.index') }}" class="nav-link {{ request()->routeIs('perjadin.index') ? 'active':'' }}">
                             <i class="fas fa-business-time nav-icon"></i>
                             <p>Perjadin</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('read user')
+                    <li class="nav-item">
+                        <a href="{{ route('surat.index') }}" class="nav-link {{ request()->routeIs('surat.index') ? 'active':'' }}">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Surat</p>
                         </a>
                     </li>
                 @endcan

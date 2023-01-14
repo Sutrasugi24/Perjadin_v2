@@ -11,8 +11,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PerjadinResource;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\StorePerjadinRequest;
-use App\Http\Requests\UpdatePerjadinRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class PerjadinController extends Controller

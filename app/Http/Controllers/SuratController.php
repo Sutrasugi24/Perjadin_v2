@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSuratRequest;
-use App\Http\Requests\UpdateSuratRequest;
 use App\Models\Surat;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\SuratResources;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class SuratController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $x['title'] = 'Surat';
+        $x['data'] = Surat::get();
+        $x['role'] = Role::get();
+
+        return view('admin.surat', $x);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //

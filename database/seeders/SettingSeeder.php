@@ -31,7 +31,7 @@ class SettingSeeder extends Seeder
         ]);
         Setting::create([
             'key'       => 'app_logo',
-            'value'     => 'storage/logo.png',
+            'value'     => 'storage/sman6.png',
             'name'      => 'Application Logo',
             'type'      => 'file',
             'ext'       => 'png',
@@ -39,7 +39,7 @@ class SettingSeeder extends Seeder
         ]);
         Setting::create([
             'key'       => 'app_favicon',
-            'value'     => 'storage/favicon.png',
+            'value'     => 'storage/sman6.png',
             'name'      => 'Application Favicon',
             'type'      => 'file',
             'ext'       => 'png'

@@ -340,7 +340,7 @@
                             <div class="input-group">
                                 <select class="form-control" id="transport" name="transport">
                                     @foreach($transport as $i)
-                                        <option {{ $data[0]->transport ? 'selected' : '' }}  value="{{ $i }}">{{ $i}}</option>
+                                        <option {{ $data[0]->transport ? 'selected' : '' }}  value="{{ $i }}">{{ ucfirst(trans($i))}}</option>
                                     @endforeach
                                 </select>
                                 @error('transport')
@@ -365,7 +365,7 @@
                         <div class="input-group">
                             <select id="single-edit" class="form-control js-states" name="coordinator" id="coordinator">
                                 <@foreach ($user as $i)
-                                    <option {{ $data[0]->coordinator ? '' : 'selected' }}  value="{{ $i->name }}">{{ $i->name }}</option>
+                                    <option {{ $data[0]->users()->find($i->id) ? 'selected' : '' }} value="{{ $i->name }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                             @error('coordinator')

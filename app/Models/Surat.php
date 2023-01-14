@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Surat extends Model
 {
     use HasFactory;
+
+    protected $table = 'surats';
+
+    
+    public function perjadins()
+    {
+        return $this->hasMany(Perjadin::class);
+    }
 }
