@@ -56,8 +56,8 @@
                                         @foreach ($data as $i)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $i->leave_date }}</td>
-                                                <td>{{ $i->return_date }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($i->leave_date)) }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($i->return_date)) }}</td>
                                                 <td>{{ $i->plan }}</td>
                                                 <td>{{ $i->destination }}</td>
                                                 <td>{{ $i->description }}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surat;
+use App\Models\Perjadin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -18,26 +19,39 @@ class SuratController extends Controller
     {
         $x['title'] = 'Surat';
         $x['data'] = Surat::get();
+        $x['perjadin'] = Perjadin::get();
         $x['role'] = Role::get();
         // dd($x);
 
         return view('admin.surat', $x);
     }
 
-    public function create()
+    public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSuratRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSuratRequest $request)
-    {
-        //
+        $validator = Validator::make($request->all(), [
+            'document_number'      => ['required'],
+            'document_date'   => ['required'],
+            'perjadin_id'   => ['required'],
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
+        DB::beginTransaction();
+        try {
+            $surat = Surat::create([
+                'document_number'    => $request->document_number,
+                'document_date'   => $request->document_date,
+                'perjadin_id'   => $request->perjadin_id,
+            ]);
+            DB::commit();
+            Alert::success('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> berhasil dibuat')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::error('Pemberitahuan', 'Data <b> </b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 
     /**

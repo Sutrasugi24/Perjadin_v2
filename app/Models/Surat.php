@@ -11,7 +11,8 @@ class Surat extends Model
 
     protected $fillable = [
         'document_date',
-        'document_number'];
+        'document_number',
+        'perjadin_id'];
 
     
     public function perjadin()

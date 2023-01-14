@@ -53,7 +53,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->document_number }}</td>
                                                 <td>{{ $i->document_date }}</td>
-                                                <td>{{ $i->perjadin->id }}</td>
+                                                <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan}} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
                                             @canany(['update surat', 'delete surat'])
                                                     <td>
                                                         <div class="btn-group">
@@ -102,6 +102,7 @@
                         var data = data.data;
                         $("#document_number").val(data.document_number);
                         $("#document_date").val(data.document_date);
+                        $("#id_perjadin").val(data.perjadin_id);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
                         $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
@@ -157,12 +158,12 @@
                         <div class="input-group">
                             <label>ID Perjadin</label>
                             <div class="input-group">
-                                <select class="form-control" name="id_perjadin">
-                                    @foreach ($data as $i)
-                                        <option value="{{ $i->perjadin->id }}">{{ $i->perjadin->id }} - {{ $i->perjadin->plan }}</option>
+                                <select class="form-control" name="perjadin_id">
+                                    @foreach ($perjadin as $i)
+                                        <option value="{{ $i->id }}">{{ $i->id }} - {{ $i->plan }}</option>
                                     @endforeach
                                 </select>
-                                @error('id_perjadin')
+                                @error('perjadin_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

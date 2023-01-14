@@ -13,6 +13,7 @@ class SuratResource extends JsonResource
             'id'                => $this->id,
             'document_number'   => $this->plan,
             'document_date'     => date('Y-m-d', strtotime($this->leave_date)),
+            'perjadin_id'     => $this->perjadin_id,
             'created_at'        => date('d-m-Y H:i:s', strtotime($this->created_at)),
             'updated_at'        => date('d-m-Y H:i:s', strtotime($this->updated_at))
         ];
