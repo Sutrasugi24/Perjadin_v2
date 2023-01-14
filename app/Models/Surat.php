@@ -9,11 +9,13 @@ class Surat extends Model
 {
     use HasFactory;
 
-    protected $table = 'surats';
+    protected $fillable = [
+        'document_date',
+        'document_number'];
 
     
-    public function perjadins()
+    public function perjadin()
     {
-        return $this->hasMany(Perjadin::class);
+        return $this->belongsTo(Perjadin::class);
     }
 }

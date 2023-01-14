@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
             $table->string('document_number')->required();
-            $table->string('document_date')->required();
+            $table->date('document_date')->required();
             $table->timestamps();
         });
 

@@ -53,7 +53,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->document_number }}</td>
                                                 <td>{{ $i->document_date }}</td>
-                                                <td></td>
+                                                <td>{{ $i->perjadin->id }}</td>
                                             @canany(['update surat', 'delete surat'])
                                                     <td>
                                                         <div class="btn-group">
@@ -137,7 +137,7 @@
                         <div class="input-group">
                             <label>Nomor Surat</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Name" name="document_number" value="{{ old('document_number') }}">
+                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Nomor Surat" name="document_number" value="{{ old('document_number') }}">
                                 @error('document_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -155,14 +155,14 @@
                         </div>
                         {{-- End Input date --}}
                         <div class="input-group">
-                            <label>Role</label>
+                            <label>ID Perjadin</label>
                             <div class="input-group">
-                                <select class="form-control" name="role">
-                                    @foreach ($role as $i)
-                                        <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                <select class="form-control" name="id_perjadin">
+                                    @foreach ($data as $i)
+                                        <option value="{{ $i->perjadin->id }}">{{ $i->perjadin->id }} - {{ $i->perjadin->plan }}</option>
                                     @endforeach
                                 </select>
-                                @error('role')
+                                @error('id_perjadin')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

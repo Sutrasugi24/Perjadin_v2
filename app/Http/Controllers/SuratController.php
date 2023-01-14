@@ -19,6 +19,7 @@ class SuratController extends Controller
         $x['title'] = 'Surat';
         $x['data'] = Surat::get();
         $x['role'] = Role::get();
+        // dd($x);
 
         return view('admin.surat', $x);
     }

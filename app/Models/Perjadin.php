@@ -26,8 +26,8 @@ class Perjadin extends Model
         return $this->belongsToMany(User::class, 'user_perjadin', 'perjadin_id', 'user_id');
     }
 
-    public function surats()
+    public function surat()
     {
-        return $this->belongsToMany(Surat::class);
+        return $this->belongsTo(Surat::class);
     }
 }
