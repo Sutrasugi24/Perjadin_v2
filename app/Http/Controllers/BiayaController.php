@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBiayaRequest;
-use App\Http\Requests\UpdateBiayaRequest;
 use App\Models\Biaya;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\BiayaResource;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class BiayaController extends Controller
 {
@@ -15,7 +21,11 @@ class BiayaController extends Controller
      */
     public function index()
     {
-        //
+        $x['title'] = 'Biaya';
+        $x['data'] = Biaya::get();
+        $x['role'] = Role::get();
+
+        return view('admin.biaya', $x);
     }
 
     /**

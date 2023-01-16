@@ -39,9 +39,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nomor Surat</th>
-                                            <th>Tanggal Surat</th>
-                                            <th>ID Perjadin</th>
+                                            <th>Jenis</th>
+                                            <th>Biaya</th>
                                             @canany(['update surat', 'delete surat'])
                                                 <th>Action</th>
                                             @endcanany
@@ -51,16 +50,15 @@
                                         @foreach ($data as $i)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $i->document_number }}</td>
-                                                <td>{{ $i->document_date }}</td>
-                                                <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan}} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
-                                            @canany(['update surat', 'delete surat'])
+                                                <td>{{ $i->type }}</td>
+                                                <td>{{ $i->cost }}</td>
+                                            @canany(['update biaya', 'delete biaya'])
                                                     <td>
                                                         <div class="btn-group">
-                                                            @can('update surat')
+                                                            @can('update biaya')
                                                                 <button class="btn btn-sm btn-primary btn-edit" title="Ubah Data!" data-id="{{ $i->id }}"><i class="fas fa-pencil-alt"></i></button>
                                                             @endcan
-                                                            @can('delete surat')
+                                                            @can('delete biaya')
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
                                                             @endcan
                                                         </div>
@@ -85,7 +83,7 @@
 @endsection
 
 @section('js')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $(document).on("click", '.btn-edit', function() {
                 let id = $(this).attr("data-id");
@@ -102,14 +100,12 @@
                         var data = data.data;
                         $("#document_number").val(data.document_number);
                         $("#document_date").val(data.document_date);
-                        $("#perjadin_id").val(data.perjadin_id);
+                        $("#id_perjadin").val(data.perjadin_id);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
                         $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
                     },
                 });
-
-                
             });
             
             $(document).on("click", '.btn-delete', function() {
@@ -119,22 +115,8 @@
                 $("#delete-data").html(name);
                 $('#modal-delete').modal({backdrop: 'static', keyboard: false, show: true});
             });
-
-            $("#perjadin_id").select2({
-                dropDownParent: $("#modal-edit"),
-                placeholder: "Pilih ID",
-                theme: 'bootstrap4'
-            });
-
-            $("#perjadin_id").select2({
-                dropDownParent: $("#modal-tambah"),
-                placeholder: "Pilih ID",
-                theme: 'bootstrap4'
-            });
-
-            $('.select2-search__field').css('width', '100%');
         });
-    </script>
+    </script> --}}
 @endsection
 
 @section('modal')
@@ -151,9 +133,8 @@
                 <div class="modal-body">
                     <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        {{--Start: Input Document Number --}}
                         <div class="input-group">
-                            <label>Nomor Surat</label>
+                            <label>Tipe</label>
                             <div class="input-group">
                                 <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Nomor Surat" name="document_number" value="{{ old('document_number') }}">
                                 @error('document_number')
@@ -161,31 +142,17 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- End: Input Document Number --}}
                         {{-- Input leave date  --}}
                         <div class="input-group">
-                            <label>Tanggal Surat</label>
+                            <label>Biaya</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('document_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="document_date" value="{{ old('document_date') }}">
+                                <input type="number" class="form-control @error('document_date') is-invalid @enderror" id="document_date" name="document_date" value="{{ old('document_date') }}">
                                 @error('document_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         {{-- End Input date --}}
-                        <div class="input-group">
-                            <label>ID Perjadin</label>
-                            <div class="input-group">
-                                <select id="perjadin_id" class="form-control" name="perjadin_id">
-                                    @foreach ($perjadin as $i)
-                                        <option value="{{ $i->id }}">{{ $i->id }} - {{ $i->plan }}</option>
-                                    @endforeach
-                                </select>
-                                @error('perjadin_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
@@ -198,7 +165,7 @@
         <!-- /.modal-dialog -->
     </div>
     {{-- Modal Update --}}
-    <div class="modal fade" id="modal-edit">
+    {{-- <div class="modal fade" id="modal-edit">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -208,38 +175,81 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('surat.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
-                         {{--Start: Input Document Number --}}
-                         <div class="input-group">
-                            <label>Nomor Surat</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Nomor Surat" id="document_number" name="document_number" value="{{ old('document_number') }}">
-                                @error('document_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        {{-- End: Input Document Number --}}
                         <div class="input-group">
-                            <label>Tanggal Surat</label>
+                            <label>Name</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('document_date') is-invalid @enderror" name="document_date" id="document_date" value="{{ old('document_date') }}">
-                                @error('document_date')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" id="name" value="{{ old('name') }}">
+                                @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>ID Perjadin</label>
+                            <label>Email</label>
                             <div class="input-group">
-                                <select id="perjadin_id" class="form-control" name="perjadin_id">
-                                    @foreach ($perjadin as $ip)
-                                        <option value="{{ $ip->id }}">{{ $ip->id }} - {{ $ip->plan }}</option>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" id="email" value="{{ old('email') }}">
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ old('password') }}">
+                                @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>NIP</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" placeholder="NIP" name="nip" id="nip" value="{{ old('nip') }}">
+                                @error('nip')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>NIPS</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nips') is-invalid @enderror" placeholder="NIPS" name="nips" id="nips" value="{{ old('nips') }}">
+                                @error('nips')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Jabatan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Jabatan" name="jabatan" id="jabatan" value="{{ old('jabatan') }}">
+                                @error('jabatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Golongan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('golongan') is-invalid @enderror" placeholder="Golongan" name="golongan" id="golongan" value="{{ old('golongan') }}">
+                                @error('golongan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Role</label>
+                            <div class="input-group">
+                                <select class="form-control" name="role" id="role">
+                                    @foreach ($role as $i)
+                                        <option value="{{ $i->name }}">{{ $i->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('perjadin_id')
+                                @error('role')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -255,7 +265,7 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div>
+    </div> --}}
     {{-- Modal delete --}}
     <div class="modal fade" id="modal-delete">
         <div class="modal-dialog">
@@ -267,7 +277,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('surat.destroy') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.destroy') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('DELETE')
                         <p class="modal-text">Apakah anda yakin akan menghapus? <b id="delete-data"></b></p>

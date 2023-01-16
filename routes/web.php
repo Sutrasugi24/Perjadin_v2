@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SettingController;
@@ -51,6 +52,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('perjadin/show', 'show')->middleware(['permission:read perjadin'])->name('perjadin.show');
         Route::put('perjadin', 'update')->middleware(['permission:update perjadin'])->name('perjadin.update');
         Route::delete('perjadin', 'destroy')->middleware(['permission:delete perjadin'])->name('perjadin.destroy');
+    });
+
+    Route::controller(BiayaController::class)->group(function () {
+        Route::get('biaya', 'index')->middleware(['permission:read biaya'])->name('biaya.index');
+        Route::post('biaya', 'store')->middleware(['permission:create biaya'])->name('biaya.store');
+        Route::post('biaya/show', 'show')->middleware(['permission:read biaya'])->name('biaya.show');
+        Route::put('biaya', 'update')->middleware(['permission:update biaya'])->name('biaya.update');
+        Route::delete('biaya', 'destroy')->middleware(['permission:delete biaya'])->name('biaya.destroy');
     });
     
 

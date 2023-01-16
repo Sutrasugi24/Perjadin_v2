@@ -125,6 +125,7 @@ class PerjadinController extends Controller
     {
         try {
             $perjadin = Perjadin::findOrFail($request->id);
+            $perjadin->users()->detach();
             $perjadin->delete();
             Alert::success('Pemberitahuan', 'Data <b>' . $perjadin->coordinator . '</b> berhasil dihapus')->toToast()->toHtml();
         } catch (\Throwable $th) {

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SuratResources;
+use App\Http\Resources\SuratResource;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,48 +54,58 @@ class SuratController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Surat  $surat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Surat $surat)
+    public function show(Request $request)
     {
-        //
+        $surat = SuratResource::collection(Surat::where(['id' => $request->id])->get());
+        return response()->json([
+            'status'    => Response::HTTP_OK,
+            'message'   => 'Data surat by id',
+            'data'      => $surat[0]
+        ], Response::HTTP_OK);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Surat  $surat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Surat $surat)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'document_number'    => ['required'],
+            'document_date'   => ['required'],
+            'perjadin_id'          => ['required'],
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
+        $data = [
+            'document_number'    => $request->document_number,
+            'document_date'   => $request->document_date,
+            'perjadin_id'          => $request->perjadin_id,
+        ];
+
+        DB::beginTransaction();
+        try {
+            $surat = Surat::findOrFail($request->id);
+            $surat->update($data);
+            DB::commit();
+            Alert::success('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> berhasil disimpan')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::error('Pemberitahuan', 'Data <b> </b> gagal disimpan : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateSuratRequest  $request
-     * @param  \App\Models\Surat  $surat
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateSuratRequest $request, Surat $surat)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Surat  $surat
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Surat $surat)
-    {
-        //
+        try {
+            $surat = Surat::findOrFail($request->id);
+            $surat->delete();
+            Alert::success('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> berhasil dihapus')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            Alert::error('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> gagal dihapus : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 }

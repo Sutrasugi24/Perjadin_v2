@@ -327,7 +327,7 @@
                         <div class="input-group">
                             <label>Tempat Tujuan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" id="destination" name="destination" value="{{ old('destination') }}">
+                                <input type="text" class="form-control @error('destination') is-invalid @enderror" placeholder="Tempat Tujuan" id="destination" name="destination" value="{{ old('destination') }}">
                                 @error('destination')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

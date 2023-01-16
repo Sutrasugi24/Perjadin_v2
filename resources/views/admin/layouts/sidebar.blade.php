@@ -84,11 +84,19 @@
                         </a>
                     </li>
                 @endcan
-                @can('read user')
+                @can('read surat')
                     <li class="nav-item">
                         <a href="{{ route('surat.index') }}" class="nav-link {{ request()->routeIs('surat.index') ? 'active':'' }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Surat</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('read user')
+                    <li class="nav-item">
+                        <a href="{{ route('biaya.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
+                            <i class="fas fa-money nav-icon"></i>
+                            <p>Biaya</p>
                         </a>
                     </li>
                 @endcan
