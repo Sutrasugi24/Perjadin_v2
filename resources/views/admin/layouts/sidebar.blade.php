@@ -74,7 +74,7 @@
                     @endif
                 @endforeach
                 @canany(['read user', 'read role', 'read permission', 'read perjadin', 'read surat'])
-                    <li class="nav-header ml-2">ACCESS</li>
+                    <li class="nav-header ml-2">PERJALANAN DINAS</li>
                 @endcanany
                 @can('read perjadin')
                     <li class="nav-item">
@@ -87,7 +87,7 @@
                 @can('read surat')
                     <li class="nav-item">
                         <a href="{{ route('surat.index') }}" class="nav-link {{ request()->routeIs('surat.index') ? 'active':'' }}">
-                            <i class="fas fa-file nav-icon"></i>
+                            <i class="fas fa-file-pdf nav-icon"></i>
                             <p>Surat</p>
                         </a>
                     </li>
@@ -95,11 +95,22 @@
                 @can('read user')
                     <li class="nav-item">
                         <a href="{{ route('biaya.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
-                            <i class="fas fa-money nav-icon"></i>
+                            <i class="fas fa-dollar-sign nav-icon"></i>
                             <p>Biaya</p>
                         </a>
                     </li>
                 @endcan
+                @can('read user')
+                    <li class="nav-item">
+                        <a href="{{ route('biaya.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
+                            <i class="fas fa-money-check nav-icon"></i>
+                            <p>Kuitansi</p>
+                        </a>
+                    </li>
+                @endcan
+                @canany(['read user', 'read role', 'read permission', 'read perjadin', 'read surat'])
+                    <li class="nav-header ml-2">AKSES</li>
+                @endcanany
                 @can('read user')
                     <li class="nav-item">
                         <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user.index') ? 'active':'' }}">
@@ -124,7 +135,7 @@
                         </a>
                     </li>
                 @endcan
-                <li class="nav-header ml-2">SETTINGS</li>
+                <li class="nav-header ml-2">PENGATURAN</li>
                 @can('read setting')
                     <li class="nav-item">
                         <a href="{{ route('setting.index') }}" class="nav-link {{ request()->routeIs('setting.index') ? 'active':'' }}">

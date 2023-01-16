@@ -234,9 +234,9 @@
                         <div class="input-group">
                             <label>ID Perjadin</label>
                             <div class="input-group">
-                                <select id="perjadin_id" class="form-control" name="perjadin_id">
+                                <select id="perjadin_id"class="form-control" name="perjadin_id">
                                     @foreach ($perjadin as $ip)
-                                        <option value="{{ $ip->id }}">{{ $ip->id }} - {{ $ip->plan }}</option>
+                                        <option {{ $ip->id == $data[0]->perjadin_id ? 'selected' : '' }} value="{{ $ip->id }}" @error('perjadin_id') is-invalid @enderror >{{ $ip->id }} - {{ $ip->plan }}</option>
                                     @endforeach
                                 </select>
                                 @error('perjadin_id')

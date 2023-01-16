@@ -51,7 +51,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->type }}</td>
-                                                <td>{{ $i->cost }}</td>
+                                                <td>{{ $i->formatRupiah('cost') }}</td>
                                             @canany(['update biaya', 'delete biaya'])
                                                     <td>
                                                         <div class="btn-group">
