@@ -47,5 +47,16 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'update surat']);
         Permission::create(['name' => 'read surat']);
         Permission::create(['name' => 'create surat']);
+
+        Permission::create(['name' => 'delete biaya']);
+        Permission::create(['name' => 'update biaya']);
+        Permission::create(['name' => 'read biaya']);
+        Permission::create(['name' => 'create biaya']);
+
+
+        Permission::create(['name' => 'delete kuitansi']);
+        Permission::create(['name' => 'update kuitansi']);
+        Permission::create(['name' => 'read kuitansi']);
+        Permission::create(['name' => 'create kuitansi']);
     }
 }

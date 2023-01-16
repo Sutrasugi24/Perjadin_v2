@@ -83,13 +83,13 @@
 @endsection
 
 @section('js')
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             $(document).on("click", '.btn-edit', function() {
                 let id = $(this).attr("data-id");
                 $('#modal-loading').modal({backdrop: 'static', keyboard: false, show: true});
                 $.ajax({
-                    url: "{{ route('surat.show') }}",
+                    url: "{{ route('biaya.show') }}",
                     type: "POST",
                     dataType: "JSON",
                     data: {
@@ -98,9 +98,8 @@
                     },
                     success: function(data) {
                         var data = data.data;
-                        $("#document_number").val(data.document_number);
-                        $("#document_date").val(data.document_date);
-                        $("#id_perjadin").val(data.perjadin_id);
+                        $("#type").val(data.type);
+                        $("#cost").val(data.cost);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
                         $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
@@ -116,7 +115,7 @@
                 $('#modal-delete').modal({backdrop: 'static', keyboard: false, show: true});
             });
         });
-    </script> --}}
+    </script>
 @endsection
 
 @section('modal')
@@ -131,13 +130,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('biaya.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
                             <label>Tipe</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Nomor Surat" name="document_number" value="{{ old('document_number') }}">
-                                @error('document_number')
+                                <input type="text" class="form-control @error('type') is-invalid @enderror" placeholder="Jenis Kegiatan" name="type" value="{{ old('type') }}">
+                                @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -146,8 +145,8 @@
                         <div class="input-group">
                             <label>Biaya</label>
                             <div class="input-group">
-                                <input type="number" class="form-control @error('document_date') is-invalid @enderror" id="document_date" name="document_date" value="{{ old('document_date') }}">
-                                @error('document_date')
+                                <input type="number" class="form-control @error('cost') is-invalid @enderror" placeholder="Biaya" id="cost" name="cost" value="{{ old('cost') }}">
+                                @error('cost')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -165,7 +164,7 @@
         <!-- /.modal-dialog -->
     </div>
     {{-- Modal Update --}}
-    {{-- <div class="modal fade" id="modal-edit">
+    <div class="modal fade" id="modal-edit">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -175,81 +174,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('biaya.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <div class="input-group">
-                            <label>Name</label>
+                            <label>Jenis kegiatan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" id="name" value="{{ old('name') }}">
-                                @error('name')
+                                <input type="text" class="form-control @error('type') is-invalid @enderror" placeholder="Jenis Kegiatan" name="type" id="type" value="{{ old('type') }}">
+                                @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>Email</label>
+                            <label>Biaya</label>
                             <div class="input-group">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" id="email" value="{{ old('email') }}">
-                                @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ old('password') }}">
-                                @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>NIP</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('nip') is-invalid @enderror" placeholder="NIP" name="nip" id="nip" value="{{ old('nip') }}">
-                                @error('nip')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>NIPS</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('nips') is-invalid @enderror" placeholder="NIPS" name="nips" id="nips" value="{{ old('nips') }}">
-                                @error('nips')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>Jabatan</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Jabatan" name="jabatan" id="jabatan" value="{{ old('jabatan') }}">
-                                @error('jabatan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>Golongan</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('golongan') is-invalid @enderror" placeholder="Golongan" name="golongan" id="golongan" value="{{ old('golongan') }}">
-                                @error('golongan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>Role</label>
-                            <div class="input-group">
-                                <select class="form-control" name="role" id="role">
-                                    @foreach ($role as $i)
-                                        <option value="{{ $i->name }}">{{ $i->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('role')
+                                <input type="number" class="form-control @error('cost') is-invalid @enderror" placeholder="Biaya" name="cost" id="cost" value="{{ old('cost') }}">
+                                @error('cost')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -265,7 +206,7 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div> --}}
+    </div>
     {{-- Modal delete --}}
     <div class="modal fade" id="modal-delete">
         <div class="modal-dialog">
@@ -277,7 +218,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('user.destroy') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('biaya.destroy') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('DELETE')
                         <p class="modal-text">Apakah anda yakin akan menghapus? <b id="delete-data"></b></p>

@@ -365,7 +365,7 @@
                         <div class="input-group">
                             <select id="single-edit" class="form-control js-states" name="coordinator" id="coordinator">
                                 <@foreach ($user as $i)
-                                    <option {{ $data[0]->users()->find($i->id) ? 'selected' : '' }} value="{{ $i->name }}">{{ $i->name }}</option>
+                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                             @error('coordinator')
@@ -378,7 +378,7 @@
                         <div class="input-group">
                             <select id="multiple-edit" multiple="multiple" data-placeholder="  Pilih Anggota" class="form-control js-states" name="members[]">
                                 <@foreach ($user as $i)
-                                    <option {{ $data[0]->users()->find($i->id) ? 'selected' : '' }}  value="{{ $i->id }}">{{ $i->name }}</option>
+                                    <option value="{{ $i->id }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                         </div>

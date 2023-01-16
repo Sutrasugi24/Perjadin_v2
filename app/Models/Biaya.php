@@ -10,4 +10,7 @@ class Biaya extends Model
 {
     use HasFactory;
     use HasFormatRupiah;
+
+    protected $fillable = [
+        'type', 'cost'];
 }

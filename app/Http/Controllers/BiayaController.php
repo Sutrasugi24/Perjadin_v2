@@ -8,90 +8,96 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BiayaResource;
-use App\Providers\AppServiceProvider;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class BiayaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $x['title'] = 'Biaya';
         $x['data'] = Biaya::get();
-        $x['role'] = Role::get();
 
         return view('admin.biaya', $x);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'type'      => ['required'],
+            'cost'   => ['required'],
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
+        DB::beginTransaction();
+        try {
+            $biaya = Biaya::create([
+                'type'    => $request->type,
+                'cost'   => $request->cost,
+            ]);
+            DB::commit();
+            Alert::success('Pemberitahuan', 'Data <b>' . $biaya->type . '</b> berhasil dibuat')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::error('Pemberitahuan', 'Data <b> </b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBiayaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBiayaRequest $request)
+    public function show(Request $request)
     {
-        //
+        $biaya = BiayaResource::collection(Biaya::where(['id' => $request->id])->get());
+        return response()->json([
+            'status'    => Response::HTTP_OK,
+            'message'   => 'Data biaya by id',
+            'data'      => $biaya[0]
+        ], Response::HTTP_OK);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Biaya  $biaya
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Biaya $biaya)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'type'    => ['required'],
+            'cost'   => ['required'],
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
+        $data = [
+            'type'    => $request->type,
+            'cost'   => $request->cost,
+        ];
+
+        DB::beginTransaction();
+        try {
+            $biaya = Biaya::findOrFail($request->id);
+            $biaya->update($data);
+            DB::commit();
+            Alert::success('Pemberitahuan', 'Data <b>' . $biaya->type . '</b> berhasil disimpan')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::error('Pemberitahuan', 'Data <b> </b> gagal disimpan : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Biaya  $biaya
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Biaya $biaya)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBiayaRequest  $request
-     * @param  \App\Models\Biaya  $biaya
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBiayaRequest $request, Biaya $biaya)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Biaya  $biaya
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Biaya $biaya)
-    {
-        //
+        try {
+            $biaya = Biaya::findOrFail($request->id);
+            $biaya->delete();
+            Alert::success('Pemberitahuan', 'Data <b>' . $biaya->type . '</b> berhasil dihapus')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            Alert::error('Pemberitahuan', 'Data <b>' . $biaya->type . '</b> gagal dihapus : ' . $th->getMessage())->toToast()->toHtml();
+        }
+        return back();
     }
 }
