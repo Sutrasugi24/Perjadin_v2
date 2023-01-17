@@ -92,7 +92,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('read user')
+                @can('read biaya')
                     <li class="nav-item">
                         <a href="{{ route('biaya.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
                             <i class="fas fa-dollar-sign nav-icon"></i>
@@ -100,12 +100,12 @@
                         </a>
                     </li>
                 @endcan
-                @can('read user')
+                @can('read kuitansi')
                     <li class="nav-item">
-                        <a href="{{ route('biaya.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
+                        {{-- <a href="{{ route('kuitansi.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
                             <i class="fas fa-money-check nav-icon"></i>
                             <p>Kuitansi</p>
-                        </a>
+                        </a> --}}
                     </li>
                 @endcan
                 @canany(['read user', 'read role', 'read permission', 'read perjadin', 'read surat'])

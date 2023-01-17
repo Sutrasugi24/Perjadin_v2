@@ -236,7 +236,7 @@
                             <div class="input-group">
                                 <select id="perjadin_id"class="form-control" name="perjadin_id">
                                     @foreach ($perjadin as $ip)
-                                        <option {{ $ip->id == $data[0]->perjadin_id ? 'selected' : '' }} value="{{ $ip->id }}" @error('perjadin_id') is-invalid @enderror >{{ $ip->id }} - {{ $ip->plan }}</option>
+                                        <option value="{{ $ip->id }}" @error('perjadin_id') is-invalid @enderror >{{ $ip->id }} - {{ $ip->plan }}</option>
                                     @endforeach
                                 </select>
                                 @error('perjadin_id')
@@ -244,13 +244,13 @@
                                 @enderror
                             </div>
                         </div>
+                    </form>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <input type="hidden" name="id" id="id">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
-                </form>
             </div>
             <!-- /.modal-content -->
         </div>

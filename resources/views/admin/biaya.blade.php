@@ -133,9 +133,9 @@
                     <form action="{{ route('biaya.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
-                            <label>Tipe</label>
+                            <label>Jenis Kegiatan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('type') is-invalid @enderror" placeholder="Jenis Kegiatan" name="type" value="{{ old('type') }}">
+                                <input type="text" class="form-control @error('type') is-invalid @enderror" placeholder="Jenis Kegiatan" name="type">
                                 @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -145,7 +145,7 @@
                         <div class="input-group">
                             <label>Biaya</label>
                             <div class="input-group">
-                                <input type="number" class="form-control @error('cost') is-invalid @enderror" placeholder="Biaya" id="cost" name="cost" value="{{ old('cost') }}">
+                                <input type="number" class="form-control @error('cost') is-invalid @enderror" placeholder="Biaya" name="cost">
                                 @error('cost')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -178,23 +178,25 @@
                         @csrf
                         @method("PUT")
                         <div class="input-group">
-                            <label>Jenis kegiatan</label>
+                            <label>Jenis Kegiatan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('type') is-invalid @enderror" placeholder="Jenis Kegiatan" name="type" id="type" value="{{ old('type') }}">
+                                <input type="text" class="form-control @error('type') is-invalid @enderror" placeholder="Jenis Kegiatan" id="type" name="type" value="{{ old('type') }}">
                                 @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{-- Input leave date  --}}
                         <div class="input-group">
                             <label>Biaya</label>
                             <div class="input-group">
-                                <input type="number" class="form-control @error('cost') is-invalid @enderror" placeholder="Biaya" name="cost" id="cost" value="{{ old('cost') }}">
+                                <input type="number" class="form-control @error('cost') is-invalid @enderror" placeholder="Biaya" id="cost" name="cost" value="{{ old('cost') }}">
                                 @error('cost')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{-- End Input date --}}
                 </div>
                 <div class="modal-footer justify-content-between">
                     <input type="hidden" name="id" id="id">
