@@ -69,7 +69,7 @@ class SuratController extends Controller
         $rules = [
             'document_number'    => ['required'],
             'document_date'   => ['required'],
-            'perjadin_id'          => ['required'],
+            'perjadin_id'       => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -81,7 +81,7 @@ class SuratController extends Controller
         $data = [
             'document_number'    => $request->document_number,
             'document_date'   => $request->document_date,
-            'perjadin_id'          => $request->perjadin_id,
+            'perjadin_id'     =>   $request->perjadin_id
         ];
 
         DB::beginTransaction();

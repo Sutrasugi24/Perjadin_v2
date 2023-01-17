@@ -9,7 +9,8 @@ class Surat extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    protected $fillable = 
+        [
         'document_date',
         'document_number',
         'perjadin_id'];
@@ -18,5 +19,10 @@ class Surat extends Model
     public function perjadin()
     {
         return $this->belongsTo(Perjadin::class);
+    }
+
+    public function kuitansi()
+    {
+        return $this->hasOne(Kuitansi::class);
     }
 }

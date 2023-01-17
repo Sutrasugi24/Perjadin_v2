@@ -102,10 +102,10 @@
                 @endcan
                 @can('read kuitansi')
                     <li class="nav-item">
-                        {{-- <a href="{{ route('kuitansi.index') }}" class="nav-link {{ request()->routeIs('biaya.index') ? 'active':'' }}">
+                        <a href="{{ route('kuitansi.index') }}" class="nav-link {{ request()->routeIs('kuitansi.index') ? 'active':'' }}">
                             <i class="fas fa-money-check nav-icon"></i>
                             <p>Kuitansi</p>
-                        </a> --}}
+                        </a>
                     </li>
                 @endcan
                 @canany(['read user', 'read role', 'read permission', 'read perjadin', 'read surat'])

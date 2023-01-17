@@ -28,6 +28,11 @@ class Perjadin extends Model
 
     public function surat()
     {
-        return $this->belongsTo(Surat::class);
+        return $this->hasOne(Surat::class);
+    }
+
+    public function kuitansi()
+    {
+        return $this->belongsTo(Kuitansi::class);
     }
 }

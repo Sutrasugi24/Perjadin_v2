@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kuitansis', function (Blueprint $table) {
             $table->id();
             $table->string('kuitansi_number')->required();
-            $table->string('kuitansi_date')->required();
+            $table->date('kuitansi_date')->required();
             $table->timestamps();
         });
 

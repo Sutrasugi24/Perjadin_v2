@@ -7,11 +7,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
         // \App\Models\User::factory(10)->create();
@@ -20,7 +15,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             SettingSeeder::class,
-            PerjadinSeeder::class
+            PerjadinSeeder::class,
+            BiayaSeeder::class,
+            SuratSeeder::class
         ]);
     }
 }

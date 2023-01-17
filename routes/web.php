@@ -9,6 +9,7 @@ use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\KuitansiController;
 use App\Http\Controllers\PerjadinController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
@@ -60,6 +61,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('biaya/show', 'show')->middleware(['permission:read biaya'])->name('biaya.show');
         Route::put('biaya', 'update')->middleware(['permission:update biaya'])->name('biaya.update');
         Route::delete('biaya', 'destroy')->middleware(['permission:delete biaya'])->name('biaya.destroy');
+    });
+
+    Route::controller(KuitansiController::class)->group(function () {
+        Route::get('kuitansi', 'index')->middleware(['permission:read kuitansi'])->name('kuitansi.index');
+        Route::post('kuitansi', 'store')->middleware(['permission:create kuitansi'])->name('kuitansi.store');
+        Route::post('kuitansi/show', 'show')->middleware(['permission:read kuitansi'])->name('kuitansi.show');
+        Route::put('kuitansi', 'update')->middleware(['permission:update kuitansi'])->name('kuitansi.update');
+        Route::delete('kuitansi', 'destroy')->middleware(['permission:delete biaya'])->name('kuitansi.destroy');
     });
     
 

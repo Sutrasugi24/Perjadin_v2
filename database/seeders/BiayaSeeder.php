@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Biaya;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class BiayaSeeder extends Seeder
 {
@@ -14,6 +15,17 @@ class BiayaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Biaya::create([
+            'type'      => 'Kegiatan half day',
+            'cost'      => 105000,
+        ]);
+        Biaya::create([
+            'type'          => 'Kegiatan fullboard di dalam kota',
+            'cost'    => 150000
+        ]);
+        Biaya::create([
+            'type'          => 'Kegiatan fullboard di luar kota',
+            'cost'    => 430000
+        ]);
     }
 }
