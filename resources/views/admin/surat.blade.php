@@ -52,7 +52,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->document_number }}</td>
-                                                <td>{{  date('j \\ F Y', strtotime($i->document_date)) }}</td>
+                                                <td>{{ date('j \\ F Y', strtotime($i->document_date)) }}</td>
                                                 <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan}} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
                                             @canany(['update surat', 'delete surat'])
                                                     <td>

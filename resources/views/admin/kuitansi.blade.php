@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            @can('create user')
+                            @can('create kuitansi')
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah" data-backdrop="static" data-keyboard="false">Tambah <i class="fas fa-plus"></i></a>
@@ -40,8 +40,9 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nomor Kuitansi</th>
-                                            <th>Tanggal kuitansi</th>
-                                            <th>Total Biaya</th>
+                                            <th>Tanggal Kuitansi</th>
+                                            <th>ID Perjadin</th>
+                                            <th>Biaya</th>
                                             @canany(['update kuitansi', 'delete kuitansi'])
                                                 <th>Action</th>
                                             @endcanany
@@ -52,8 +53,9 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->kuitansi_number }}</td>
-                                                <td>{{ $i->kuitansi_date }}</td>
+                                                <td>{{ date('j \\ F Y', strtotime($i->kuitansi_date)) }}</td>
                                                 <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan}} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
+                                                <td>{{ $i->formatRupiah('cost_total') }}</td>
                                             @canany(['update kuitansi', 'delete kuitansi'])
                                                     <td>
                                                         <div class="btn-group">
@@ -86,10 +88,11 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+         $(document).ready(function() {
             $(document).on("click", '.btn-edit', function() {
                 let id = $(this).attr("data-id");
                 $('#modal-loading').modal({backdrop: 'static', keyboard: false, show: true});
+
                 $.ajax({
                     url: "{{ route('surat.show') }}",
                     type: "POST",
@@ -108,8 +111,6 @@
                         $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
                     },
                 });
-
-                
             });
             
             $(document).on("click", '.btn-delete', function() {
@@ -121,17 +122,28 @@
             });
 
             $("#perjadin_id").select2({
-                dropDownParent: $("#modal-edit"),
-                placeholder: "Pilih ID",
-                theme: 'bootstrap4'
-            });
-
-            $("#perjadin_id").select2({
                 dropDownParent: $("#modal-tambah"),
                 placeholder: "Pilih ID",
                 theme: 'bootstrap4'
             });
 
+            $("#perjadin_id").select2({
+                dropDownParent: $("#modal-edit"),
+                placeholder: "Pilih ID",
+                theme: 'bootstrap4'
+            });
+
+            $("#biaya_id").select2({
+                dropDownParent: $("#modal-tambah"),
+                placeholder: "Pilih Kegiatan",
+                theme: 'bootstrap4'
+            });
+
+            $("#biaya_id").select2({
+                dropDownParent: $("#modal-edit"),
+                placeholder: "Pilih Kegiatan",
+                theme: 'bootstrap4'
+            });
             $('.select2-search__field').css('width', '100%');
         });
     </script>
@@ -149,14 +161,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('kuitansi.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{--Start: Input Document Number --}}
                         <div class="input-group">
-                            <label>Nomor Surat</label>
+                            <label>Nomor Kuitansi</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Nomor Surat" name="document_number" value="{{ old('document_number') }}">
-                                @error('document_number')
+                                <input type="text" class="form-control @error('kuitansi_number') is-invalid @enderror" placeholder="Nomor Kuitansi" name="kuitansi_number" value="{{ old('kuitansi_number') }}">
+                                @error('kuitansi_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -164,9 +176,9 @@
                         {{-- End: Input Document Number --}}
                         {{-- Input leave date  --}}
                         <div class="input-group">
-                            <label>Tanggal Surat</label>
+                            <label>Tanggal Kuitansi</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('document_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="document_date" value="{{ old('document_date') }}">
+                                <input type="date" class="form-control @error('kuitansi_date') is-invalid @enderror" placeholder="dd-mm-yyyy" name="kuitansi_date" value="{{ old('kuitansi_date') }}">
                                 @error('document_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -182,6 +194,21 @@
                                     @endforeach
                                 </select>
                                 @error('perjadin_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- End biaya date --}}
+                        <div class="input-group">
+                            <label>Jenis Kegiatan</label>
+                            <div class="input-group">
+                                <select id="biaya_id" class="form-control" name="biaya_id">
+                                    @foreach ($biaya as $i)
+                                        <option value="{{ $i->id }}">{{ $i->type }}</option>
+                                    @endforeach
+                                </select>
+                                @error('biaya_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -211,46 +238,46 @@
                     <form action="{{ route('surat.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
-                         {{--Start: Input Document Number --}}
-                         <div class="input-group">
+                        {{-- Input leave date  --}}
+                        <div class="input-group">
                             <label>Nomor Surat</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" placeholder="Nomor Surat" id="document_number" name="document_number" value="{{ old('document_number') }}">
+                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" id="document_number" name="document_number" value="{{ old('document_number') }}">
                                 @error('document_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        {{-- End: Input Document Number --}}
+                        {{-- Input leave date  --}}
                         <div class="input-group">
                             <label>Tanggal Surat</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('document_date') is-invalid @enderror" name="document_date" id="document_date" value="{{ old('document_date') }}">
+                                <input type="date" class="form-control @error('document_date') is-invalid @enderror" id="document_date" name="document_date" value="{{ old('document_date') }}">
                                 @error('document_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{-- End Input date --}}
+                        {{--Start: Input koordinator --}}
+                        <label>ID Perjadin</label>
                         <div class="input-group">
-                            <label>ID Perjadin</label>
-                            <div class="input-group">
-                                <select id="perjadin_id"class="form-control" name="perjadin_id">
-                                    @foreach ($perjadin as $ip)
-                                        <option value="{{ $ip->id }}" @error('perjadin_id') is-invalid @enderror >{{ $ip->id }} - {{ $ip->plan }}</option>
-                                    @endforeach
-                                </select>
-                                @error('perjadin_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <select id="perjadin_id" class="form-control js-states" name="perjadin_id" id="perjadin_id">
+                                <@foreach ($perjadin as $i)
+                                    <option value="{{ $i->id }}">{{ $i->id }} - {{ $i->plan }} ({{ date('j \\ F Y', strtotime($i->leave_date)) }})</option>
+                                @endforeach
+                            </select>
+                            @error('perjadin_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <input type="hidden" name="id" id="id">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
+                </form>
             </div>
             <!-- /.modal-content -->
         </div>

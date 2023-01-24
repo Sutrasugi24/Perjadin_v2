@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('kuitansi_number')->required();
             $table->date('kuitansi_date')->required();
+            $table->string('cost_total')->required();
             $table->timestamps();
         });
 

@@ -100,7 +100,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('read kuitansi')
+                @can('read user')
                     <li class="nav-item">
                         <a href="{{ route('kuitansi.index') }}" class="nav-link {{ request()->routeIs('kuitansi.index') ? 'active':'' }}">
                             <i class="fas fa-money-check nav-icon"></i>

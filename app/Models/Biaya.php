@@ -13,4 +13,10 @@ class Biaya extends Model
 
     protected $fillable = [
         'type', 'cost'];
+
+    
+    public function kuitansi()
+    {
+        return $this->hasOne(Kuitansi::class);
+    }
 }

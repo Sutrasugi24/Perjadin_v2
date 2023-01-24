@@ -23,6 +23,6 @@ class Surat extends Model
 
     public function kuitansi()
     {
-        return $this->hasOne(Kuitansi::class);
+        return $this->belongsTo(Kuitansi::class);
     }
 }

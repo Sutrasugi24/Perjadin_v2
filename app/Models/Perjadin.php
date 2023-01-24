@@ -33,6 +33,6 @@ class Perjadin extends Model
 
     public function kuitansi()
     {
-        return $this->belongsTo(Kuitansi::class);
+        return $this->hasOne(Kuitansi::class);
     }
 }

@@ -2,22 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasFormatRupiah;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kuitansi extends Model
 {
     use HasFactory;
+    use HasFormatRupiah;
 
-
+    protected $fillable = [
+        'kuitansi_number',
+        'kuitansi_date',
+        'cost_total',
+        'perjadin_id',
+        'biaya_id'
+    ];
 
     public function perjadin()
     {
-        return $this->hasOne(Perjadin::class);
+        return $this->belongsTo(Perjadin::class);
     }
 
-    public function surat()
+    public function biaya()
     {
-        return $this->hasOne(Surat::class);
+        return $this->belongsTo(Biaya::class);
     }
 }
