@@ -70,6 +70,55 @@
                 </div>
                 <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="col-lg-4 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ count($perjadin) }}</h3>
+                            <p>Perjadin</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-business-time"></i>
+                        </div>
+                        <a href="{{ route('perjadin.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-4 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ count($surat) }}</h3>
+                            <p>Surat</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <a href="{{ route('surat.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-4 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ count($kuitansi) }}</h3>
+
+                            <p>Kuitansi</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-money-check"></i>
+                        </div>
+                        <a href="{{ route('permission.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

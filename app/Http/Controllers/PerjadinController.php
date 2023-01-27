@@ -37,7 +37,7 @@ class PerjadinController extends Controller
             'description'   => ['required', 'max:255'],
             'transport'     => ['required', 'in:darat,laut,udara'],
             'coordinator'   => ['required', 'max:255'],
-            'members'       => ['required', 'array'],
+            'members'       => ['array'],
 
         ]);
         
@@ -87,7 +87,7 @@ class PerjadinController extends Controller
             'description'   => ['required', 'max:255'],
             'transport'     => ['required', 'in:darat,laut,udara'],
             'coordinator'   => ['required', 'max:255'],
-            'members'       => ['required', 'array'],
+            'members'       => ['array'],
         ];
 
         $validator = Validator::make($request->all(), $rules);

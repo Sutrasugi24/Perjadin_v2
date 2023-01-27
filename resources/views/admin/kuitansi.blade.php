@@ -94,7 +94,7 @@
                 $('#modal-loading').modal({backdrop: 'static', keyboard: false, show: true});
 
                 $.ajax({
-                    url: "{{ route('surat.show') }}",
+                    url: "{{ route('kuitansi.show') }}",
                     type: "POST",
                     dataType: "JSON",
                     data: {
@@ -103,9 +103,10 @@
                     },
                     success: function(data) {
                         var data = data.data;
-                        $("#document_number").val(data.document_number);
-                        $("#document_date").val(data.document_date);
-                        $("#perjadin_id").val(data.perjadin_id);
+                        $("#document_number").val(data.kuitansi_number);
+                        $("#document_date").val(data.kuitansi_date);
+                        $("#id_perjadin").val(data.perjadin_id);
+                        $("#id_biaya").val(data.biaya_id);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
                         $('#modal-edit').modal({backdrop: 'static', keyboard: false, show: true});
@@ -235,41 +236,58 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('surat.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('kuitansi.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
-                        {{-- Input leave date  --}}
+                        {{--Start: Input Document Number --}}
                         <div class="input-group">
-                            <label>Nomor Surat</label>
+                            <label>Nomor Kuitansi</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('document_number') is-invalid @enderror" id="document_number" name="document_number" value="{{ old('document_number') }}">
-                                @error('document_number')
+                                <input type="text" class="form-control @error('kuitansi_number') is-invalid @enderror" id="document_number" placeholder="Nomor Kuitansi" name="kuitansi_number" value="{{ old('kuitansi_number') }}">
+                                @error('kuitansi_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        {{-- End: Input Document Number --}}
                         {{-- Input leave date  --}}
                         <div class="input-group">
-                            <label>Tanggal Surat</label>
+                            <label>Tanggal Kuitansi</label>
                             <div class="input-group">
-                                <input type="date" class="form-control @error('document_date') is-invalid @enderror" id="document_date" name="document_date" value="{{ old('document_date') }}">
+                                <input type="date" class="form-control @error('kuitansi_date') is-invalid @enderror" id="document_date" placeholder="dd-mm-yyyy" name="kuitansi_date" value="{{ old('kuitansi_date') }}">
                                 @error('document_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         {{-- End Input date --}}
-                        {{--Start: Input koordinator --}}
-                        <label>ID Perjadin</label>
                         <div class="input-group">
-                            <select id="perjadin_id" class="form-control js-states" name="perjadin_id" id="perjadin_id">
-                                <@foreach ($perjadin as $i)
-                                    <option value="{{ $i->id }}">{{ $i->id }} - {{ $i->plan }} ({{ date('j \\ F Y', strtotime($i->leave_date)) }})</option>
-                                @endforeach
-                            </select>
-                            @error('perjadin_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label>ID Perjadin</label>
+                            <div class="input-group">
+                                <select id="perjadin_id" class="form-control" id="id_perjadin" name="perjadin_id">
+                                    @foreach ($perjadin as $i)
+                                        <option value="{{ $i->id }}">{{ $i->id }} - {{ $i->plan }}</option>
+                                    @endforeach
+                                </select>
+                                @error('perjadin_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- End biaya date --}}
+                        <div class="input-group">
+                            <label>Jenis Kegiatan</label>
+                            <div class="input-group">
+                                <select id="biaya_id" class="form-control" id="id_biaya" name="biaya_id">
+                                    @foreach ($biaya as $i)
+                                        <option value="{{ $i->id }}">{{ $i->type }}</option>
+                                    @endforeach
+                                </select>
+                                @error('biaya_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -294,7 +312,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('surat.destroy') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('kuitansi.destroy') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('DELETE')
                         <p class="modal-text">Apakah anda yakin akan menghapus? <b id="delete-data"></b></p>

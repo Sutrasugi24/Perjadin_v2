@@ -27,5 +27,13 @@ class BiayaSeeder extends Seeder
             'type'          => 'Kegiatan fullboard di luar kota',
             'cost'    => 430000
         ]);
+        Biaya::create([
+            'type'          => 'Transport',
+            'cost'    => 0
+        ]);
+        Biaya::create([
+            'type'          => 'Uang Saku',
+            'cost'    => 105000
+        ]);
     }
 }
