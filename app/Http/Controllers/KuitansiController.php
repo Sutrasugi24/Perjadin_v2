@@ -29,6 +29,17 @@ class KuitansiController extends Controller
         return view('admin.kuitansi', $x);
     }
 
+    public function download()
+    {
+        
+        $x['title'] = 'Kuitansi';
+        $x['perjadin'] = Perjadin::get();
+        $x['biaya'] = Biaya::get();
+        $x['data'] = Kuitansi::get();
+
+        return view('admin.kuitansi-download', $x);
+    }
+
 
     public function store(Request $request)
     {

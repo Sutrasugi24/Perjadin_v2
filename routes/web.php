@@ -69,6 +69,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('kuitansi/show', 'show')->middleware(['permission:read user'])->name('kuitansi.show');
         Route::put('kuitansi', 'update')->middleware(['permission:update kuitansi'])->name('kuitansi.update');
         Route::delete('kuitansi', 'destroy')->middleware(['permission:delete biaya'])->name('kuitansi.destroy');
+        Route::get('kuitansi/download', 'download')->middleware(['permission:read kuitansi'])->name('kuitansi.download');
     });
     
 
