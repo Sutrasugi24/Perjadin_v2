@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use App\Models\User;
+use App\Models\Biaya;
 use App\Models\Surat;
+use App\Models\Kuitansi;
 use App\Models\Perjadin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +53,7 @@ class SuratController extends Controller
             Alert::success('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> berhasil dibuat')->toToast()->toHtml();
         } catch (\Throwable $th) {
             DB::rollback();
-            Alert::error('Pemberitahuan', 'Data <b> </b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
+            Alert::error('Pemberitahuan', 'Data <b>'. $surat->document_number .'</b> gagal dibuat : ' . $th->getMessage())->toToast()->toHtml();
         }
         return back();
     }
@@ -92,10 +96,11 @@ class SuratController extends Controller
             Alert::success('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> berhasil disimpan')->toToast()->toHtml();
         } catch (\Throwable $th) {
             DB::rollback();
-            Alert::error('Pemberitahuan', 'Data <b> </b> gagal disimpan : ' . $th->getMessage())->toToast()->toHtml();
+            Alert::error('Pemberitahuan', 'Data <b>'. $surat->document_number .'</b> gagal disimpan : ' . $th->getMessage())->toToast()->toHtml();
         }
         return back();
     }
+
 
     public function destroy(Request $request)
     {
@@ -107,5 +112,26 @@ class SuratController extends Controller
             Alert::error('Pemberitahuan', 'Data <b>' . $surat->document_number . '</b> gagal dihapus : ' . $th->getMessage())->toToast()->toHtml();
         }
         return back();
+    }
+
+    public function download($id)
+    {
+        $surat = Surat::findOrFail($id);
+        $perjadin = Perjadin::findOrFail($surat->perjadin_id);
+
+        $x['title'] = 'Surat';
+        $x['perjadin'] = Perjadin::find($surat->perjadin_id);
+        $x['data'] = Surat::find($id);
+        $x['user'] = User::get();
+        $x['kuitansi'] = Kuitansi::get();
+        // dd($x);
+
+        // $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'defaultFont' => 'sans-serif'])
+        //     ->setPaper('a4', 'potrait')
+        //     ->loadView('admin.surat-download', compact('x'));
+        view()->share('x', $x);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+                ->loadView('admin.surat-download', $x);
+        return $pdf->download('surat.pdf');
     }
 }

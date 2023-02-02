@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('transport', ['darat', 'laut', 'udara'])->required();
             $table->date('leave_date')->required();
             $table->date('return_date')->required();
-            $table->string('coordinator')->required();
+            $table->integer('coordinator')->required();
             $table->string('description')->required();
         });
     }

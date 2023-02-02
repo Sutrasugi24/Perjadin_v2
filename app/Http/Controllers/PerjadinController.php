@@ -22,6 +22,7 @@ class PerjadinController extends Controller
         $x['user'] = User::get();
         $x['role'] = Role::get();
         $x['transport'] = ['darat', 'laut', 'udara'];
+        // dd($x);
 
         return view('admin.perjadin', $x);
     }

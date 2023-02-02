@@ -62,7 +62,7 @@
                                                 <td>{{ $i->destination }}</td>
                                                 <td>{{ $i->description }}</td>
                                                 <td>{{ ucfirst(trans($i->transport)) }}</td>
-                                                <td>{{ $i->coordinator }}</td>
+                                                <td>{{ $user[$i->coordinator]->name }}</td>
                                                 <td>{{ $i->users()->get()->implode('name', ', ') }}</td>
                                             @canany(['update perjadin', 'delete perjadin'])
                                                     <td>
@@ -252,7 +252,7 @@
                             <select id="single-input" class="form-control js-states" name="coordinator">
                                 <option></option>
                                 <@foreach ($user as $i)
-                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                    <option value="{{ $i->id }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -365,7 +365,7 @@
                         <div class="input-group">
                             <select id="single-edit" class="form-control js-states" name="coordinator" id="coordinator">
                                 <@foreach ($user as $i)
-                                    <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                    <option value="{{ $i->id }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                             @error('coordinator')

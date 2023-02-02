@@ -31,7 +31,6 @@ class KuitansiController extends Controller
 
     public function download()
     {
-        
         $x['title'] = 'Kuitansi';
         $x['perjadin'] = Perjadin::get();
         $x['biaya'] = Biaya::get();

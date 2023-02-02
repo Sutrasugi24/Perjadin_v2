@@ -65,9 +65,6 @@
                                                             @can('delete kuitansi')
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
                                                             @endcan
-                                                            @can('read kuitansi')
-                                                                <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
-                                                            @endcan
                                                         </div>
                                                     </td>
                                                 @endcanany

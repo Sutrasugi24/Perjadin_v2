@@ -63,6 +63,9 @@
                                                             @can('delete surat')
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
                                                             @endcan
+                                                            @can('read surat')
+                                                                <a href="{{route('surat.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-download"></i></a>
+                                                            @endcan
                                                         </div>
                                                     </td>
                                                 @endcanany
@@ -110,6 +113,17 @@
                     },
                 });
             });
+
+
+            $(document).on("click", '.btn-print', function() {
+                let id = $(this).attr("data-id");
+                let perjadinId = $(this).attr("data-perjadin");
+                $("#did").val(id);
+                $("#perjadin-id").val(perjadinId);
+                $("#print-perjadin").html(perjadinId);
+                $('#modal-print').modal({backdrop: 'static', keyboard: false, show: true});
+            });
+
             
             $(document).on("click", '.btn-delete', function() {
                 let id = $(this).attr("data-id");
@@ -281,4 +295,31 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    {{-- Modal Unduh --}}
+    {{-- <div class="modal fade" id="modal-print">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Unduh data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('surat.download') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <p class="modal-text">Apakah anda yakin akan mengunduh data? <b id="print-perjadin"></b></p>
+                        <input type="hidden" name="id" id="did">
+                        <input type="hidden" name="id-perjadin" id="perjadin-id">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-success">Unduh</button>
+                </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div> --}}
 @endsection

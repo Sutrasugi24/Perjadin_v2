@@ -18,7 +18,7 @@ class PerjadinSeeder extends Seeder
         $perjadin = Perjadin::create([
             'leave_date'      => '2023-01-10',
             'return_date'     => '2023-01-10',
-            'coordinator'  => 'Admin',
+            'coordinator'  => 1,
             'plan'       => 'Perjalanan Dinas ke Kota Garut',
             'destination'      => 'Kota Garut',
             'transport'   => 'darat',
