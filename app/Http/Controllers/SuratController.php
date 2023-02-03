@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Biaya;
 use App\Models\Surat;
@@ -118,12 +119,18 @@ class SuratController extends Controller
     {
         $surat = Surat::findOrFail($id);
         $perjadin = Perjadin::findOrFail($surat->perjadin_id);
+        //selisih hari
+        $fdate = new Carbon($perjadin->return_date);
+        $tdate = new Carbon($perjadin->leave_date);
+        $interval = $fdate->diffInDays($tdate) + 1;
 
         $x['title'] = 'Surat';
-        $x['perjadin'] = Perjadin::find($surat->perjadin_id);
+        $x['perjadin'] = Perjadin::with(['kuitansi', 'surat'])->where('id', $surat->perjadin_id)->get();
+        $x['selisihHari'] = $interval;
         $x['data'] = Surat::find($id);
         $x['user'] = User::get();
-        $x['kuitansi'] = Kuitansi::get();
+
+        
         // dd($x);
 
         // $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'defaultFont' => 'sans-serif'])

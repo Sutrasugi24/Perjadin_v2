@@ -16,7 +16,7 @@ class SuratSeeder extends Seeder
     public function run()
     {
         Surat::create([
-            'document_number'      => 'SMAN6CIMAHNI/12345/12345',
+            'document_number'      => 'SMAN6CIMAHI/12345/12345',
             'document_date'      => '2023-01-17',
             'perjadin_id' => 1
         ]);

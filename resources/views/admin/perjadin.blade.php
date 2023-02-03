@@ -62,7 +62,11 @@
                                                 <td>{{ $i->destination }}</td>
                                                 <td>{{ $i->description }}</td>
                                                 <td>{{ ucfirst(trans($i->transport)) }}</td>
-                                                <td>{{ $user[$i->coordinator]->name }}</td>
+                                                @foreach($user as $id)
+                                                    @if ($id->id == $i->coordinator)
+                                                        <td>{{ $id->name }}</td>
+                                                    @endif
+                                                @endforeach
                                                 <td>{{ $i->users()->get()->implode('name', ', ') }}</td>
                                             @canany(['update perjadin', 'delete perjadin'])
                                                     <td>
