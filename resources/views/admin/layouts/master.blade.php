@@ -55,6 +55,8 @@
         <!-- ./wrapper -->
         <!-- jQuery -->
         <script src="{{ asset('template/admin/plugins/jquery/jquery.min.js') }}"></script>
+        <!-- BarChart -->
+        <script src="{{ asset('template/admin/plugins/chart.js/Chart.min.js') }}"></script>
         @yield('js')
         @include('admin.layouts.script')
         <!-- jQuery UI 1.11.4 -->

@@ -21,6 +21,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "@eonasdan/tempus-dominus": "^6.2.10"
+        "@eonasdan/tempus-dominus": "^6.2.10",
+        "chart.js": "^4.2.0"
     }
 }
