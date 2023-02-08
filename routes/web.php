@@ -16,7 +16,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\FileManagerController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 })->name('index');
 
 Auth::routes([

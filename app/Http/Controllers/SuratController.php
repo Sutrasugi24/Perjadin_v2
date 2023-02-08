@@ -24,7 +24,7 @@ class SuratController extends Controller
     {
         $x['title'] = 'Surat';
         $x['data'] = Surat::get();
-        $x['perjadin'] = Perjadin::get();
+        $x['perjadin'] = Perjadin::with('users')->get();
         $x['role'] = Role::get();
         // dd($x);
 
@@ -125,19 +125,26 @@ class SuratController extends Controller
         $interval = $fdate->diffInDays($tdate) + 1;
 
         $x['title'] = 'Surat';
-        $x['perjadin'] = Perjadin::with(['kuitansi', 'surat'])->where('id', $surat->perjadin_id)->get();
+        $x['perjadin'] = Perjadin::with(['kuitansi', 'surat', 'users'])->where('id', $surat->perjadin_id)->get();
         $x['selisihHari'] = $interval;
         $x['data'] = Surat::find($id);
+        $x['members'][] = $perjadin->coordinator;
+
+        foreach ($perjadin->users as $user) {
+            $x['members'][] = $user->id;
+        }
+        // $x['members'] = array_unshift($perjadin->users, $perjadin->coordinator);
         $x['user'] = User::get();
 
-        
         // dd($x);
+        // dd(Perjadin::with('users')->get(['id']));
 
         // $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'defaultFont' => 'sans-serif'])
         //     ->setPaper('a4', 'potrait')
         //     ->loadView('admin.surat-download', compact('x'));
         view()->share('x', $x);
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+                ->setPaper('A4', 'landscape')
                 ->loadView('admin.surat-download', $x);
         return $pdf->download('surat.pdf');
     }

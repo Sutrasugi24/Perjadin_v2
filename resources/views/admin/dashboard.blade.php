@@ -109,7 +109,7 @@
                     </div>
                         <div class="col-md-3 col-sm-6 col-12">
                             <div style="background-color: #4D96FF;" class="info-box">
-                                <span class="info-box-icon"><i class="fas fa-comments"></i></span>
+                                <span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Biaya</span>
                                     <span class="info-box-number">Rp. {{ number_format($kuitansi->sum('cost_total'), 0, ',', '.') }}</span>
