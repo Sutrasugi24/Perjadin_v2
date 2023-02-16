@@ -133,15 +133,7 @@ class SuratController extends Controller
         foreach ($perjadin->users as $user) {
             $x['members'][] = $user->id;
         }
-        // $x['members'] = array_unshift($perjadin->users, $perjadin->coordinator);
         $x['user'] = User::get();
-
-        // dd($x);
-        // dd(Perjadin::with('users')->get(['id']));
-
-        // $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'defaultFont' => 'sans-serif'])
-        //     ->setPaper('a4', 'potrait')
-        //     ->loadView('admin.surat-download', compact('x'));
         view()->share('x', $x);
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
                 ->setPaper('A4', 'landscape')

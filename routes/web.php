@@ -39,15 +39,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('user', 'destroy')->middleware(['permission:delete user'])->name('user.destroy');
     });
 
-    Route::controller(SuratController::class)->group(function () {
-        Route::get('surat', 'index')->middleware(['permission:read surat'])->name('surat.index');
-        Route::post('surat', 'store')->middleware(['permission:create surat'])->name('surat.store');
-        Route::post('surat/show', 'show')->middleware(['permission:read surat'])->name('surat.show');
-        Route::put('surat', 'update')->middleware(['permission:update surat'])->name('surat.update');
-        Route::delete('surat', 'destroy')->middleware(['permission:delete surat'])->name('surat.destroy');
-        Route::get('surat/download/{id}}', 'download')->middleware(['permission:read surat'])->name('surat.download');
-    });
-
     Route::controller(PerjadinController::class)->group(function () {
         Route::get('perjadin', 'index')->middleware(['permission:read perjadin'])->name('perjadin.index');
         Route::post('perjadin', 'store')->middleware(['permission:create perjadin'])->name('perjadin.store');
@@ -70,7 +61,16 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('kuitansi/show', 'show')->middleware(['permission:read user'])->name('kuitansi.show');
         Route::put('kuitansi', 'update')->middleware(['permission:update kuitansi'])->name('kuitansi.update');
         Route::delete('kuitansi', 'destroy')->middleware(['permission:delete biaya'])->name('kuitansi.destroy');
-        Route::get('kuitansi/download/', 'download')->middleware(['permission:read kuitansi'])->name('kuitansi.download');
+        Route::get('kuitansi/download/{id}}', 'download')->middleware(['permission:read kuitansi'])->name('kuitansi.download');
+    });
+
+    Route::controller(SuratController::class)->group(function () {
+        Route::get('surat', 'index')->middleware(['permission:read surat'])->name('surat.index');
+        Route::post('surat', 'store')->middleware(['permission:create surat'])->name('surat.store');
+        Route::post('surat/show', 'show')->middleware(['permission:read surat'])->name('surat.show');
+        Route::put('surat', 'update')->middleware(['permission:update surat'])->name('surat.update');
+        Route::delete('surat', 'destroy')->middleware(['permission:delete surat'])->name('surat.destroy');
+        Route::get('surat/download/{id}}', 'download')->middleware(['permission:read surat'])->name('surat.download');
     });
     
 

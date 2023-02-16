@@ -8,15 +8,15 @@
         }
         /* Create two equal columns that floats next to each other */
         .column {
-        float: left;
-        width: 47.5%;
-        padding: 10px;
+            float: left;
+            width: 47.5%;
+            padding: 10px;
         }
         /* Clear floats after the columns */
         .row:after {
-        content: "";
-        display: table;
-        clear: both;
+            content: "";
+            display: table;
+            clear: both;
         }
         .wrap-text-right {
             text-align:left;
@@ -77,12 +77,16 @@
             text-align: right;
             padding-right: 20%;
         }
+
+        .tb-m{
+            margin-bottom: 69px;
+        }
     </style>
 </head>
 <body>
 @foreach ($members as $member)
 <div class="row">
-  <div class="column" style="background-color:#F0F8FF;">
+  <div class="column">
     <section class="content">
         <div class="container-fluid p-5">
             <div class="row mb-5">
@@ -95,13 +99,13 @@
                 </div>
             <div class="container-right">
                 <div class="wrap-text-right">
-                    <p>Lembar ke  <span style="padding-left:27px;">:</span> </p>
+                    <p>Lembar ke  <span style="padding-left:26px;">:</span> </p>
                     <p>Kode nomor <span style="padding-left:20px;">:</span> </p>
-                    <p>Nomor <span style="padding-left:50px;">:</span> </p>
+                    <p>Nomor <span style="padding-left:38px;">:</span> </p>
                 </div>
             </div>
-            <div style="text-align: left; width: 50%;">
-                <p style="margin-top: 2px; margin-bottom:2px; font-size:8px; text-align:center; font-weight:bold;"><u>Surat Perjalanan Dinas (SPD)</u></p>
+            <div style="text-align: center; margin-top: 3px; margin-bottom:3px;" >
+                <p style="font-size:8px; font-weight:bold;"><u>Surat Perjalanan Dinas (SPD)</u></p>
             </div>
             <div class="row">
                 <div class="col-12 mt-3">
@@ -130,7 +134,7 @@
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
                                     <p class="text-left m-0">{{ $user->find($member)->golongan }}</p>
                                     <p class="text-left m-0">{{ $user->find($member)->jabatan }}</p>
-                                    <p class="text-left mb-1">{{$perjadin[0]->kuitansi->formatRupiah('cost_total')}}</p>
+                                    <p class="text-left mb-1">Rp. {{$perjadin[0]->kuitansi->formatRupiah('cost_total')}}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
@@ -236,105 +240,86 @@
         </div><!-- /.container-fluid -->
     </section>
   </div>
-  <div class="column" style="background-color:#FFF0F5;">
+  <div class="column">
     <section class="content">
         <div class="container-fluid p-5">
             <div class="row">
                 <div class="col-12 mt-3">
                     <table class="table">
                         <tbody>
-                            <tr class="d-flex">
-                                <td colspan="3" class="col-xs-5 h-6 p-1"><p class="text-left">Pengguna Anggaran/Kuasa Pengguna Anggaran</p></td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left">Drs. Ade Suratman, M.PD.</p></td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td colspan="2" class="col-xs-5 h-6 pt-3"><p class="text-left">Nama/NIP Pegawai yang melaksanakan perjalanan dinas</p></td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1">
-                                </td>
-                            </tr>
-                            <tr class="d-flex">
+                            <tr>
+                                <td><p>l.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p>a. Pangkat dan Golongan</p>
-                                    <p>b. Jabatan</p>
-                                    <p>c. Tingkat Biaya Perjalanan Dinas</p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    @foreach($user as $id)
-                                    @if ($id->id == $members)
-                                        <p class="text-left m-0">{{ $id->golongan }}</p>
-                                        <p class="text-left m-0">{{ $id->jabatan }}</p>
-                                    @endif
-                                @endforeach
-                                    <p class="text-left mb-1">{{$perjadin[0]->kuitansi->formatRupiah('cost_total')}}</p>
+                                    <p class="text-left">Berangkat dari : SMAN 6 Cimahi</p>
+                                    <p class="text-left">Ke : {{ $perjadin[0]->destination }}</p>
+                                    <p class="text-left tb-m">Pada tanggal : {{ $perjadin[0]->leave_date }}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
-                                <td colspan="2" class="col-xs-5 h-6 p-1"><p class="text-left">Maksud Perjalanan Dinas</p></td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left">{{ $perjadin[0]->plan }}</p></td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td colspan="2" class="col-xs-5 h-6 p-1"><p class="text-left">Alat angkutan / transpotasi yang digunakan</p></td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left">Angkutan {{ ucfirst(trans($perjadin[0]->transport)) }}</p></td>
-                            </tr>
-                            <tr class="d-flex">
+                                <td><p>ll.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p class="text-left m-0">a. Tempat berangkat</p>
-                                    <p class="text-left m-0">b. Tempat tujuan</p>
+                                    <p>Tiba di    : {{ $perjadin[0]->destination }}</p>
+                                    <p>Pada Tanggal    : {{ $perjadin[0]->leave_date }}</p>
+                                    <p class="tb-m"></p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    <p class="text-left m-0">SMAN 6 Cimahi</p>
-                                    <p class="text-left m-0">{{ $perjadin[0]->destination }}</p>
+                                    <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
+                                    <p class="text-left">Ke : {{ $perjadin[0]->destination }}</p>
+                                    <p class="text-left tb-m">Pada tanggal : {{ $perjadin[0]->leave_date }}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
-                                <td class="col-xs-1 h-6 p-1"><p class="text-center">7</p></td>
+                                <td><p>lll.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p class="text-left m-0">a. Lamanya Perjalanan Dinas</p>
-                                    <p class="text-left m-0">b. Tanggal berangkat</p>
-                                    <p class="text-left mb-1">c. Tanggal harus kembali/tiba di tempat baru*</p>
+                                    <p>Tiba di    : {{ $perjadin[0]->destination }}</p>
+                                    <p>Pada Tanggal    : {{ $perjadin[0]->leave_date }}</p>
+                                    <p class="tb-m"></p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    <p class="text-left m-0">{{ $selisihHari }} Hari</p>
-                                    <p class="text-left m-0">{{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y')}}</p>
-                                    <p class="text-left mb-1">{{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y')}}</p>
+                                    <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
+                                    <p class="text-left">Ke : {{ $perjadin[0]->destination }}</p>
+                                    <p class="text-left tb-m">Pada tanggal : {{ $perjadin[0]->leave_date }}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
-                                <td class="col-xs-1 h-6 p-1"><p class="text-center">9</p></td>
+                                <td><p>lV.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p class="text-left m-0">Pembebanan anggaran</p>
-                                    <p class="text-left m-0">a. Instansi</p>
-                                    <p class="text-left mb-1">b. Akun</p>
+                                    <p>Tiba di    : </p>
+                                    <p>Pada Tanggal    : </p>
+                                    <p class="tb-m"></p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    <p class="text-left m-0"><br></p>
-                                    <p class="text-left m-0">SMA Negeri 6 Cimahi</p>
-                                    <p class="text-left mb-1">5.1.02.05.01</p>
+                                    <p class="text-left">Berangkat dari :  </p>
+                                    <p class="text-left">Ke : </p>
+                                    <p class="text-left tb-m">Pada tanggal : </p>
                                 </td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-xs-1 h-6 p-1"><p class="text-center">10</p></td>
-                                <td colspan="2" class="col-xs-5 h-6 p-1"><p class="text-left">Keterangan lain lain</p></td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left"></p></td>
                             </tr>
                             <tr class="d-flex">
                                 <td colspan="5">
-                                    <p style="text-align: left; padding-left:30px;">* Coret yang tidak perlu</p><
-                                    <div class="container-kota">
-                                        <div class="wrap-kota">
-                                            <p>Dikeluarkan: di Kota Cimahi</p>
-                                            <p>Tanggal: {{ \Carbon\Carbon::parse($perjadin[0]->surat->document_date)->isoFormat('D MMMM Y')}}</p>
-                                        </div>
+                                    <div style="text-align: left;">
+                                        <p style="padding-left: 5px;">V. <span style="padding-left:10px;">Tiba di    : SMAN 6 Cimahi</span></p>
+                                        <p style="padding-left:25px;">Pada Tanggal    : {{ $perjadin[0]->return_date }}</p>
+                                        <p style="padding-left:25px;">Telah diperiksa dengan keterangan bahwa perjalanan tersebut atas perintahnya dan semata-mata untuk kepentingan jabatan dalam waktu yang sesingkat-singkatnya.</p>
                                     </div>
                                     <br/>
-                                    <div class="container-text">
-                                        <div class="wrap-text">
-                                            <p >Kepala SMA Negeri 6 Cimahi</p>
+                                    <div style="text-align: center;">
+                                        <div tyle="text-align: center;">
+                                            <p style="font-weight:bold;">Kepala SMA Negeri 6 Cimahi</p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
-                                            <p ><u>Drs. ADE SURATMAN, M.PD.</u></p>
-                                            <p >NIP. 196301141988031007</p>
+                                            <p style="font-weight:bold;"><u>Drs. ADE SURATMAN, M.PD.</u></p>
+                                            <p style="font-weight:bold;">NIP. 196301141988031007</p>
                                             <br/>
                                         </div>
+                                    </div>
+                                </td>               
+                            </tr>
+                            <tr class="d-flex">
+                                <td colspan="5">
+                                    <div style="text-align: left;">
+                                        <p style="padding-left: 5px;">Vl. <span style="padding-left:9px;">Perhatian</span></p>
+                                        <p style="padding-left:26px;">PA/KPA yang menerbitkan SPD, pegawai yang melakukan perjalanan dinas, para pejabat yang mengesahkan tanggal berangkat/tiba, serta bendahara pengeluaran bertanggung jawab berdasarkan peraturan-peraturan Keuangan Negara apabila Negara menderita rugi akibat kesalahan, kelalaian dan kealpaannya..</p>
                                     </div>
                                 </td>               
                             </tr>

@@ -8,7 +8,7 @@ trait HasFormatRupiah
     {
         $prefix = $prefix ? $prefix : 'Rp. ';
         $nominal = $this->attributes[$field];
-        return $prefix . number_format($nominal, 0, ',', '.');
+        return number_format($nominal, 0, ',', '.');
     }
 }
 

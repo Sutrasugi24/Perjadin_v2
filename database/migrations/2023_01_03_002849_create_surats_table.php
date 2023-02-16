@@ -21,7 +21,7 @@ return new class extends Migration
         });
 
         Schema::table('surats', function (Blueprint $table) {
-            $table->foreignId('perjadin_id')->constrained('perjadins');
+            $table->foreignId('perjadin_id')->constrained('perjadins')->onDelete('cascade');
         });
     }
 

@@ -68,7 +68,7 @@
                                                     @endif
                                                 @endforeach
                                                 <td>{{ $i->users()->get()->implode('name', ', ') }}</td>
-                                            @canany(['update perjadin', 'delete perjadin'])
+                                                @canany(['update perjadin', 'delete perjadin'])
                                                     <td>
                                                         <div class="btn-group">
                                                             @can('update perjadin')

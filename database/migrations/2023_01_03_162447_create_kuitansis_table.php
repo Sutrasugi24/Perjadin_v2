@@ -22,8 +22,8 @@ return new class extends Migration
         });
 
         Schema::table('kuitansis', function (Blueprint $table) {
-            $table->foreignId('biaya_id')->constrained('biayas');
-            $table->foreignId('perjadin_id')->constrained('perjadins')->onDelete('restrict');
+            $table->foreignId('biaya_id')->constrained('biayas')->onDelete('cascade');
+            $table->foreignId('perjadin_id')->constrained('perjadins')->onDelete('cascade');
         });
     }
 

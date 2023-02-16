@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Biaya;
 use App\Models\Kuitansi;
 use App\Models\Perjadin;
+use PDF;
 use Nette\Utils\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,16 +28,6 @@ class KuitansiController extends Controller
         $x['data'] = Kuitansi::get();
 
         return view('admin.kuitansi', $x);
-    }
-
-    public function download()
-    {
-        $x['title'] = 'Kuitansi';
-        $x['perjadin'] = Perjadin::get();
-        $x['biaya'] = Biaya::get();
-        $x['data'] = Kuitansi::get();
-
-        return view('admin.kuitansi-download', $x);
     }
 
 
@@ -176,4 +167,19 @@ class KuitansiController extends Controller
         }
         return back();
     }
+
+
+    public function download($id)
+    {
+
+        $x['title'] = 'Kuitansi';
+        $x['data'] = Kuitansi::findOrFail($id);
+
+        view()->share('x', $x);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+                ->setPaper('A4', 'potrait')
+                ->loadView('admin.kuitansi-download', $x);
+        return $pdf->download('kuitansi.pdf');
+    }
+    
 }

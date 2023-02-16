@@ -55,7 +55,7 @@
                                                 <td>{{ $i->kuitansi_number }}</td>
                                                 <td>{{ date('j \\ F Y', strtotime($i->kuitansi_date)) }}</td>
                                                 <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan}} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
-                                                <td>{{ $i->formatRupiah('cost_total') }}</td>
+                                                <td>Rp. {{ $i->formatRupiah('cost_total') }}</td>
                                             @canany(['update kuitansi', 'delete kuitansi'])
                                                     <td>
                                                         <div class="btn-group">
@@ -64,6 +64,9 @@
                                                             @endcan
                                                             @can('delete kuitansi')
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
+                                                            @endcan
+                                                            @can('read kuitansi')
+                                                                <a href="{{route('kuitansi.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-download"></i></a>
                                                             @endcan
                                                         </div>
                                                     </td>
