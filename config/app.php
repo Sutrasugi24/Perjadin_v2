@@ -166,6 +166,7 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Riskihajar\Terbilang\TerbilangServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -199,6 +200,7 @@ return [
         'ReCaptcha'     => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Setting'       => App\Helpers\SettingHelper::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
     ])->toArray(),
 
 ];

@@ -7,6 +7,7 @@ use App\Models\Biaya;
 use App\Models\Kuitansi;
 use App\Models\Perjadin;
 use PDF;
+use Terbilang;
 use Nette\Utils\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -171,9 +172,12 @@ class KuitansiController extends Controller
 
     public function download($id)
     {
+        $kuitansi = Kuitansi::findOrFail($id);
+        
 
         $x['title'] = 'Kuitansi';
         $x['data'] = Kuitansi::findOrFail($id);
+        $x['terbilang'] = Terbilang::make($kuitansi->cost_total);
 
         view()->share('x', $x);
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])

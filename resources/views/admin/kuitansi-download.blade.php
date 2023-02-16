@@ -160,10 +160,10 @@
                     <tr >
                         <td colspan="2">
                             <p class="pl-10 float-left">
-                                BANYAKNYA: 
+                                BANYAKNYA : 
                             </p>
-                            <p class="wrap">
-                                SERATUS DUA PULUH LIMA RIBU RUPIAH 
+                            <p class="wrap" style="text-transform: uppercase;">
+                                {{ $terbilang }} 
                             </p>
                         </td>
                     </tr>
