@@ -64,7 +64,10 @@
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
                                                             @endcan
                                                             @can('read surat')
-                                                                <a href="{{route('surat.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-download"></i></a>
+                                                                <a href="{{route('surat.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Surat!"><i class="fas fa-download"></i></a>
+                                                            @endcan
+                                                            @can('read surat')
+                                                                <a href="{{route('surat.rincian', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Rincian Biaya!"><i class="fas fa-download"></i></a>
                                                             @endcan
                                                         </div>
                                                     </td>

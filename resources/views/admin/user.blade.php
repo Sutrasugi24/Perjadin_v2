@@ -29,7 +29,14 @@
                             @can('create user')
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah" data-backdrop="static" data-keyboard="false">Tambah <i class="fas fa-plus"></i></a>
+                                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah" data-backdrop="static" data-keyboard="false" title="Tambah Data!">Tambah <i class="fas fa-plus"></i></a>
+                                    <a href="#" class="ml-1 btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-import" data-backdrop="static" data-keyboard="false" title="Import Data!">Import <i class="fas fa-file-import"></i></a>
+                                    
+                                    {{-- <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file">
+                                        <input type="submit" value="import">
+                                    </form> --}}
                                 </h3>
                             </div>
                             @endcan
@@ -362,6 +369,32 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    {{-- Modal Import --}}
+    {{-- Modal tambah --}}
+    <div class="modal fade" id="modal-import">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <button type="submit" value="import" class="btn btn-primary">Simpan</button>
                 </div>
                 </form>
             </div>

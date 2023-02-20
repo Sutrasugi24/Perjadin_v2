@@ -14,6 +14,19 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ asset('template/admin/dist/css/adminlte.min.css') }}">
         {!! htmlScriptTagJsApi() !!}
+
+        <style>
+            #showPassword{
+                display: none;
+            }
+
+            .fa{
+                margin-top: 12px;
+                margin-left: 2px;
+            }
+
+
+        </style>
     </head>
     <body class="hold-transition login-page">
         @php
@@ -40,6 +53,10 @@
                         </div>
                         <div class="input-group mb-3">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                            <span class="eye" onclick="showPassword()">
+                                <i id="showPassword" class="fa fa-eye"></i>
+                                <i id="hidePassword" class="fa fa-eye-slash"></i>
+                            </span>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -88,5 +105,23 @@
             <script src="{{ asset('template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('template/admin/dist/js/adminlte.js') }}"></script>
+        <script>
+            function showPassword(){
+                var x = document.getElementById("password");
+                var y = document.getElementById("showPassword");
+                var z = document.getElementById("hidePassword");
+
+                if(x.type === 'password'){
+                    x.type = "text";
+                    y.style.display = "block";
+                    z.style.display = "none";
+                }
+                else{
+                    x.type = "password";
+                    y.style.display = "none";
+                    z.style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('nips')->unique()->nullable();
             $table->string('jabatan')->nullable();
             $table->string('golongan')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable;
             $table->rememberToken();
             $table->timestamps();
         });

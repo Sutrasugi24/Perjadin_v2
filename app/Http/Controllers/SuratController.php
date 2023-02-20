@@ -17,6 +17,7 @@ use App\Http\Resources\SuratResource;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Terbilang;
 
 class SuratController extends Controller
 {
@@ -136,8 +137,46 @@ class SuratController extends Controller
         $x['user'] = User::get();
         view()->share('x', $x);
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
-                ->setPaper('A4', 'landscape')
+                ->setPaper('F4', 'landscape')
                 ->loadView('admin.surat-download', $x);
         return $pdf->download('surat.pdf');
+    }
+
+    public function rincian($id){
+        $surat = Surat::findOrFail($id);
+        $perjadin = Perjadin::findOrFail($surat->perjadin_id);
+        //selisih hari
+        $fdate = new Carbon($perjadin->return_date);
+        $tdate = new Carbon($perjadin->leave_date);
+        $interval = $fdate->diffInDays($tdate) + 1;
+
+        $totalMembers = (DB::table('user_perjadin')->where('perjadin_id', $surat->perjadin_id)->count()) + 1;
+        
+        
+
+        $x['title'] = 'Surat';
+        $x['perjadin'] = Perjadin::with(['kuitansi', 'surat', 'users'])->where('id', $surat->perjadin_id)->get();
+        $x['selisihHari'] = $interval;
+        $x['data'] = Surat::find($id);
+        $x['members'][] = $perjadin->coordinator;
+        $x['cost_per_id'] = $perjadin->kuitansi->cost_total / $totalMembers;
+        
+        //Terbilang
+        $x['terbilang'] = Terbilang::make($perjadin->kuitansi->cost_total);
+
+        foreach ($perjadin->users as $user) {
+            $x['members'][] = $user->id;
+        }
+
+        $x['user'] = User::get();
+
+        view()->share('x', $x);
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+                ->setPaper('F4', 'potrait')
+                ->loadView('admin.rincian', $x);
+        return $pdf->download('surat.pdf');
+
+        // return view('admin.rincian', $x);
     }
 }

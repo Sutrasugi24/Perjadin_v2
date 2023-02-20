@@ -37,6 +37,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('user/show', 'show')->middleware(['permission:read user'])->name('user.show');
         Route::put('user', 'update')->middleware(['permission:update user'])->name('user.update');
         Route::delete('user', 'destroy')->middleware(['permission:delete user'])->name('user.destroy');
+        Route::post('user/user-import', 'import')->middleware(['permission:update user'])->name('user.import');
     });
 
     Route::controller(PerjadinController::class)->group(function () {
@@ -71,6 +72,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::put('surat', 'update')->middleware(['permission:update surat'])->name('surat.update');
         Route::delete('surat', 'destroy')->middleware(['permission:delete surat'])->name('surat.destroy');
         Route::get('surat/download/{id}}', 'download')->middleware(['permission:read surat'])->name('surat.download');
+        Route::get('surat/rincian/{id}}', 'rincian')->middleware(['permission:read surat'])->name('surat.rincian');
+        
     });
     
 

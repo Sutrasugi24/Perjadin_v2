@@ -29,6 +29,8 @@ class User extends Authenticatable
         'golongan',
     ];
 
+    public $timestamps = false;
+
     /**
      * The attributes that should be hidden for serialization.
      *

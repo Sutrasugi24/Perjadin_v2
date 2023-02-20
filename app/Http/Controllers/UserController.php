@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
+use Excel;
 use App\Models\User;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
+use App\Http\Resources\UserResource;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -144,4 +146,17 @@ class UserController extends Controller
         }
         return back();
     }
+
+    public function import(Request $request)
+    {
+        // dd($request->file('file'));
+        try {
+            Excel::import(new UsersImport, $request->file('file'));
+            Alert::success('Pemberitahuan', 'Data berhasil diunggah!');
+            
+        } catch (\Throwable $th){
+            Alert::error('Pemberitahuan', 'Data gagal diunggah! Dikarenakan ada data yang sama.' );
+        }
+            return back();
+    }    
 }
