@@ -26,6 +26,7 @@
         .wrap-text-right {
             text-align:left;
             margin: 0;
+            padding-right: 10px;
             display: inline-block;
         }
 
@@ -37,7 +38,7 @@
 
         .container-right {
             text-align: left;
-            padding-left: 75%;
+            padding-left: 60%;
         }
 
         table {
@@ -109,8 +110,8 @@
             <div class="container-right">
                 <div class="wrap-text-right">
                     <p>Lembar ke  <span style="padding-left:26px;">:</span> </p>
-                    <p>Kode nomor <span style="padding-left:20px;">:</span> </p>
-                    <p>Nomor <span style="padding-left:38px;">:</span> </p>
+                    <p>Kode nomor <span style="padding-left:18px;">:</span> </p>
+                    <p>Nomor <span style="padding-left:42px;">:</span> </p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 0; margin-bottom:0;" >
@@ -130,7 +131,11 @@
                                 <td colspan="2" class="col-xs-5 h-6 pt-3"><p class="text-left">Nama/NIP Pegawai yang melaksanakan perjalanan dinas</p></td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
                                     <p class="text-left mb-0">{{ $user->find($member)->name }}</p>
-                                    <p class="text-left">NIP.{{ $user->find($member)->nip }}</p>
+                                    @if($user->find($member)->golongan == '')
+                                        <p class="text-left">NIP. -</p>
+                                    @else
+                                        <p class="text-left">NIP.{{ $user->find($member)->nip }}</p>
+                                    @endif
                                 </td>
                             </tr>
                             <tr class="d-flex">
@@ -141,15 +146,27 @@
                                     <p>c. Tingkat Biaya Perjalanan Dinas</p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    <p class="text-left m-0">{{ $user->find($member)->golongan }}</p>
+                                    @if($user->find($member)->golongan == '')
+                                        <p class="text-left m-0">-</p>
+                                    @else
+                                        <p class="text-left m-0">{{ $user->find($member)->golongan }}</p>
+                                    @endif
                                     <p class="text-left m-0">{{ $user->find($member)->jabatan }}</p>
                                     <p class="text-left mb-1">Rp. {{$perjadin[0]->kuitansi->formatRupiah('cost_total')}}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
                                 <td class="col-xs-1 h-6 p-1"><p class="text-center">4</p></td>
-                                <td colspan="2" class="col-xs-5 h-6 p-1"><p class="text-left  mb-5">Maksud Perjalanan Dinas</p></td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left  mb-5">{{ $perjadin[0]->plan }}</p></td>
+                                <td colspan="2" class="col-xs-5 h-6 p-1">
+                                    <p class="text-left  mb-5">Maksud Perjalanan Dinas </p>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td colspan="2" class="col-xs-6 h-6 p-1">
+                                    <p class="text-left  mb-5">{{ $perjadin[0]->plan }}</p>
+                                    <br/>
+                                    <br/>
+                                </td>
                             </tr>
                             <tr class="d-flex">
                                 <td class="col-xs-1 h-6 p-1"><p class="text-center">5</p></td>
@@ -233,8 +250,8 @@
                                         <div class="wrap-text">
                                             <p >Kepala SMA Negeri 6 Cimahi</p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
-                                            <p ><u>Drs. ADE SURATMAN, M.PD.</u></p>
-                                            <p >NIP. 196301141988031007</p>
+                                            <p><u>Drs. YAYAT SUPRIYAT, M. M.Pd.</u></p>
+                                            <p>NIP. 196307251989031013</p>
                                             <br/>
                                         </div>
                                     </div>
@@ -317,8 +334,8 @@
                                         <div tyle="text-align: center;">
                                             <p style="font-weight:bold;">Kepala SMA Negeri 6 Cimahi</p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
-                                            <p style="font-weight:bold;"><u>Drs. ADE SURATMAN, M.PD.</u></p>
-                                            <p style="font-weight:bold;">NIP. 196301141988031007</p>
+                                            <p style="font-weight:bold;"><u>Drs. YAYAT SUPRIYAT, M. M.Pd.</u></p>
+                                            <p style="font-weight:bold;">NIP. 196307251989031013</p>
                                             <br/>
                                         </div>
                                     </div>
@@ -327,8 +344,8 @@
                             <tr class="d-flex">
                                 <td colspan="5">
                                     <div style="text-align: left;">
-                                        <p style="padding-left: 5px;">Vl. <span style="padding-left:9px;">Perhatian</span></p>
-                                        <p style="padding-left:26px;">PA/KPA yang menerbitkan SPD, pegawai yang melakukan perjalanan dinas, para pejabat yang mengesahkan tanggal berangkat/tiba, serta bendahara pengeluaran bertanggung jawab berdasarkan peraturan-peraturan Keuangan Negara apabila Negara menderita rugi akibat kesalahan, kelalaian dan kealpaannya..</p>
+                                        <p style="padding-left: 5px;">Vl. <span style="padding-left:7px;">Perhatian</span></p>
+                                        <p style="padding-left:26px; text-align: justify;">PA/KPA yang menerbitkan SPD, pegawai yang melakukan perjalanan dinas, para pejabat yang mengesahkan tanggal berangkat/tiba, serta bendahara pengeluaran bertanggung jawab berdasarkan peraturan-peraturan Keuangan Negara apabila Negara menderita rugi akibat kesalahan, kelalaian dan kealpaannya..</p>
                                     </div>
                                 </td>               
                             </tr>

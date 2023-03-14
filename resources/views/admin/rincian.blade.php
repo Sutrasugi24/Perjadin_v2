@@ -175,7 +175,7 @@
                                     <p class="text-center">1</p>
                                 </td>
                                 <td colspan="2">
-                                    <p class="text-center">{{ $perjadin[0]->plan }}</p>
+                                    <p class="text-center">Perjalanan Dinas ke {{ $perjadin[0]->destination }}, selama {{ $selisihHari }} hari {{ $perjadin[0]->plan }}</p>
                                 </td>
                                 <td style="border-left: 1px solid black;">
                                     <p class="hidden" style="width:10%;">1</p>
@@ -195,7 +195,7 @@
                                     <p class="hidden" style="margin: 6px 0;">_</p>
                                     @foreach ($members as $member)
                                         <div class="text-right pr-50">
-                                            <p class="inline">Rp. {{$cost_per_id}}</p>
+                                            <p class="inline">Rp. {{ number_format($cost_per_id, 0, ',', '.') }}</p>
                                             <p class="inline">x</p>
                                             <p class="inline">{{ $selisihHari }} hari</p>
                                         </div>
@@ -205,7 +205,7 @@
                                 <td class="border" style="border-top: none; width:10%;">
                                     <p class="hidden" style="margin: 7px 0;">_</p>
                                     @foreach ($members as $member)
-                                        <p style="margin: 7px 0;">Rp. <span style="padding-left: 40px;"> {{$cost_per_id}} </span></p>
+                                        <p style="margin: 7px 0;">Rp. <span style="padding-left: 40px;"> {{ number_format($cost_per_id, 0, ',', '.') }} </span></p>
                                     @endforeach
                                     <p class="bold" style="border-top: 1px solid black; margin: 13px 0 20px 0;">Rp. <span style="padding-left: 40px;">{{$perjadin[0]->kuitansi->formatRupiah('cost_total')}}</span> </p>
                                 </td>
@@ -279,8 +279,12 @@
                                 <p class="bold text-center">NIP. 198209142010011001</p>
                             </td>
                             <td>
-                                <p class="bold text-center uppercase" style="margin-top:75px;"> <u> {{ $user->find($perjadin[0]->coordinator)->name }} </u> </p>
-                                <p class="bold text-center">NIP. {{ $user->find($perjadin[0]->coordinator)->nip }}</p>
+                                <p class="bold text-center uppercase" style="margin-top:75px;"> <u> {{ $user->find($perjadin[0]->coordinator)->name }} </u></p>
+                                @if($user->find($perjadin[0]->coordinator)->nip == '')
+                                    <p class="bold text-center">NIP. -</p>
+                                @else
+                                    <p class="bold text-center">NIP. {{ $user->find($perjadin[0]->coordinator)->nip }}</p>
+                                @endif
                             </td>
                         </tr>
                     </table>
@@ -335,8 +339,8 @@
                                 <p class="hidden">-</p>
                             </td>
                             <td>
-                                <p class="bold text-center uppercase" style="margin-top:75px;"><u>Drs. ADE SURATMAN, M.Pd.</u></p>
-                                <p class="bold text-center">NIP. -</p>
+                                <p class="bold text-center uppercase" style="margin-top:75px;"><u>Drs. YAYAT SUPRIYAT, M. M.Pd.</u></p>
+                                <p class="bold text-center">NIP. 196307251989031013</p>
                             </td>
                         </tr>
                     </table>

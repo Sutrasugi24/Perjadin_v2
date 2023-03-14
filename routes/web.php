@@ -73,6 +73,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('surat', 'destroy')->middleware(['permission:delete surat'])->name('surat.destroy');
         Route::get('surat/download/{id}}', 'download')->middleware(['permission:read surat'])->name('surat.download');
         Route::get('surat/rincian/{id}}', 'rincian')->middleware(['permission:read surat'])->name('surat.rincian');
+        Route::get('surat/pembayaran/{id}}', 'pembayaran')->middleware(['permission:read surat'])->name('surat.pembayaran');
+        
         
     });
     

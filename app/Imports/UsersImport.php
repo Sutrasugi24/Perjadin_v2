@@ -10,27 +10,21 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class UsersImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) 
         {
-            $randStr = Hash::make(11);
+            $randStr = Hash::make(5);
+            $randGmail = Hash::make(1);
 
             User::create([
                 'name' => $row['nama'],
-                'email' => $row['nama'].'@gmail.com',
+                'email' => $randGmail.'@gmail.com',
                 'nip' => $row['nip'],
                 'nips' => $row['nips'],
                 'jabatan' => $row['jabatan'],
                 'golongan' => $row['golongan'],
                 'password' => $randStr,
-    
             ]);
         }
     }

@@ -149,14 +149,12 @@ class UserController extends Controller
 
     public function import(Request $request)
     {
-        // dd($request->file('file'));
         try {
-            Excel::import(new UsersImport, $request->file('file'));
-            Alert::success('Pemberitahuan', 'Data berhasil diunggah!');
-            
-        } catch (\Throwable $th){
-            Alert::error('Pemberitahuan', 'Data gagal diunggah! Dikarenakan ada data yang sama.' );
+        Excel::import(new UsersImport, $request->file('file'));
+        Alert::success('Pemberitahuan', 'Data <b>' . $request->file . '</b> berhasil ditambahkan')->toToast()->toHtml();
+        } catch (\Throwable $th) {
+            Alert::error('Pemberitahuan', 'Data <b>' . $request->file . '</b> gagal ditambahkan : ' . $th->getMessage())->toToast()->toHtml();
         }
-            return back();
-    }    
+        return back();
+    }
 }

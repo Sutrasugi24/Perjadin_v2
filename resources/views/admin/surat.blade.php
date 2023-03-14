@@ -57,17 +57,20 @@
                                             @canany(['update surat', 'delete surat'])
                                                     <td>
                                                         <div class="btn-group">
+                                                            @can('read surat')
+                                                                <a href="{{route('surat.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Surat!"><i class="fas fa-envelope"></i></a>
+                                                            @endcan
+                                                            @can('read surat')
+                                                                <a href="{{route('surat.rincian', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Rincian Biaya!"><i class="fas fa-dollar-sign"></i></a>
+                                                            @endcan
+                                                            @can('read surat')
+                                                                <a href="{{route('surat.pembayaran', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Daftar Pembayaran!"><i class="fas fa-file-contract"></i></a>
+                                                            @endcan
                                                             @can('update surat')
                                                                 <button class="btn btn-sm btn-primary btn-edit" title="Ubah Data!" data-id="{{ $i->id }}"><i class="fas fa-pencil-alt"></i></button>
                                                             @endcan
                                                             @can('delete surat')
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
-                                                            @endcan
-                                                            @can('read surat')
-                                                                <a href="{{route('surat.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Surat!"><i class="fas fa-download"></i></a>
-                                                            @endcan
-                                                            @can('read surat')
-                                                                <a href="{{route('surat.rincian', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Rincian Biaya!"><i class="fas fa-download"></i></a>
                                                             @endcan
                                                         </div>
                                                     </td>

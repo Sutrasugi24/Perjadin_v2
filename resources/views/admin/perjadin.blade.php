@@ -141,7 +141,7 @@
             $("#single-input").select2({
                 dropDownParent: $("#modal-tambah"),
                 placeholder: "Pilih Koordinator",
-                theme: 'bootstrap4'
+                theme: 'bootstrap4',
             });
 
             $("#single-edit").select2({
@@ -163,6 +163,7 @@
                 theme: 'bootstrap4',
                 tags: true
             });
+            
             $('.select2-search__field').css('width', '100%');
         });
     </script>
@@ -170,7 +171,7 @@
 
 @section('modal')
     {{-- Modal tambah --}}
-    <div class="modal fade" id="modal-tambah" tabindex="-1">
+    <div class="modal fade" id="modal-tambah">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -254,13 +255,11 @@
                         <label>Koordinator</label>
                         <div class="input-group">
                             <select id="single-input" class="form-control js-states" name="coordinator">
-                                <option></option>
                                 <@foreach ($user as $i)
                                     <option value="{{ $i->id }}">{{ $i->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        {{-- End: Input koordinator --}}
                         {{--Start: Input koordinator --}}
                         <label>Anggota</label>
                         <div class="input-group">

@@ -19,7 +19,6 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -31,7 +30,6 @@
                                 <h3 class="card-title">
                                     <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah" data-backdrop="static" data-keyboard="false" title="Tambah Data!">Tambah <i class="fas fa-plus"></i></a>
                                     <a href="#" class="ml-1 btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-import" data-backdrop="static" data-keyboard="false" title="Import Data!">Import <i class="fas fa-file-import"></i></a>
-                                    
                                     {{-- <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file">
@@ -377,7 +375,6 @@
         <!-- /.modal-dialog -->
     </div>
     {{-- Modal Import --}}
-    {{-- Modal tambah --}}
     <div class="modal fade" id="modal-import">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

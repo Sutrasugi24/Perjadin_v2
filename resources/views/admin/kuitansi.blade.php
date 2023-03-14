@@ -59,15 +59,16 @@
                                             @canany(['update kuitansi', 'delete kuitansi'])
                                                     <td>
                                                         <div class="btn-group">
+                                                            @can('read kuitansi')
+                                                                <a href="{{route('kuitansi.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-file-invoice-dollar"></i></a>
+                                                            @endcan
                                                             @can('update kuitansi')
                                                                 <button class="btn btn-sm btn-primary btn-edit" title="Ubah Data!" data-id="{{ $i->id }}"><i class="fas fa-pencil-alt"></i></button>
                                                             @endcan
                                                             @can('delete kuitansi')
                                                                 <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
                                                             @endcan
-                                                            @can('read kuitansi')
-                                                                <a href="{{route('kuitansi.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-download"></i></a>
-                                                            @endcan
+                                                            
                                                         </div>
                                                     </td>
                                                 @endcanany

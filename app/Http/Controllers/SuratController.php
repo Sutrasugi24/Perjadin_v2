@@ -175,8 +175,41 @@ class SuratController extends Controller
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
                 ->setPaper('F4', 'potrait')
                 ->loadView('admin.rincian', $x);
-        return $pdf->download('surat.pdf');
+        return $pdf->download('rincian_biaya.pdf');
 
         // return view('admin.rincian', $x);
+    }
+
+    public function pembayaran($id){
+        $surat = Surat::findOrFail($id);
+        $perjadin = Perjadin::findOrFail($surat->perjadin_id);
+        //selisih hari
+        $fdate = new Carbon($perjadin->return_date);
+        $tdate = new Carbon($perjadin->leave_date);
+        $interval = $fdate->diffInDays($tdate) + 1;
+
+        $totalMembers = (DB::table('user_perjadin')->where('perjadin_id', $surat->perjadin_id)->count()) + 1;
+        
+        $x['title'] = 'Surat';
+        $x['perjadin'] = Perjadin::with(['kuitansi', 'surat', 'users'])->where('id', $surat->perjadin_id)->get();
+        $x['selisihHari'] = $interval;
+        $x['data'] = Surat::find($id);
+        $x['members'][] = $perjadin->coordinator;
+        $x['cost_per_id'] = $perjadin->kuitansi->cost_total / $totalMembers;
+        //Terbilang
+        $x['terbilang'] = Terbilang::make($perjadin->kuitansi->cost_total);
+
+        foreach ($perjadin->users as $user) {
+            $x['members'][] = $user->id;
+        }
+        $x['user'] = User::get();
+        view()->share('x', $x);
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+                ->setPaper('F4', 'landscape')
+                ->loadView('admin.pembayaran_transport', $x);
+        return $pdf->download('daftar_pembayaran.pdf');
+
+        //return view('admin.pembayaran_transport', $x);
     }
 }
