@@ -135,6 +135,10 @@
         .pr-50{
             padding-right: 50px;
         }
+
+        .mtb{
+            padding: 10px 5px;
+        }
     </style>
 </head>
 
@@ -152,26 +156,26 @@
             <div class="row">
                 <table>
                     <tr class="border">
-                        <td class="border text-center bold"><p> No </p></td>
-                        <td class="border text-center bold"><p>Nama</p></td>
-                        <td class="border text-center bold"><p>Pangkat/Gol</p></td>
-                        <td class="border text-center bold"><p>Tarif</p></td>
-                        <td class="border text-center bold"><p>Lama(hari)</p></td>
-                        <td class="border text-center bold"><p>Jumlah yang Diterima</p></td>
-                        <td class="border text-center bold"><p>Tanda Tangan Penerima</p></td>
+                        <td class="border text-center bold"  style="width: 5%;"><p> No </p></td>
+                        <td class="border text-center bold" style="width: 30%;"><p>Nama</p></td>
+                        <td class="border text-center bold" style="width: 20%;"><p>Pangkat/Gol</p></td>
+                        <td class="border text-center bold" style="width: 10%;"><p>Tarif</p></td>
+                        <td class="border text-center bold" style="width: 5%;"><p>Lama(hari)</p></td>
+                        <td class="border text-center bold" style="width: 10%;"><p>Jumlah yang Diterima</p></td>
+                        <td class="border text-center bold" style="width: 20%;"><p>Tanda Tangan Penerima</p></td>
                     </tr>
                     @foreach($members as $member)
                     <tr class="border">
-                        <td class="border text-center"><p>{{ $loop->iteration }}</p></td>
-                        <td class="border uppercase"><p>{{ $user->find($member)->name }}</p></td>
+                        <td class="border text-center mtb">{{ $loop->iteration }}</td>
+                        <td class="border mtb">{{ $user->find($member)->name }}</td>
                         @if( $user->find($member)->golongan == '')
-                        <td class="border text-center"><p> {{ $user->find($member)->jabatan }} / -</p></td>
+                            <td class="border text-center"> {{ $user->find($member)->jabatan }} / -</td>
                         @else
-                            <td class="border text-center"><p> {{ $user->find($member)->jabatan }} / {{ $user->find($member)->golongan }}</p></td>
+                            <td class="border text-center"> {{ $user->find($member)->jabatan }} / {{ $user->find($member)->golongan }}</td>
                         @endif
-                        <td class="border text-right"><p>{{ number_format($cost_per_id, 0, ',', '.') }}</p></td>
-                        <td class="border text-center"><p>{{ $selisihHari }}</p></td>
-                        <td class="border text-right"><p>{{ number_format($cost_per_id, 0, ',', '.') }}</p></td>
+                        <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id, 0, ',', '.') }}</td>
+                        <td class="border text-center">{{ $selisihHari }}</td>
+                        <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id, 0, ',', '.') }}</td>
                         <td class="border"></td>
                     </tr>
                     @endforeach
@@ -180,7 +184,7 @@
                         <td class="border bold text-right"><p>{{ $perjadin[0]->kuitansi->formatRupiah('cost_total') }}</p></td>
                         <td class="border"></td>
                     </tr>
-                    <td class="border" colspan="7"><p style="font-weight: bold; text-transform: capitalize;"><i> {{ $terbilang }} </i></p></td>
+                    <td class="border text-center" colspan="7"><p style="font-weight: bold; text-transform: capitalize;"><i> {{ $terbilang }} </i></p></td>
                 </table>
                 <table class="ttd">
                     <br/>
@@ -203,10 +207,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p class="bold text-center">Bendahara Pengeluaran Pembantu,</p>
+                            <p class="bold text-center uppercase">Bendahara Pengeluaran Pembantu,</p>
                         </td>
                         <td>
-                            <p class="bold text-center">Koordinator</p>
+                            <p class="bold text-center uppercase">Koordinator</p>
                         </td>
                     </tr>
                     
@@ -216,7 +220,7 @@
                             <p class="bold text-center">NIP. 198209142010011001</p>
                         </td>
                         <td>
-                            <p class="bold text-center uppercase" style="margin-top:75px;"> <u> {{ $user->find($perjadin[0]->coordinator)->name }} </u> </p>
+                            <p class="bold text-center" style="margin-top:75px;"> <u> {{ $user->find($perjadin[0]->coordinator)->name }} </u> </p>
                             @if($user->find($perjadin[0]->coordinator)->nip == '')
                                 <p class="bold text-center">NIP. -</p>
                             @else

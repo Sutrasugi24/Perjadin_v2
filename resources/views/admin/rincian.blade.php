@@ -188,8 +188,9 @@
                                 <td>
                                     <p>Uang Transport:</p>
                                     @foreach ($members as $member)
-                                        <p class="uppercase" style="margin: 6px 0; padding-left:15px;">{{ $user->find($member)->name }}</p>
+                                        <p style="margin: 6px 0; padding-left:15px;">{{ $user->find($member)->name }}</p>
                                     @endforeach
+                                    <p class="bold" style="margin: 10px 0 20px 0;">Jumlah Uang Transport</p>
                                 </td>
                                 <td>
                                     <p class="hidden" style="margin: 6px 0;">_</p>
@@ -200,7 +201,7 @@
                                             <p class="inline">{{ $selisihHari }} hari</p>
                                         </div>
                                     @endforeach
-                                    <p class="bold text-right" style="margin: 10px 0 20px 0;">Jumlah Uang Transport</p>
+                                    <p class="bold text-right hidden" style="margin: 10px 0 20px 0;">Jumlah Uang Transport</p>
                                 </td>
                                 <td class="border" style="border-top: none; width:10%;">
                                     <p class="hidden" style="margin: 7px 0;">_</p>
@@ -230,7 +231,7 @@
                             </tr>
                             <tr>
                                 <td colspan="5">
-                                    <p class="text-center capitalize bold">{{ $terbilang }}</p>
+                                    <p class="text-center capitalize bold" style="font-style: italic;">{{ $terbilang }}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -258,7 +259,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <p class="bold">Rp <span style="padding-left: 60px;">{{ $perjadin[0]->kuitansi->formatRupiah('cost_total') }}</span></p>
+                                <p class="bold">Rp <span style="padding-left: 40px;">{{ $perjadin[0]->kuitansi->formatRupiah('cost_total') }}</span></p>
                             </td>
                             <td>
                                 <p class="bold text-center">Rp <span style="padding-left: 90px;">{{ $perjadin[0]->kuitansi->formatRupiah('cost_total') }} </span></p>
@@ -266,10 +267,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <p class="bold text-center" style="margin-top:20px;">Pembantu Bendahara Pengeluaran Pembantu,</p>
+                                <p class="bold text-center uppercase" style="margin-top:20px;">Pembantu Bendahara Pengeluaran Pembantu,</p>
                             </td>
                             <td>
-                                <p class="bold text-center" style="margin-top:20px;">Yang Menerima,</p>
+                                <p class="bold text-center uppercase" style="margin-top:20px;">Yang Menerima,</p>
                             </td>
                         </tr>
                         
@@ -329,7 +330,7 @@
                                 <p class="hidden">1</p>
                             </td>
                             <td>
-                                <p class="bold text-center" style="margin-top: 10px;">Kepala SMA Negeri 6 Cimahi,</p>
+                                <p class="bold uppercase text-center" style="margin-top: 10px;">Kepala SMA Negeri 6 Cimahi,</p>
                             </td>
                         </tr>
                         
