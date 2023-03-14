@@ -18,11 +18,13 @@ return new class extends Migration
             $table->timestamps();
             $table->string('plan')->required();
             $table->string('destination')->required();
+            $table->string('destination_two')->nullable();
+            $table->string('destination_three')->nullable();
             $table->enum('transport', ['darat', 'laut', 'udara'])->required();
             $table->date('leave_date')->required();
             $table->date('return_date')->required();
             $table->integer('coordinator')->required();
-            $table->string('description')->required();
+            $table->string('description')->nullable();
         });
     }
 

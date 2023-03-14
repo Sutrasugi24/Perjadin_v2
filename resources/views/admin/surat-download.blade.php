@@ -280,34 +280,50 @@
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
                                     <p class="text-left">Berangkat dari : SMAN 6 Cimahi</p>
                                     <p class="text-left">Ke : {{ $perjadin[0]->destination }}</p>
-                                    <p class="text-left tb-m">Pada tanggal : {{ $perjadin[0]->leave_date }}</p>
+                                    <p class="text-left tb-m">Pada tanggal :  {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
                                 <td><p>ll.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
                                     <p>Tiba di    : {{ $perjadin[0]->destination }}</p>
-                                    <p>Pada Tanggal    : {{ $perjadin[0]->leave_date }}</p>
+                                    <p>Pada Tanggal    : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
                                     <p class="tb-m"></p>
                                 </td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
-                                    <p class="text-left">Ke : {{ $perjadin[0]->destination }}</p>
-                                    <p class="text-left tb-m">Pada tanggal : {{ $perjadin[0]->leave_date }}</p>
-                                </td>
+                                @if( $perjadin[0]->destination != '' )
+                                    <td colspan="2" class="col-xs-6 h-6 p-1">
+                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
+                                        <p class="text-left">Ke : {{ $perjadin[0]->destination_two }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                    </td>
+                                @else
+                                    <td colspan="2" class="col-xs-6 h-6 p-1">
+                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
+                                        <p class="text-left">Ke : SMAN 6 Cimahi</p>
+                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
+                                    </td>
+                                @endif
                             </tr>
                             <tr class="d-flex">
                                 <td><p>lll.</p></td>
-                                <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p>Tiba di    : {{ $perjadin[0]->destination }}</p>
-                                    <p>Pada Tanggal    : {{ $perjadin[0]->leave_date }}</p>
-                                    <p class="tb-m"></p>
-                                </td>
-                                <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
-                                    <p class="text-left">Ke : {{ $perjadin[0]->destination }}</p>
-                                    <p class="text-left tb-m">Pada tanggal : {{ $perjadin[0]->leave_date }}</p>
-                                </td>
+                                    <td colspan="2" class="col-xs-5 h-6 p-1">
+                                        <p>Tiba di    : {{ $perjadin[0]->destination_two }}</p>
+                                        <p>Pada Tanggal    : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                        <p class="tb-m"></p>
+                                    </td>
+                                @if( $perjadin[0]->destination_three != '' )
+                                    <td colspan="2" class="col-xs-6 h-6 p-1">
+                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination_two }} </p>
+                                        <p class="text-left">Ke : {{ $perjadin[0]->destination_three }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                    </td>
+                                @else
+                                    <td colspan="2" class="col-xs-6 h-6 p-1">
+                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination_two }} </p>
+                                        <p class="text-left">Ke : SMAN 6 Cimahi</p>
+                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
+                                    </td>
+                                @endif
                             </tr>
                             <tr class="d-flex">
                                 <td><p>lV.</p></td>
@@ -325,8 +341,8 @@
                             <tr class="d-flex">
                                 <td colspan="5">
                                     <div style="text-align: left;">
-                                        <p style="padding-left: 5px;">V. <span style="padding-left:10px;">Tiba di    : SMAN 6 Cimahi</span></p>
-                                        <p style="padding-left:25px;">Pada Tanggal    : {{ $perjadin[0]->return_date }}</p>
+                                        <p style="padding-left: 5px;">V. <span style="padding-left:8px;">Tiba di    : SMAN 6 Cimahi</span></p>
+                                        <p style="padding-left:25px;">Pada Tanggal    : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
                                         <p style="padding-left:25px;">Telah diperiksa dengan keterangan bahwa perjalanan tersebut atas perintahnya dan semata-mata untuk kepentingan jabatan dalam waktu yang sesingkat-singkatnya.</p>
                                     </div>
                                     <br/>

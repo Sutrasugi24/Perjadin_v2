@@ -21,8 +21,20 @@
             }
 
             .fa{
-                margin-top: 12px;
-                margin-left: 2px;
+                color: #333;
+            
+                margin: 8px 0 0 0;
+                margin-left: -30px;
+                padding: 4px 9px 25px 0px;
+                border-radius: 0px 5px 5px 0px;
+            
+                float: right;
+                position: relative;
+                right: 1%;
+                top: -.2%;
+                z-index: 5;
+                
+                cursor: pointer;
             }
 
 
@@ -63,7 +75,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                             <div class="col-md-12">
                                 {!! htmlFormSnippet([
                                     "theme" => "light",
@@ -74,9 +86,9 @@
                                     "error-callback" => "errorCallbackFunction",
                                 ]) !!}
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
-                            <div class="col-8">
+                            {{-- <div class="col-4">
                                 <div class="icheck-primary">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -84,10 +96,10 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-block">{{ __('Log In') }}</button>
                             </div>
                             <!-- /.col -->
                         </div>

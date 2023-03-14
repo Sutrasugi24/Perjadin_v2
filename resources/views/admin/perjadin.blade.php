@@ -43,7 +43,8 @@
                                             <th>Tanggal Pulang</th>
                                             <th>Maksud</th>
                                             <th>Tujuan</th>
-                                            <th>Keterangan</th>
+                                            <th>Tujuan Kedua</th>
+                                            <th>Tujuan Ketiga</th>
                                             <th>Angkutan</th>
                                             <th>Koordinator</th>
                                             <th>Anggota</th>
@@ -60,7 +61,8 @@
                                                 <td>{{ date('d-m-Y', strtotime($i->return_date)) }}</td>
                                                 <td>{{ $i->plan }}</td>
                                                 <td>{{ $i->destination }}</td>
-                                                <td>{{ $i->description }}</td>
+                                                <td>{{ $i->destination_two }}</td>
+                                                <td>{{ $i->destination_three }}</td>
                                                 <td>{{ ucfirst(trans($i->transport)) }}</td>
                                                 @foreach($user as $id)
                                                     @if ($id->id == $i->coordinator)
@@ -119,6 +121,8 @@
                         $("#return_date").val(data.leave_date);
                         $("#plan").val(data.plan);
                         $("#destination").val(data.destination);
+                        $("#destination_two").val(data.destination_two);
+                        $("#destination_three").val(data.destination_three);
                         $("#transport").val(data.transport);
                         $("#coordinator").val(data.coordinator);
                         $("#description").val(data.description);
@@ -218,8 +222,30 @@
                         <div class="input-group">
                             <label>Tempat Tujuan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Tempat Tujuan" name="destination" value="{{ old('destination') }}">
+                                <input type="text" class="form-control @error('destination') is-invalid @enderror" placeholder="Tempat Tujuan" name="destination" value="{{ old('destination') }}">
                                 @error('destination')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- End: Input destination --}}
+                        {{--Start: Input destination --}}
+                        <div class="input-group">
+                            <label>Tempat Tujuan Kedua</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('destination_two') is-invalid @enderror" placeholder="Tempat Tujuan Kedua" name="destination_two" value="{{ old('destination_two') }}">
+                                @error('destination_two')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- End: Input destination --}}
+                         {{--Start: Input destination --}}
+                         <div class="input-group">
+                            <label>Tempat Tujuan Ketiga</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('destination_three') is-invalid @enderror" placeholder="Tempat Tujuan Ketiga" name="destination_three" value="{{ old('destination_three') }}">
+                                @error('destination_three')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -332,6 +358,28 @@
                             <div class="input-group">
                                 <input type="text" class="form-control @error('destination') is-invalid @enderror" placeholder="Tempat Tujuan" id="destination" name="destination" value="{{ old('destination') }}">
                                 @error('destination')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- End: Input destination --}}
+                        {{--Start: Input destination --}}
+                        <div class="input-group">
+                            <label>Tempat Tujuan Kedua</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('destination_two') is-invalid @enderror" placeholder="Tempat Tujuan Kedua" id="destination_two" name="destination_two" value="{{ old('destination_two') }}">
+                                @error('destination_two')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- End: Input destination --}}
+                        {{--Start: Input destination --}}
+                        <div class="input-group">
+                            <label>Tempat Tujuan Ketiga</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('destination_three') is-invalid @enderror" placeholder="Tempat Tujuan Ketiga" id="destination_three" name="destination_three" value="{{ old('destination_three') }}">
+                                @error('destination_three')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

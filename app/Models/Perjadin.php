@@ -17,7 +17,7 @@ class Perjadin extends Model
 
     protected $fillable = [
         'leave_date', 'return_date', 'plan',
-        'destination', 'description', 'transport',
+        'destination', 'destination_two', 'destination_three', 'description', 'transport',
         'coordinator'];
 
 
