@@ -391,7 +391,7 @@
                             <div class="input-group">
                                 <select class="form-control" id="transport" name="transport">
                                     @foreach($transport as $i)
-                                        <option {{ $data[0]->transport ? 'selected' : '' }}  value="{{ $i }}">{{ ucfirst(trans($i))}}</option>
+                                        <option {{ $data }}  value="{{ $i }}">{{ ucfirst(trans($i))}}</option>
                                     @endforeach
                                 </select>
                                 @error('transport')
