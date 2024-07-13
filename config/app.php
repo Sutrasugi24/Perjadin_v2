@@ -200,7 +200,7 @@ return [
         'Alert'         => RealRashid\SweetAlert\Facades\Alert::class,
         'ReCaptcha'     => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Setting'       => App\Helpers\SettingHelper::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),

@@ -196,7 +196,7 @@
                                     <p class="hidden" style="margin: 6px 0;">_</p>
                                     @foreach ($members as $member)
                                         <div class="text-right pr-50">
-                                            <p class="inline">Rp. {{ number_format($cost_per_id, 0, ',', '.') }}</p>
+                                            <p class="inline">Rp. {{ number_format($cost_per_id / $selisihHari, 0, ',', '.')}}</p>
                                             <p class="inline">x</p>
                                             <p class="inline">{{ $selisihHari }} hari</p>
                                         </div>

@@ -152,7 +152,7 @@
                                         <p class="text-left m-0">{{ $user->find($member)->golongan }}</p>
                                     @endif
                                     <p class="text-left m-0">{{ $user->find($member)->jabatan }}</p>
-                                    <p class="text-left mb-1">Rp. {{$perjadin[0]->kuitansi->formatRupiah('cost_total')}}</p>
+                                    <p class="text-left mb-1">Rp.-</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
@@ -287,20 +287,20 @@
                                 <td><p>ll.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
                                     <p>Tiba di    : {{ $perjadin[0]->destination }}</p>
-                                    <p>Pada Tanggal    : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                    <p>Pada Tanggal    : </p>
                                     <p class="tb-m"></p>
                                 </td>
                                 @if( $perjadin[0]->destination != '' )
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
                                         <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
                                         <p class="text-left">Ke : {{ $perjadin[0]->destination_two }}</p>
-                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : </p>
                                     </td>
                                 @else
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
                                         <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
                                         <p class="text-left">Ke : SMAN 6 Cimahi</p>
-                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : </p>
                                     </td>
                                 @endif
                             </tr>
@@ -308,20 +308,20 @@
                                 <td><p>lll.</p></td>
                                     <td colspan="2" class="col-xs-5 h-6 p-1">
                                         <p>Tiba di    : {{ $perjadin[0]->destination_two }}</p>
-                                        <p>Pada Tanggal    : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                        <p>Pada Tanggal    : </p>
                                         <p class="tb-m"></p>
                                     </td>
                                 @if( $perjadin[0]->destination_three != '' )
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
                                         <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination_two }} </p>
                                         <p class="text-left">Ke : {{ $perjadin[0]->destination_three }}</p>
-                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : </p>
                                     </td>
                                 @else
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
                                         <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination_two }} </p>
                                         <p class="text-left">Ke : SMAN 6 Cimahi</p>
-                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : </p>
                                     </td>
                                 @endif
                             </tr>

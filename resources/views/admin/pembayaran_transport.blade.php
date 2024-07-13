@@ -173,7 +173,7 @@
                         @else
                             <td class="border text-center"> {{ $user->find($member)->jabatan }} / {{ $user->find($member)->golongan }}</td>
                         @endif
-                        <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id, 0, ',', '.') }}</td>
+                        <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id / $selisihHari, 0, ',', '.') }}</td>
                         <td class="border text-center">{{ $selisihHari }}</td>
                         <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id, 0, ',', '.') }}</td>
                         <td class="border"></td>
@@ -224,7 +224,7 @@
                             @if($user->find($perjadin[0]->coordinator)->nip == '')
                                 <p class="bold text-center">NIP. -</p>
                             @else
-                                <p class="bold text-center">NIP. {{ $user->find($perjadin[0]->coordinator)->nip }}</p>
+                                <p class="bold text-center">NIP. {{ $user->find($perjadin->coordinator)->nip }}</p>
                             @endif
                         </td>
                     </tr>

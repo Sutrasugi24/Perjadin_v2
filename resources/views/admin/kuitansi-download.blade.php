@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <style>
+        
         .logo{
             width: 60%;
             float: left;
@@ -160,38 +161,32 @@
                     <tr >
                         <td colspan="2">
                             <p class="pl-10 float-left">
-                                BANYAKNYA : 
+                                BANYAKNYA
                             </p>
                             <p class="wrap" style="text-transform: uppercase;">
                                 {{ $terbilang }} 
                             </p>
                         </td>
+                        <td colspan="3"> ...............</td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <p class="pl-10 float-left">
-                                Rp. ..........................................
+                                Rp. 
                             </p>
                             <p>
-                                <span class="text-bold"> {{$data->formatRupiah('cost_total')}} </span>.............
+                                <span class="text-bold">{{$data->formatRupiah('cost_total')}} </span>
                             </p>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            <p class="text-bold pl-5 ">
-                                Yaitu untuk  : ....................................................................................................................................................................................................
-                            </p>                        
-                            <p class="text-bold pl-5">
-                                ............................................................................................................................................................................................................................
-                            </p>
-                            <p class="text-bold pl-5">
-                                ............................................................................................................................................................................................................................
-                             </p>
-                             <p class="text-bold pl-5">
-                                ............................................................................................................................................................................................................................
-                             </p>
-                        </td>
+                        <tr>
+                            <td colspan="3">
+                                <p class="text-bold pl-5">
+                                    Yaitu untuk: <span>{{ $perjadin->plan }}</span>
+                                </p>
+                            </td>
+                        </tr>
                     </tr>
                     <tr class="signature border-top text-center">
                         <td style="width: 33.3%;">
@@ -233,7 +228,7 @@
                         </td>
                         <td style="width: 33.3%;">
                             <p class="signature-name text-bold text-underline">
-                                Ani Nuraini
+                                {{ $user->find($perjadin->coordinator)->name }}
                             </p>
                             <p>
                                 NIP. 1237198739012870928
