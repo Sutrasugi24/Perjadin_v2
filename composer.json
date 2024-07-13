@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "afrizalmy/laraindo": "^1.0",
         "alexusmai/laravel-file-manager": "^3.0",
         "barryvdh/laravel-dompdf": "^2.2",
         "biscolab/laravel-recaptcha": "^5.3",
