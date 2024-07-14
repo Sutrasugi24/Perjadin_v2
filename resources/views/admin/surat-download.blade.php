@@ -109,7 +109,7 @@
                 </div>
             <div class="container-right">
                 <div class="wrap-text-right">
-                    <p>Lembar ke  <span style="padding-left:26px;">:</span> </p>
+                    <p>Lembar ke  <span style="padding-left:26px;">: 1</span> </p>
                     <p>Kode nomor <span style="padding-left:18px;">:</span> </p>
                     <p>Nomor <span style="padding-left:42px;">:</span> </p>
                 </div>

@@ -224,7 +224,7 @@
                             @if($user->find($perjadin[0]->coordinator)->nip == '')
                                 <p class="bold text-center">NIP. -</p>
                             @else
-                                <p class="bold text-center">NIP. {{ $user->find($perjadin->coordinator)->nip }}</p>
+                                <p class="bold text-center">NIP. {{ $user->find($perjadin[0]->coordinator)->nip }}</p>
                             @endif
                         </td>
                     </tr>
