@@ -14,7 +14,7 @@ use App\Http\Resources\SuratResource;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
-use Riskihajar\Terbilang\Facades\Terbilang;
+use Laraindo\RupiahFormat;
 
 class SuratController extends Controller
 {
@@ -168,7 +168,7 @@ class SuratController extends Controller
             'members' => $members,
             'user' => User::all(),
             'cost_per_id' => $perjadin->kuitansi->cost_total / $totalMembers,
-            'terbilang' => Terbilang::make($perjadin->kuitansi->cost_total),
+            'terbilang' => RupiahFormat::terbilang($perjadin->kuitansi->cost_total),
         ];
     }
 }

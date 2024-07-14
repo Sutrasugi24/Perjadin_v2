@@ -8,7 +8,6 @@ use App\Models\Kuitansi;
 use App\Models\Perjadin;
 use App\Models\User;
 use PDF;
-use Terbilang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -16,6 +15,8 @@ use App\Http\Resources\KuitansiResource;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Laraindo\RupiahFormat;
+
 
 class KuitansiController extends Controller
 {
@@ -114,7 +115,8 @@ class KuitansiController extends Controller
         
         $x['title'] = 'Kuitansi';
         $x['data'] = $kuitansi;
-        $x['terbilang'] = Terbilang::make($kuitansi->cost_total);
+        
+        $x['terbilang'] = RupiahFormat::terbilang($kuitansi->cost_total);
         $x['perjadin'] = $perjadin; // Pass perjadin data to the view
         $x['user'] = User::all();
 
