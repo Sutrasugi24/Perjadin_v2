@@ -106,6 +106,26 @@
         .inline{
             display: inline;
         }
+
+        .pt-0{
+            padding-top: 0;
+        }
+
+        .pb-0{
+            padding-bottom: 0;
+        }
+        
+        .mb-0{
+            margin-bottom: 0; 
+        }
+
+        .mt-0{
+            margin-top: 0;
+        }
+
+        .text-hide{
+            visibility: hidden;
+        }
         
 
     </style>
@@ -176,71 +196,84 @@
                     <tr>
                         <td>
                             <p class="pl-10 float-left">
-                                Rp. 
+                                Jumlah
                             </p>
                         </td>
                         <td colspan="2">
-                            <p class="wrap text-left inline">
-                            <span class="text-bold">: {{$data->formatRupiah('cost_total')}} </span>
+                            <p class="text-left inline text-bold">
+                                : Rp.{{$data->formatRupiah('cost_total')}}
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p class="pl-10 float-left">
-                                Yaitu untuk
+                            <p class="pl-10 float-left text-bold">
+                            Yaitu untuk
                             </p>
                         </td>
                         <td colspan="2">
-                            <p class="wrap text-left inline">
-                            : {{ $perjadin->plan }}
+                            <p class="text-left inline text-bold">
+                                : {{ $perjadin->plan }}
                             </p>
                         </td>
                     </tr>
+                    <br/>
                     <tr class="signature border-top text-center">
                         <td style="width: 33.3%;">
-                            <p>
-                                Mengetahui / Menyutujui : <br>
+                            <p class="mb-0 pb-0 text-hide">
+                                test
+                            </p>
+                            <p class="pb-0 mt-0 mb-0">
+                                Mengetahui / Menyutujui :
+                            </p>
+                            <p class="pt-0 mt-0">
                                 Kepala Sekolah,
                             </p>
                         </td>
                         <td style="width: 33.3%;" class="border-r-l ">
-                            <p>
-                                Lunas dibayar <br>
-                    Pembantu Bendahara Pengeluaran <br>
+                            <p class="pb-0 mb-0" style="padding-top: 25px;">
+                                Lunas dibayar
+                            </p>
+                            <p class="pt-0 mt-0">
+                                Pembantu Bendahara Pengeluaran <br/>
                                 Pembantu,
                             </p>
                         </td>
                         <td style="width: 33.3%;">
-                            <p>
-                                Cimahi, 22 Agustus 2022, <br>
+                            <p class="mb-0">
+                                Cimahi, 22 Agustus 2022, 
+                            </p>
+                            <p class="pb-0 mb-0">
                                 Yang Menerima,
+                            </p>
+                            <p class="text-hide">
+                                test
                             </p>
                         </td>
                     </tr>
                     <tr class="text-center">
                         <td style="width: 33.3%;">
-                            <p class="signature-name text-bold text-underline">
+                            <p class="signature-name text-bold text-underline" style="padding-bottom: 0px; margin-bottom: 0px;">
                                 Drs. Ade Suratman M.PD.
                             </p>
-                            <p>
+                            <p style="margin-top:2px; padding-top:0px;">
                                 NIP. 13241234213423
                             </p>
                         </td>
                         <td style="width: 33.3%;" class="border-r-l">
-                            <p class="signature-name text-bold text-underline">
+                            <p class="signature-name text-bold text-underline" style="padding-bottom: 0px; margin-bottom: 0px;">
                                 Mulyadi
                             </p>
-                            <p>
+                            <p style="margin-top:2px; padding-top:0px;">
                                 NIP. 1237198739012870928
                             </p>
                         </td>
                         <td style="width: 33.3%;">
-                            <p class="signature-name text-bold text-underline">
-                                {{ $user->find($perjadin->coordinator)->name }}
+                            <p class="signature-name text-bold text-underline" style="padding-bottom: 0px; margin-bottom: 0px;">
+                                <span>{{ $user->find($perjadin->coordinator)->name }}</span>
                             </p>
-                            <p>
-                                NIP. 1237198739012870928
+                            <p style="margin-top:2px; padding-top:0px;">
+                                NIP. {{ $user->find($perjadin->coordinator)->nip }}
                             </p>
                         </td>
                     </tr>
@@ -249,7 +282,7 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
-  </div>
+    </div>
 </div>
 </body>
 </html>
