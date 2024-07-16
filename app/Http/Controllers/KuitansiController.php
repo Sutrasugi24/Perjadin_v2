@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Laraindo\RupiahFormat;
 
-
 class KuitansiController extends Controller
 {
     public function index()
@@ -107,7 +106,7 @@ class KuitansiController extends Controller
     }
 
     public function download($id)
-{
+    {
         $kuitansi = Kuitansi::findOrFail($id);
 
         // Fetch related Perjadin data
@@ -126,7 +125,58 @@ class KuitansiController extends Controller
             ->loadView('admin.kuitansi-download', $x);
         
         return $pdf->download('kuitansi.pdf');
-}
+    }
+
+    public function rincian($id)
+    {
+        $kuitansi = Kuitansi::findOrFail($id);
+        $data = $this->prepareViewData($kuitansi);
+
+        view()->share('x', $data);
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+            ->setPaper('F4', 'portrait')
+            ->loadView('admin.rincian', $data);
+
+        return $pdf->download('rincian_biaya.pdf');
+    }
+
+    public function pembayaran($id)
+    {
+        $kuitansi = Kuitansi::findOrFail($id);
+        $data = $this->prepareViewData($kuitansi);
+
+        view()->share('x', $data);
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
+            ->setPaper('F4', 'landscape')
+            ->loadView('admin.pembayaran_transport', $data);
+
+        return $pdf->download('daftar_pembayaran.pdf');
+    }
+
+    private function prepareViewData(Kuitansi $kuitansi)
+    {
+        $perjadin = Perjadin::findOrFail($kuitansi->perjadin_id);
+        $interval = (new Carbon($perjadin->return_date))->diffInDays(new Carbon($perjadin->leave_date)) + 1;
+        $totalMembers = DB::table('user_perjadin')->where('perjadin_id', $kuitansi->perjadin_id)->count() + 1;
+
+        $members = [$perjadin->coordinator];
+        foreach ($perjadin->users as $user) {
+            $members[] = $user->id;
+        }
+
+        return [
+            'title' => 'Kuitansi',
+            'perjadin' => Perjadin::with(['kuitansi', 'users'])->where('id', $kuitansi->perjadin_id)->get(),
+            'selisihHari' => $interval,
+            'data' => $kuitansi,
+            'members' => $members,
+            'user' => User::all(),
+            'cost_per_id' => $perjadin->kuitansi->cost_total / $totalMembers,
+            'terbilang' => RupiahFormat::terbilang($perjadin->kuitansi->cost_total),
+        ];
+    }
 
     private function validateRequest($request)
     {

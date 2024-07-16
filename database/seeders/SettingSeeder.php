@@ -18,14 +18,28 @@ class SettingSeeder extends Seeder
         Setting::create([
             'key'       => 'app_name',
             'value'     => 'SMAN 6 Cimahi',
-            'name'      => 'SMAN 6 Cimahi',
+            'name'      => 'Nama Sekolah',
+            'type'      => 'text',
+            'category'  => 'information'
+        ]);
+        // Setting::create([
+        //     'key'       => 'app_short_name',
+        //     'value'     => 'SMAN 6 Cimahi',
+        //     'name'      => 'Nama Sekolah',
+        //     'type'      => 'text',
+        //     'category'  => 'information'
+        // ]);
+        Setting::create([
+            'key'       => 'app_headmaster',
+            'value'     => 'Drs. YAYAT SUPRIYAT, M. M.Pd',
+            'name'      => 'Kepala Sekolah',
             'type'      => 'text',
             'category'  => 'information'
         ]);
         Setting::create([
-            'key'       => 'app_short_name',
-            'value'     => 'SMAN 6 Cimahi',
-            'name'      => 'SMAN 6 Cimahi',
+            'key'       => 'app_nip',
+            'value'     => '19630725198903104',
+            'name'      => 'NIP Kepala Sekolah',
             'type'      => 'text',
             'category'  => 'information'
         ]);

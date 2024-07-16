@@ -121,34 +121,6 @@ class SuratController extends Controller
         return $pdf->download('surat.pdf');
     }
 
-    public function rincian($id)
-    {
-        $surat = Surat::findOrFail($id);
-        $data = $this->prepareViewData($surat);
-
-        view()->share('x', $data);
-
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
-            ->setPaper('F4', 'portrait')
-            ->loadView('admin.rincian', $data);
-
-        return $pdf->download('rincian_biaya.pdf');
-    }
-
-    public function pembayaran($id)
-    {
-        $surat = Surat::findOrFail($id);
-        $data = $this->prepareViewData($surat);
-
-        view()->share('x', $data);
-
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
-            ->setPaper('F4', 'landscape')
-            ->loadView('admin.pembayaran_transport', $data);
-
-        return $pdf->download('daftar_pembayaran.pdf');
-    }
-
     private function prepareViewData(Surat $surat)
     {
         $perjadin = Perjadin::findOrFail($surat->perjadin_id);

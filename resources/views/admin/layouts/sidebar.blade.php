@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
     <img src="{{ asset(Setting::getValue('app_logo')) }}" alt="{{ Setting::getName('app_name') }}" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">{{ Setting::getValue('app_short_name') }}</span>
+    <span class="brand-text font-weight-light">{{ Setting::getValue('app_name') }}</span>
     </a>
 
     <!-- Sidebar -->

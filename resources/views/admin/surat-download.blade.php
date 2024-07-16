@@ -350,8 +350,8 @@
                                         <div tyle="text-align: center;">
                                             <p style="font-weight:bold;">Kepala SMA Negeri 6 Cimahi</p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
-                                            <p style="font-weight:bold;"><u>Drs. YAYAT SUPRIYAT, M. M.Pd.</u></p>
-                                            <p style="font-weight:bold;">NIP. 196307251989031013</p>
+                                            <p style="font-weight:bold;"><u>{{ Setting::getValue('app_headmaster') }}</u></p>
+                                            <p style="font-weight:bold;">NIP. {{ Setting::getValue('app_nip') }}</p>
                                             <br/>
                                         </div>
                                     </div>

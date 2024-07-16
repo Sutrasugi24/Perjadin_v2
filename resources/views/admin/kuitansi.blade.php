@@ -49,31 +49,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $i)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $i->kuitansi_number }}</td>
-                                                <td>{{ date('j \\ F Y', strtotime($i->kuitansi_date)) }}</td>
-                                                <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan}} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
-                                                <td>Rp. {{ $i->formatRupiah('cost_total') }}</td>
+                                    @foreach ($data as $i)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $i->kuitansi_number }}</td>
+                                            <td>{{ date('j \\ F Y', strtotime($i->kuitansi_date)) }}</td>
+                                            <td>{{ $i->perjadin->id }} - {{ $i->perjadin->plan }} ({{ date('j \\ F Y', strtotime($i->perjadin->leave_date)) }})</td>
+                                            <td>Rp. {{ $i->formatRupiah('cost_total') }}</td>
                                             @canany(['update kuitansi', 'delete kuitansi'])
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            @can('read kuitansi')
-                                                                <a href="{{route('kuitansi.download', $i->id )}}"class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-file-invoice-dollar"></i></a>
-                                                            @endcan
-                                                            @can('update kuitansi')
-                                                                <button class="btn btn-sm btn-primary btn-edit" title="Ubah Data!" data-id="{{ $i->id }}"><i class="fas fa-pencil-alt"></i></button>
-                                                            @endcan
-                                                            @can('delete kuitansi')
-                                                                <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->document_number }}"><i class="fas fa-trash"></i></button>
-                                                            @endcan
-                                                            
-                                                        </div>
-                                                    </td>
-                                                @endcanany
-                                            </tr>
-                                        @endforeach
+                                                <td>
+                                                    <div class="btn-group">
+                                                        @can('read kuitansi')
+                                                            <a href="{{ route('kuitansi.download', $i->id) }}" class="btn btn-sm btn-warning btn-print" title="Cetak Data!"><i class="fas fa-file-invoice-dollar"></i></a>
+                                                        @endcan
+                                                        @can('read kuitansi')
+                                                            <a href="{{ route('kuitansi.rincian', $i->id) }}" class="btn btn-sm btn-warning btn-print" title="Cetak Rincian Biaya!"><i class="fas fa-dollar-sign"></i></a>
+                                                        @endcan
+                                                        @can('read kuitansi')
+                                                            <a href="{{ route('kuitansi.pembayaran', $i->id) }}" class="btn btn-sm btn-warning btn-print" title="Cetak Daftar Pembayaran!"><i class="fas fa-file-contract"></i></a>
+                                                        @endcan
+                                                        @can('update kuitansi')
+                                                            <button class="btn btn-sm btn-primary btn-edit" title="Ubah Data!" data-id="{{ $i->id }}"><i class="fas fa-pencil-alt"></i></button>
+                                                        @endcan
+                                                        @can('delete kuitansi')
+                                                            <button class="btn btn-sm btn-danger btn-delete" title="Hapus Data!" data-id="{{ $i->id }}" data-name="{{ $i->kuitansi_number }}"><i class="fas fa-trash"></i></button>
+                                                        @endcan
+                                                    </div>
+                                                </td>
+                                            @endcanany
+                                        </tr>
+                                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
