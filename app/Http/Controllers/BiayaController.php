@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BiayaResource;
 use App\Models\Biaya;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +47,17 @@ class BiayaController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function show(Request $request)
+    {
+        $biaya = BiayaResource::collection(Biaya::where('id', $request->id)->get());
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Data biaya by id',
+            'data' => $biaya[0]
+        ], Response::HTTP_OK);
+    }
+
+    public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'type' => ['required', 'string', 'max:255'],
@@ -64,7 +75,7 @@ class BiayaController extends Controller
 
         DB::beginTransaction();
         try {
-            $biaya = Biaya::findOrFail($id);
+            $biaya = Biaya::findOrFail($request->id);
             $biaya->update([
                 'type' => $request->type,
                 'cost' => $request->cost,
@@ -77,10 +88,10 @@ class BiayaController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         try {
-            $biaya = Biaya::findOrFail($id);
+            $biaya = Biaya::findOrFail($request->id);
             $biaya->delete();
             return back()->with('success', "Data <b>{$biaya->type}</b> berhasil dihapus");
         } catch (\Throwable $th) {
