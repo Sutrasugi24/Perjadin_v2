@@ -135,7 +135,7 @@ class KuitansiController extends Controller
         view()->share('x', $data);
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
-            ->setPaper('F4', 'portrait')
+            ->setPaper(array(0,0,609.4488,935.433), 'portrait') //F4
             ->loadView('admin.rincian', $data);
 
         return $pdf->download('rincian_biaya.pdf');
@@ -149,7 +149,7 @@ class KuitansiController extends Controller
         view()->share('x', $data);
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
-            ->setPaper('F4', 'landscape')
+            ->setPaper(array(0,0,609.4488,935.433), 'landscape') //F4
             ->loadView('admin.pembayaran_transport', $data);
 
         return $pdf->download('daftar_pembayaran.pdf');
