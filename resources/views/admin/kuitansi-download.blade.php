@@ -241,7 +241,7 @@
                         </td>
                         <td style="width: 33.3%;">
                             <p class="mb-0">
-                                Cimahi, {{ \Carbon\Carbon::parse($perjadin[0]->surat->document_date)->isoFormat('D MMMM Y')}}, 
+                                Cimahi, {{ \Carbon\Carbon::parse($perjadin->surat->document_date)->isoFormat('D MMMM Y')}}, 
                             </p>
                             <p class="pb-0 mb-0">
                                 Yang Menerima,

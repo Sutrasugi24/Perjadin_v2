@@ -121,7 +121,7 @@ class KuitansiController extends Controller
 
         view()->share('x', $x);
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled' => true])
-            ->setPaper('A4', 'portrait')
+            ->setPaper(array(0,0,609.4488,935.433), 'portrait')
             ->loadView('admin.kuitansi-download', $x);
         
         return $pdf->download('kuitansi.pdf');
