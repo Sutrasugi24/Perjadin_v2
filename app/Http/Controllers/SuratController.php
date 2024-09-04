@@ -115,7 +115,7 @@ class SuratController extends Controller
         view()->share('x', $data);
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled', true])
-            ->setPaper('F4', 'landscape')
+            ->setPaper(array(0,0,609.4488,935.433), 'landscape')
             ->loadView('admin.surat-download', $data);
 
         return $pdf->download('surat.pdf');
@@ -139,8 +139,6 @@ class SuratController extends Controller
             'data' => $surat,
             'members' => $members,
             'user' => User::all(),
-            'cost_per_id' => $perjadin->kuitansi->cost_total / $totalMembers,
-            'terbilang' => RupiahFormat::terbilang($perjadin->kuitansi->cost_total),
         ];
     }
 }
