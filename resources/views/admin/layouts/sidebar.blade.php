@@ -108,7 +108,7 @@
                         </a>
                     </li>
                 @endcan
-                @canany(['read user', 'read role', 'read permission', 'read perjadin', 'read surat'])
+                @canany(['read user', 'read role', 'read permission'])
                     <li class="nav-header ml-2">AKSES</li>
                 @endcanany
                 @can('read user')
@@ -135,7 +135,9 @@
                         </a>
                     </li>
                 @endcan
-                <li class="nav-header ml-2">PENGATURAN</li>
+                @canany(['read setting', 'filemanager', 'read module'])
+                    <li class="nav-header ml-2">PENGATURAN</li>
+                @endcanany
                 @can('read setting')
                     <li class="nav-item">
                         <a href="{{ route('setting.index') }}" class="nav-link {{ request()->routeIs('setting.index') ? 'active':'' }}">

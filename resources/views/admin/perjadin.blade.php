@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            @can('create user')
+                            @can('create perjadin')
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus"></i> Tambah</a>

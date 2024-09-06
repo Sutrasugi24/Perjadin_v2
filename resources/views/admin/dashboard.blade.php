@@ -24,6 +24,9 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
+
+                    @can('read user')
+                    <!-- User -->
                     <div class="col-lg-4 col-6">
                         <!-- small box -->
                         <div style="background-color: #0081C9;" class="small-box">
@@ -37,7 +40,10 @@
                         <a href="{{ route('user.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
+                    @endcan
+
+                    @can('read role')
+                    <!-- Role  -->
                     <div class="col-lg-4 col-6">
                         <!-- small box -->
                         <div style="background-color: #5BC0F8;" class="small-box">
@@ -51,7 +57,10 @@
                         <a href="{{ route('role.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
+                    @endcan
+
+                    @can('read permission')
+                    <!-- Permission -->
                     <div class="col-lg-4 col-6">
                         <!-- small box -->
                         <div style="background-color: #86E5FF;" class="small-box">
@@ -65,12 +74,17 @@
                         <a href="{{ route('permission.index') }}" class="small-box-footer"> More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    @endcan
+
                     <!-- ./col -->
                 </div>
                 <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
             <div class="container-fluid">
                 <div class="row">
+                
+                    @can('read perjadin')
+                    <!-- Perjadin -->
                     <div class="col-md-3 col-sm-6 col-12">
                         <div style="background-color: #FF6B6B;" class="info-box">
                             <span class="info-box-icon"><i class="fas fa-business-time"></i></span>
@@ -83,6 +97,10 @@
                             </div>                            
                         </div>
                     </div>
+                    @endcan
+
+                    @can('read surat')
+                    <!-- Surat -->
                     <div class="col-md-3 col-sm-6 col-12">
                         <div style="background-color: #FFD93D;" class="info-box">
                             <span class="info-box-icon"><i class="fas fa-file-pdf"></i></span>
@@ -95,6 +113,10 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
+
+                    @can('read kuitansi')
+                    <!-- Kuitansi -->
                     <div class="col-md-3 col-sm-6 col-12">
                         <div style="background-color: #6BCB77;" class="info-box">
                             <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
@@ -107,21 +129,27 @@
                             </div>
                         </div>
                     </div>
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div style="background-color: #4D96FF;" class="info-box">
-                                <span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Biaya</span>
-                                    <span class="info-box-number">Rp. {{ number_format($kuitansi->sum('cost_total'), 0, ',', '.') }}</span>
-                                <span class="progress-description">
-                                    Total Biaya yang telah dikeluarkan
-                                </span>
-                            </div>
-                        </div>         
-                    </div>
+                    @endcan
+
+                    @can('read biaya')
+                    <!-- Biaya -->
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div style="background-color: #4D96FF;" class="info-box">
+                            <span class="info-box-icon"><i class="fas fa-dollar-sign"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Biaya</span>
+                                <span class="info-box-number">Rp. {{ number_format($kuitansi->sum('cost_total'), 0, ',', '.') }}</span>
+                            <span class="progress-description">
+                                Total Biaya yang telah dikeluarkan
+                            </span>
+                        </div>
+                    </div>         
+                    @endcan
+                </div>
                 </div>
             </div>
             
+            @can('read perjadin')
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Informasi Perjadin</h3>
@@ -140,6 +168,7 @@
                     </div>
                 </div>
             </div>
+            @endcan
         </section>
         <!-- /.content -->
     </div>
