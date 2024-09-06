@@ -31,12 +31,22 @@ class KuitansiController extends Controller
 
     public function store(Request $request)
     {
-        $this->validateRequest($request);
+        $validator = Validator::make($request->all(), [
+            'kuitansi_number'   => ['required'],
+            'kuitansi_date'     => ['required'],
+            'perjadin_id'       => ['required'],
+            'biaya_id'          => ['required'],
+        ]);
 
-        $total_biaya = $this->calculateTotalBiaya($request->perjadin_id, $request->biaya_id);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                ->withInput();
+        }
 
         DB::beginTransaction();
         try {
+            $total_biaya = $this->calculateTotalBiaya($request->perjadin_id, $request->biaya_id);
+
             $kuitansi = Kuitansi::create([
                 'kuitansi_number' => $request->kuitansi_number,
                 'kuitansi_date' => Carbon::now(),
@@ -203,14 +213,7 @@ class KuitansiController extends Controller
         $members = (DB::table('user_perjadin')->where('perjadin_id', $id_perjadin)->count()) + 1;
 
         $biaya = Biaya::findOrFail($id_biaya);
-        $uangSaku = Biaya::findOrFail(5)->cost;
-        $transport = Biaya::findOrFail(4)->cost;
 
-        if ($id_biaya == 1 || $interval <= 2) {
-            return (($interval * $biaya->cost) + $transport) * $members;
-        } else {
-            $interval -= 2;
-            return (($biaya->cost * 2) + ($interval * $uangSaku) + $transport) * $members;
-        }
+        return $biaya->cost * $interval * $members;
     }
 }

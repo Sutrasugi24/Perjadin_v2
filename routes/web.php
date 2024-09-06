@@ -57,9 +57,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 
     Route::controller(KuitansiController::class)->group(function () {
-        Route::get('kuitansi', 'index')->middleware(['permission:read user'])->name('kuitansi.index');
-        Route::post('kuitansi', 'store')->middleware(['permission:create user'])->name('kuitansi.store');
-        Route::post('kuitansi/show', 'show')->middleware(['permission:read user'])->name('kuitansi.show');
+        Route::get('kuitansi', 'index')->middleware(['permission:read kuitansi'])->name('kuitansi.index');
+        Route::post('kuitansi', 'store')->middleware(['permission:create kuitansi'])->name('kuitansi.store');
+        Route::post('kuitansi/show', 'show')->middleware(['permission:read kuitansi'])->name('kuitansi.show');
         Route::put('kuitansi', 'update')->middleware(['permission:update kuitansi'])->name('kuitansi.update');
         Route::delete('kuitansi', 'destroy')->middleware(['permission:delete biaya'])->name('kuitansi.destroy');
         Route::get('kuitansi/download/{id}', 'download')->middleware(['permission:read kuitansi'])->name('kuitansi.download');
