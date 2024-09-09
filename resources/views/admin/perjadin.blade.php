@@ -210,9 +210,9 @@
                         </div>
                         {{-- End Input date --}}
                         <div class="input-group">
-                            <label>Tujuan</label>
+                            <label>Maksud Perjalanan Dinas</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" name="plan" value="{{ old('plan') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud Perjalan Dinas" name="plan" value="{{ old('plan') }}">
                                 @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -344,9 +344,9 @@
                         </div>
                         {{-- End Input date --}}
                         <div class="input-group">
-                            <label>Tujuan</label>
+                            <label>Maksud Perjalan Dinas</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud" id="plan" name="plan" value="{{ old('plan') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud Perjalan Dinas" id="plan" name="plan" value="{{ old('plan') }}">
                                 @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
