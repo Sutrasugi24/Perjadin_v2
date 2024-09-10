@@ -212,7 +212,7 @@
                         <div class="input-group">
                             <label>Maksud Perjalanan Dinas</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud Perjalan Dinas" name="plan" value="{{ old('plan') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud Perjalanan Dinas" name="plan" value="{{ old('plan') }}">
                                 @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -344,9 +344,9 @@
                         </div>
                         {{-- End Input date --}}
                         <div class="input-group">
-                            <label>Maksud Perjalan Dinas</label>
+                            <label>Maksud Perjalanan Dinas</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud Perjalan Dinas" id="plan" name="plan" value="{{ old('plan') }}">
+                                <input type="text" class="form-control @error('plan') is-invalid @enderror" placeholder="Maksud Perjalanan Dinas" id="plan" name="plan" value="{{ old('plan') }}">
                                 @error('plan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
