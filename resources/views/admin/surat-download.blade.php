@@ -135,11 +135,7 @@
                                 <td colspan="2" class="col-xs-5 h-6 pt-3"><p class="text-left">Nama/NIP Pegawai yang melaksanakan perjalanan dinas</p></td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
                                     <p class="text-left mb-0">{{ $user->find($member)->name }}</p>
-                                    @if($user->find($member)->golongan == '')
-                                        <p class="text-left">NIP. -</p>
-                                    @else
-                                        <p class="text-left">NIP.{{ $user->find($member)->nip }}</p>
-                                    @endif
+                                    <p class="text-left">NIP. {{ $user->find($member)->nip }}</p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
@@ -150,11 +146,19 @@
                                     <p>c. Tingkat Biaya Perjalanan Dinas</p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
-                                    @if($user->find($member)->golongan == '')
-                                        <p class="text-left m-0">-</p>
+                                    <p class="text-left m-0">
+                                    @if ($user->find($member)->pangkat)
+                                        {{ $user->find($member)->pangkat }}
                                     @else
-                                        <p class="text-left m-0">{{ $user->find($member)->golongan }}</p>
+                                        -
                                     @endif
+                                    <span>/</span> 
+                                    @if ($user->find($member)->golongan)
+                                        {{ $user->find($member)->golongan }}
+                                    @else
+                                        -
+                                    @endif
+                                    </p>
                                     <p class="text-left m-0">{{ $user->find($member)->jabatan }}</p>
                                     <p class="text-left mb-1">Rp.-</p>
                                 </td>

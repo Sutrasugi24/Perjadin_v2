@@ -168,11 +168,19 @@
                     <tr class="border">
                         <td class="border text-center mtb">{{ $loop->iteration }}</td>
                         <td class="border mtb">{{ $user->find($member)->name }}</td>
-                        @if( $user->find($member)->golongan == '')
-                            <td class="border text-center"> {{ $user->find($member)->jabatan }} / -</td>
+                        <td class="border text-center">
+                        @if ( $user->find($member)->pangkat )
+                            {{ $user->find($member)->pangkat }}
                         @else
-                            <td class="border text-center"> {{ $user->find($member)->jabatan }} / {{ $user->find($member)->golongan }}</td>
+                            -
                         @endif
+                        <span>/</span>
+                        @if ( $user->find($member)->golongan )
+                            {{ $user->find($member)->golongan }}
+                        @else
+                            -
+                        @endif
+                        </td>
                         <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id / $selisihHari, 0, ',', '.') }}</td>
                         <td class="border text-center">{{ $selisihHari }}</td>
                         <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id, 0, ',', '.') }}</td>

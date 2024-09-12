@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nip')->unique()->nullable();
             $table->string('nips')->unique()->nullable();
             $table->string('jabatan')->nullable();
+            $table->string('pangkat')->nullable();
             $table->string('golongan')->nullable();
             $table->string('password')->nullable;
             $table->rememberToken();

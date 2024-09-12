@@ -33,6 +33,7 @@ class UserController extends Controller
             'nip'       => ['required', 'string', 'unique:users'],
             'nips'      => ['required', 'string', 'unique:users'],
             'jabatan'   => ['required', 'string'],
+            'pangkat'   => ['required', 'string'],
             'golongan'  => ['required', 'string']
         ]);
         if ($validator->fails()) {
@@ -48,6 +49,7 @@ class UserController extends Controller
                 'nip'       => $request->nip,
                 'nips'      => $request->nips,
                 'jabatan'   => $request->jabatan,
+                'pangkat'   => $request->pangkat,
                 'golongan'  => $request->golongan
             ]);
             $user->assignRole($request->role);
@@ -78,6 +80,7 @@ class UserController extends Controller
             'password'  => ['nullable', 'string'],
             'role'      => ['required'],
             'jabatan'   => ['required', 'string'],
+            'pangkat'   => ['required', 'string'],
             'golongan'  => ['required', 'string']
         ];
 
@@ -115,6 +118,7 @@ class UserController extends Controller
             'nip'     => $request->nip,
             'nips'     => $request->nips,
             'jabatan'     => $request->jabatan,
+            'pangkat'     => $request->pangkat,
             'golongan'     => $request->golongan,
         ];
         if (!empty($request->password)) {

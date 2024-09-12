@@ -49,6 +49,7 @@
                                             <th>NIP</th>
                                             <th>NIPS</th>
                                             <th>Jabatan</th>
+                                            <th>Pangkat</th>
                                             <th>Golongan</th>
                                             <th>Role</th>
                                             @canany(['update user', 'delete user'])
@@ -65,6 +66,7 @@
                                                 <td>{{ $i->nip}}</td>
                                                 <td>{{ $i->nips}}</td>
                                                 <td>{{ $i->jabatan}}</td>
+                                                <td>{{ $i->pangkat }}</td>
                                                 <td>{{ $i->golongan }}</td>
                                                 <td>{{ implode(",", $i->getRoleNames()->toArray()) }}</td>
                                             @canany(['update user', 'delete user'])
@@ -121,6 +123,7 @@
                         $("#nips").val(data.nips);
                         $("#old_nips").val(data.nips);
                         $("#jabatan").val(data.jabatan);
+                        $("#pangkat").val(data.pangkat);
                         $("#golongan").val(data.golongan);
                         $("#role").val(data.role);
                         $("#id").val(data.id);
@@ -210,6 +213,14 @@
                             </div>
                         </div>
                         <div class="input-group">
+                            <label>Pangkat</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('pangkat') is-invalid @enderror" placeholder="Pangkat" name="pangkat" value="{{ old('pangkat') }}">
+                                @error('pangkat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div><div class="input-group">
                             <label>Golongan</label>
                             <div class="input-group">
                                 <input type="text" class="form-control @error('golongan') is-invalid @enderror" placeholder="Golongan" name="golongan" value="{{ old('golongan') }}">
@@ -306,6 +317,15 @@
                             <div class="input-group">
                                 <input type="text" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Jabatan" name="jabatan" id="jabatan" value="{{ old('jabatan') }}">
                                 @error('jabatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Pangkat</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('pangkat') is-invalid @enderror" placeholder="Pangkat" name="pangkat" id="pangkat" value="{{ old('pangkat') }}">
+                                @error('pangkat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

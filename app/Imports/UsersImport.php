@@ -23,6 +23,7 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'nip' => $row['nip'],
                 'nips' => $row['nips'],
                 'jabatan' => $row['jabatan'],
+                'pangkat' => $row['pangkat'],
                 'golongan' => $row['golongan'],
                 'password' => $randStr,
             ]);

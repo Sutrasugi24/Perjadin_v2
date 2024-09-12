@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'nip'       => '12345678',
             'nips'      => '12345678',
             'jabatan'   => 'Kepala TU',
+            'pangkat'   => '-',
             'golongan'  => 'Karya'
         ]);
         $superadmin->assignRole('superadmin');
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
             'nip'       => '123456781',
             'nips'      => '123456781',
             'jabatan'   => 'Wakil TU',
+            'pangkat'   => '-',
             'golongan'  => 'Karya'
         ]);
         $admin->assignRole('admin');
@@ -44,6 +46,7 @@ class UserSeeder extends Seeder
             'nip'       => '123456789',
             'nips'      => '123456789',
             'jabatan'   => 'Wakil Wakil Kepala TU',
+            'pangkat'   => '-',
             'golongan'  => 'Karya'
         ]);
         $operator->assignRole('operator');

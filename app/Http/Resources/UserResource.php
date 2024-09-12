@@ -16,6 +16,7 @@ class UserResource extends JsonResource
             'nip'           => $this->nip,
             'nips'          => $this->nips,
             'jabatan'       => $this->jabatan,
+            'pangkat'       => $this->pangkat,
             'golongan'      => $this->golongan,
             'role'          => implode(",", $this->getRoleNames()->toArray()),
             'created_at'    => date('d-m-Y H:i:s', strtotime($this->created_at)),
