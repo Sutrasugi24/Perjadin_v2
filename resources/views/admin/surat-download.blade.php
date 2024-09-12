@@ -38,7 +38,7 @@
 
         .container-right {
             text-align: left;
-            padding-left: 60%;
+            padding-left: 55%;
         }
 
         table {
@@ -61,6 +61,10 @@
             width: 5%;
             text-align: center;
             font-size: 11px;
+        }
+
+        .hidden-border{
+            border: 10px solid transparent;
         }
 
         .wrap-text {
@@ -109,13 +113,13 @@
                 </div>
             <div class="container-right">
                 <div class="wrap-text-right">
-                    <p>Lembar ke  <span style="padding-left:26px;">: 1</span> </p>
+                    <p>Lembar ke  <span style="padding-left:26px;">: 2</span> </p>
                     <p>Kode nomor <span style="padding-left:18px;">:</span> </p>
-                    <p>Nomor <span style="padding-left:42px;">:</span> </p>
+                    <p>Nomor <span style="padding-left:42px;">:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/KPG.11.01-SMAN6CMH/{{now()->year}}</p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 0; margin-bottom:0;" >
-                <p style="font-size:11px; font-weight:bold;"><u>Surat Perjalanan Dinas (SPD)</u></p>
+                <p style="font-size:11px; font-weight:bold;"><u>SURAT PERJALANAN DINAS (SPD)</u></p>
             </div>
             <div class="row">
                 <div class="col-12 mt-3">
@@ -124,7 +128,7 @@
                             <tr class="d-flex">
                                 <td class="col h-6 p-1"><p class="text-center">1</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1"><p class="text-left">Pengguna Anggaran/Kuasa Pengguna Anggaran</p></td>
-                                    <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left">Kepala Sekolah</p></td>
+                                    <td colspan="2" class="col-xs-6 h-6 p-1"><p class="text-left">{{ Setting::getValue('app_headmaster') }}</p></td>
                             </tr>
                             <tr class="d-flex">
                                 <td class="col-xs-1 h-6 p-1"><p class="text-center">2</p></td>
@@ -238,12 +242,18 @@
                             </tr>
                             <tr class="d-flex">
                                 <td colspan="5">
-                                    <p style="text-align: left; padding-left:30px;">* Coret yang tidak perlu</p><
-                                    <div class="container-kota">
-                                        <div class="wrap-kota">
-                                            <p>Dikeluarkan: di Kota Cimahi</p>
-                                            <p>Tanggal: {{ \Carbon\Carbon::parse($perjadin[0]->surat->document_date)->isoFormat('D MMMM Y')}}</p>
-                                        </div>
+                                    <p style="text-align: left; padding-left:30px;">* Coret yang tidak perlu</p>
+                                    <div style="">
+                                        <table class="hidden-border" style="width: auto; margin-right: 100px; margin-left: auto;">
+                                            <tr class="hidden-border">
+                                                <td class="hidden-border" style="white-space: nowrap; text-align: right;">Dikeluarkan di :</td>
+                                                <td> Kota Cimahi</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-border" style="text-align: right;">Tanggal :</td>
+                                                <td> {{ \Carbon\Carbon::parse($perjadin[0]->surat->document_date)->isoFormat('D MMMM Y')}}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                     <br/>
                                     <div class="container-text">
