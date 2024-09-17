@@ -17,7 +17,6 @@ class PerjadinResource extends JsonResource
             'destination'   => $this->destination,
             'destination_two'   => $this->destination_two,
             'destination_three'   => $this->destination_three,
-            'description'   => $this->description,
             'transport'     => $this->transport,
             'coordinator'   => $this->coordinator,
             'created_at'    => date('d-m-Y H:i:s', strtotime($this->created_at)),

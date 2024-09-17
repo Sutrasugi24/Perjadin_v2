@@ -37,7 +37,6 @@ class PerjadinController extends Controller
             'destination'   => ['required'],
             'destination_two' => ['max:255'],
             'destination_three' => ['max:255'],
-            'description'   => ['max:255'],
             'transport'     => ['required', 'in:darat,laut,udara'],
             'coordinator'   => ['required', 'max:255'],
             'members'       => ['array'],
@@ -57,7 +56,6 @@ class PerjadinController extends Controller
                 'destination'   => $request->destination,
                 'destination_two' => $request->destination_two,
                 'destination_three' => $request->destination_three,
-                'description'   => $request->description,
                 'transport'     => $request->transport,
                 'coordinator'   => $request->coordinator
             ]);
@@ -89,7 +87,6 @@ class PerjadinController extends Controller
             'return_date'   => ['required'],
             'plan'          => ['required', 'max:255'],
             'destination'   => ['required'],
-            'description'   => ['max:255'],
             'transport'     => ['required', 'in:darat,laut,udara'],
             'coordinator'   => ['required', 'max:255'],
             'members'       => ['array'],
@@ -108,7 +105,6 @@ class PerjadinController extends Controller
             'destination'   => $request->destination,
             'destination_two'   => $request->destination_two,
             'destination_three'   => $request->destination_three,
-            'description'   => $request->description,
             'transport'     => $request->transport,
             'coordinator'   => $request->coordinator,
             // 'members'       => $request->members

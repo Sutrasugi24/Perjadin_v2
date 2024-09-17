@@ -125,7 +125,6 @@
                         $("#destination_three").val(data.destination_three);
                         $("#transport").val(data.transport);
                         $("#coordinator").val(data.coordinator);
-                        $("#description").val(data.description);
                         $("#members").val(data.members);
                         $("#id").val(data.id);
                         $('#modal-loading').modal('hide');
@@ -266,17 +265,6 @@
                             </div>
                         </div>
                         {{-- End: Input destination --}}
-                        {{--Start: Input description --}}
-                        <div class="input-group">
-                            <label>Deskripsi</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" name="description" value="{{ old('description') }}">
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        {{-- End: Input description --}}
                         {{--Start: Input koordinator --}}
                         <label>Koordinator</label>
                         <div class="input-group">
@@ -400,17 +388,6 @@
                             </div>
                         </div>
                         {{-- End: Input destination --}}
-                        {{--Start: Input description --}}
-                        <div class="input-group">
-                            <label>Deskripsi</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi" id="description" name="description" value="{{ old('description') }}">
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        {{-- End: Input description --}}
                         {{--Start: Input koordinator --}}
                         <label>Koordinator</label>
                         <div class="input-group">

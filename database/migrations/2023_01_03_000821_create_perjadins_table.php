@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date('leave_date')->required();
             $table->date('return_date')->required();
             $table->integer('coordinator')->required();
-            $table->string('description')->nullable();
         });
     }
 
