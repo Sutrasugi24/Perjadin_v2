@@ -44,6 +44,20 @@ class SettingSeeder extends Seeder
             'category'  => 'information'
         ]);
         Setting::create([
+            'key'       => 'app_trasurer',
+            'value'     => 'MULYADI', 
+            'name'      => 'Bendahara',
+            'type'      => 'text',
+            'category'  => 'information'
+        ]);
+        Setting::create([
+            'key'       => 'app_treasurer_nip',
+            'value'     => '198209142010011001',
+            'name'      => 'NIP Bendahara',
+            'type'      => 'text',
+            'category'  => 'information'
+        ]);
+        Setting::create([
             'key'       => 'app_logo',
             'value'     => 'storage/sman6.png',
             'name'      => 'Application Logo',
