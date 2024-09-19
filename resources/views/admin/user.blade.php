@@ -234,7 +234,12 @@
                             <div class="input-group">
                                 <select class="form-control" name="role">
                                     @foreach ($role as $i)
-                                        <option value="{{ $i->name }}">{{ $i->name }}</option>
+                                    @if($i->name !== 'superadmin')
+                                        <option value="{{ $i->name }}"
+                                          {{ $i->name == "guest" ? "selected" : "" }}>
+                                            {{ $i->name }}
+                                        </option>
+                                    @endif
                                     @endforeach
                                 </select>
                                 @error('role')
