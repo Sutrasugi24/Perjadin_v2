@@ -22,7 +22,6 @@ class PerjadinSeeder extends Seeder
             'plan'       => 'Perjalanan Dinas ke Kota Garut',
             'destination'      => 'Kota Garut',
             'transport'   => 'darat',
-            'description'  => 'Keberangkatan ke Garut'
         ]);
     }
 }
