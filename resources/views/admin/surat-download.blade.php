@@ -264,8 +264,8 @@
                                         <div class="wrap-text">
                                             <p >Kepala SMA Negeri 6 Cimahi</p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
-                                            <p><u>Drs. YAYAT SUPRIYAT, M. M.Pd.</u></p>
-                                            <p>NIP. 196307251989031013</p>
+                                            <p><u>{{ Setting::getValue('app_headmaster') }}</u></p>
+                                            <p>NIP. {{ Setting::getValue('app_nip') }}</p>
                                             <br/>
                                         </div>
                                     </div>
