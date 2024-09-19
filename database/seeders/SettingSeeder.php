@@ -31,21 +31,21 @@ class SettingSeeder extends Seeder
         // ]);
         Setting::create([
             'key'       => 'app_headmaster',
-            'value'     => 'Drs. YAYAT SUPRIYAT, M. M.Pd',
+            'value'     => 'Drs. Deden Musa',
             'name'      => 'Kepala Sekolah',
             'type'      => 'text',
             'category'  => 'information'
         ]);
         Setting::create([
             'key'       => 'app_nip',
-            'value'     => '19630725198903104',
+            'value'     => '196409211988031003',
             'name'      => 'NIP Kepala Sekolah',
             'type'      => 'text',
             'category'  => 'information'
         ]);
         Setting::create([
-            'key'       => 'app_trasurer',
-            'value'     => 'MULYADI', 
+            'key'       => 'app_treasurer',
+            'value'     => 'Mulyadi', 
             'name'      => 'Bendahara',
             'type'      => 'text',
             'category'  => 'information'
