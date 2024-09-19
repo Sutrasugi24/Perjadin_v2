@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\User;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -14,19 +14,19 @@ class UsersImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) 
         {
-            $randStr = Hash::make(5);
-            $randGmail = Hash::make(1);
+            $randStr = Str::random(10);
+            $randGmail = Str::random(8);
 
             User::create([
                 'name' => $row['nama'],
                 'email' => $randGmail.'@gmail.com',
+                'password' => $randStr,
                 'nip' => $row['nip'],
                 'nips' => $row['nips'],
                 'jabatan' => $row['jabatan'],
                 'pangkat' => $row['pangkat'],
                 'golongan' => $row['golongan'],
-                'password' => $randStr,
-            ]);
+            ])->assignRole('guest');
         }
     }
 }
