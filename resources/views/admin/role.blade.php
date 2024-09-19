@@ -55,10 +55,10 @@
                                                 <td>{{ $i->name }}</td>
                                                 <td>{{ $i->guard_name }}</td>
                                                 <td>
-                                                    @if ($i->name == 'superadmin' || count($i->permissions) == count($permission))
+                                                    @if (count($i->permissions) == count($permission))
                                                         All permission
                                                     @else
-                                                        {{ $i->permissions->implode('name', '|') }}
+                                                        {{ $i->permissions->implode('name', ', ') }}
                                                     @endif
                                                 </td>
                                                 <td>{{ $i->updated_at }}</td>
