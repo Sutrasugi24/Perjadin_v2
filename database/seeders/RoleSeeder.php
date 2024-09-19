@@ -102,5 +102,13 @@ class RoleSeeder extends Seeder
             'read surat',
             'create surat',
         ]);
+
+        $guest = Role::create([
+            'name'          => 'guest',
+            'guard_name'    => 'web'
+        ]);
+        $guest->givePermissionTo([
+            'read user',
+        ]);
     }
 }

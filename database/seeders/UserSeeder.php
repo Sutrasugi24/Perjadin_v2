@@ -50,5 +50,18 @@ class UserSeeder extends Seeder
             'golongan'  => 'Karya'
         ]);
         $operator->assignRole('operator');
+
+        $guest = User::create([
+            'name'      => 'Guest',
+            'email'     => 'guest@guest.com',
+            'password'  => bcrypt('guest'),
+            'nip'       => '',
+            'nips'      => '',
+            'jabatan'   => '',
+            'pangkat'   => '',
+            'golongan'  => ''
+        ]);
+        $guest->assignRole('guest');
+
     }
 }
