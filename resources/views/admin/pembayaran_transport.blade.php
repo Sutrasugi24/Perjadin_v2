@@ -29,6 +29,15 @@
             clear: both;
         }
 
+        .currency {
+            text-align: right;
+        }
+
+        .currency:before {
+            content: "Rp. ";
+            float: left;
+        }
+
         .text-left{
             text-align: left;
         }
@@ -57,6 +66,10 @@
             border: 1px solid black;
             border-collapse: collapse;
             width: 100%;
+        }
+
+        td {
+            padding: 5px;
         }
     
         .border{
@@ -150,19 +163,19 @@
         <div class="container-fluid p-5">
             <div class="row mb-5">
             <div style="text-align: center; margin-top: 0; margin-bottom:0;" >
-                <p class="uppercase bold">Daftar Pembayaran Uang Transport belanja perjalanan dinas (SPD)</p>
-                <p class="text-center">Perjalanan Dinas ke {{ $perjadin[0]->destination }}, selama {{ $selisihHari }} hari {{ $perjadin[0]->plan }}</p>
+                <p class="bold">DAFTAR PEMBAYARAN UANG TRANSPORTASI BELANJA PERJALANAN DINAS</p>
+                <p class="text-center">ke {{ $perjadin[0]->destination }}, pada tanggal {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y')}} {{ $perjadin[0]->plan }}</p>
             </div>
             <div class="row">
                 <table>
                     <tr class="border">
-                        <td class="border text-center bold"  style="width: 5%;"><p> No </p></td>
-                        <td class="border text-center bold" style="width: 30%;"><p>Nama</p></td>
-                        <td class="border text-center bold" style="width: 20%;"><p>Pangkat/Gol</p></td>
-                        <td class="border text-center bold" style="width: 10%;"><p>Tarif</p></td>
-                        <td class="border text-center bold" style="width: 5%;"><p>Lama(hari)</p></td>
-                        <td class="border text-center bold" style="width: 10%;"><p>Jumlah yang Diterima</p></td>
-                        <td class="border text-center bold" style="width: 20%;"><p>Tanda Tangan Penerima</p></td>
+                        <td class="border text-center bold" style="width: 5%;"> No </td>
+                        <td class="border text-center bold" style="width: 30%;">Nama</td>
+                        <td class="border text-center bold" style="width: 20%;">Pangkat/Gol</td>
+                        <td class="border text-center bold" style="width: 10%;">Tarif</td>
+                        <td class="border text-center bold" style="width: 5%;">Lama (hari)</td>
+                        <td class="border text-center bold" style="width: 10%;">Jumlah yang Diterima</td>
+                        <td class="border text-center bold" style="width: 20%;">Tanda Tangan Penerima</td>
                     </tr>
                     @foreach($members as $member)
                     <tr class="border">
@@ -181,15 +194,15 @@
                             -
                         @endif
                         </td>
-                        <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id / $selisihHari, 0, ',', '.') }}</td>
+                        <td class="border currency">{{ number_format($cost_per_id / $selisihHari, 0, ',', '.') }}</td>
                         <td class="border text-center">{{ $selisihHari }}</td>
-                        <td class="border text-right" style="padding-right: 2px;">{{ number_format($cost_per_id, 0, ',', '.') }}</td>
+                        <td class="border currency">{{ number_format($cost_per_id, 0, ',', '.') }}</td>
                         <td class="border"></td>
                     </tr>
                     @endforeach
                     <tr class="border">
-                        <td class="border bold text-center uppercase" colspan="5"><p>Jumlah</p></td>
-                        <td class="border bold text-right"><p>{{ $perjadin[0]->kuitansi->formatRupiah('cost_total') }}</p></td>
+                        <td class="border bold text-center" colspan="5">JUMLAH</td>
+                        <td class="border bold currency">{{ $perjadin[0]->kuitansi->formatRupiah('cost_total') }}</td>
                         <td class="border"></td>
                     </tr>
                     <td class="border text-center" colspan="7"><p style="font-weight: bold; text-transform: capitalize;"><i> {{ $terbilang }} </i></p></td>
@@ -215,24 +228,24 @@
                     </tr>
                     <tr>
                         <td>
-                            <p class="bold text-center uppercase">Bendahara Pengeluaran Pembantu,</p>
+                            <p class="bold text-center">BENDAHARA PENGELUARAN PEMBANTU,</p>
                         </td>
                         <td>
-                            <p class="bold text-center uppercase">Koordinator</p>
+                            <p class="bold text-center">KOORDINATOR,</P>
                         </td>
                     </tr>
                     
                     <tr>
                         <td>
-                            <p class="bold text-center uppercase" style="margin-top:75px;"> <u> Mulyadi </u></p>
-                            <p class="bold text-center">NIP. 198209142010011001</p>
+                            <p class="bold text-center" style="margin-top:75px;"><u>{{ Setting::getValue('app_treasurer') }}</u></p>
+                            <p class="text-center">NIP. {{ Setting::getValue('app_treasurer_nip') }}</p>
                         </td>
                         <td>
                             <p class="bold text-center" style="margin-top:75px;"> <u> {{ $user->find($perjadin[0]->coordinator)->name }} </u> </p>
                             @if($user->find($perjadin[0]->coordinator)->nip == '')
-                                <p class="bold text-center">NIP. -</p>
+                                <p class="text-center">NIP. -</p>
                             @else
-                                <p class="bold text-center">NIP. {{ $user->find($perjadin[0]->coordinator)->nip }}</p>
+                                <p class="text-center">NIP. {{ $user->find($perjadin[0]->coordinator)->nip }}</p>
                             @endif
                         </td>
                     </tr>
