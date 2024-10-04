@@ -344,7 +344,9 @@
                                 <p class="hidden">1</p>
                             </td>
                             <td>
-                                <p class="bold text-center" style="margin-top: 10px;">Kepala SMA Negeri 6 Cimahi,</p>
+                                <p class="bold text-center" style="margin-top: 10px;">
+                                    {{ Setting::getValue('app_plh') === 'true' ? 'Plh. ' : '' }} Kepala SMA Negeri 6 Cimahi,
+                                </p>
                             </td>
                         </tr>
                         

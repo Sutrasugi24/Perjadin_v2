@@ -232,7 +232,7 @@
                                 Mengetahui / Menyutujui :
                             </p>
                             <p class="pt-0 mt-0">
-                                Kepala Sekolah,
+                                {{ Setting::getValue('app_plh') === 'true' ? 'Plh. ' : '' }} Kepala Sekolah,
                             </p>
                         </td>
                         <td style="width: 33.3%;" class="border-r-l ">
