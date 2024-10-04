@@ -263,7 +263,7 @@
                                     <div class="container-text">
                                         <div class="wrap-text">
                                             <p >
-                                                {{ Setting::getValue('app_plh') === 'true' ? 'Plh. ' : '' }} Kepala SMA Negeri 6 Cimahi
+                                                {{ Setting::getValue('app_plt') === 'true' ? 'Plt. ' : '' }} Kepala SMA Negeri 6 Cimahi
                                             </p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
                                             <p><u>{{ Setting::getValue('app_headmaster') }}</u></p>
@@ -365,7 +365,7 @@
                                     <div style="text-align: center;">
                                         <div tyle="text-align: center;">
                                             <p style="font-weight:bold;">
-                                                {{ Setting::getValue('app_plh') === 'true' ? 'Plh. ' : '' }} Kepala SMA Negeri 6 Cimahi
+                                                {{ Setting::getValue('app_plt') === 'true' ? 'Plt. ' : '' }} Kepala SMA Negeri 6 Cimahi
                                             </p>
                                             <br/> <br/> <br/> <br/> <br/> <br/>
                                             <p style="font-weight:bold;"><u>{{ Setting::getValue('app_headmaster') }}</u></p>

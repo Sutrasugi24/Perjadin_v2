@@ -30,9 +30,9 @@ class SettingSeeder extends Seeder
         //     'category'  => 'information'
         // ]);
         Setting::create([
-            'key'       => 'app_plh',
+            'key'       => 'app_plt',
             'value'     => 'false',
-            'name'      => 'Plh',
+            'name'      => 'Plt',
             'type'      => 'checkbox',
             'category'  => 'information'
         ]);
