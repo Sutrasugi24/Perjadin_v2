@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,26 +56,44 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
+        $settings = Setting::all();
+        /* foreach ($settings as $setting) { */
         $validator = Validator::make($request->all(), [
-            'key'       => ['required'],
-            'value'     => ['required']
+            '*' => ['required'],
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)
                 ->withInput();
         }
+        /* } */
 
+        /* try { */
+        /*     for ($i = 0; $i < count($request->key); $i++) { */ 
+        /*         Setting::where(['key' => $request->key[$i]])->update(['value' => $request->value[$i]]); */
+        /*     } */
+        /*     Alert::success('Pemberitahuan', 'Setting berhasil disimpan')->toToast()->toHtml(); */
+        /* } catch (\Throwable $th) { */
+        /*     Alert::error('Pemberitahuan', 'Setting gagal disimpan : ' . $th->getMessage())->toToast()->toHtml(); */
+        /* } */
+        /* return back(); */
+
+        DB::beginTransaction();
         try {
-            for ($i = 0; $i < count($request->key); $i++) { 
-                Setting::where(['key' => $request->key[$i]])->update(['value' => $request->value[$i]]);
+            foreach ($settings as $setting) {
+                $setting->update([
+                    'value' => $request[$setting->key]
+                ]);
             }
+            DB::commit();
             Alert::success('Pemberitahuan', 'Setting berhasil disimpan')->toToast()->toHtml();
         } catch (\Throwable $th) {
+            DB::rollback();
             Alert::error('Pemberitahuan', 'Setting gagal disimpan : ' . $th->getMessage())->toToast()->toHtml();
         }
         return back();
     }
+
 
     public function destroy(Request $request)
     {

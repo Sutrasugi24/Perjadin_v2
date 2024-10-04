@@ -48,16 +48,21 @@
                                                         <label for="{{ $set->key }}" class="col-sm-2 col-form-label">{{ str_replace("Application ", "", $set->name) }}</label>
                                                         <div class="col-sm-10">
                                                             @if ($set->type == 'text')
-                                                                <input type="hidden" name="key[]" value="{{ $set->key }}">
-                                                                <input type="text" name="value[]" value="{{ $set->value }}" class="form-control" id="{{ $set->key }}" placeholder="{{ $set->name }}" required>
+                                                                <input type="hidden" name="{{ $set->key }}" value="{{ $set->key }}">
+                                                                <input type="text" name="{{ $set->key }}" value="{{ $set->value }}" class="form-control" id="{{ $set->key }}" placeholder="{{ $set->name }}" required>
                                                             @elseif($set->type == 'textarea')
-                                                                <input type="hidden" name="key[]" value="{{ $set->key }}">
-                                                                <textarea type="text" name="value[]" rows="3" class="form-control" id="{{ $set->key }}" placeholder="{{ $set->name }}" required>{{ $set->value }}</textarea>
+                                                                <input type="hidden" name="{{ $set->key }}" value="{{ $set->key }}">
+                                                                <textarea type="text" name="{{ $set->key }}" rows="3" class="form-control" id="{{ $set->key }}" placeholder="{{ $set->name }}" required>{{ $set->value }}</textarea>
+                                                            @elseif($set->type == 'checkbox')
+                                                                <div class="form-check">
+                                                                    <input type="hidden" name="{{ $set->key }}" value="false">
+                                                                    <input type="checkbox" name="{{ $set->key }}" value="true" {{$set->value == 'true' ? 'checked' : ''}} class="form-check-input" id="{{ $set->key }}">
+                                                                </div>
                                                             @elseif($set->type == 'file')
                                                                 <img src="{{ asset($set->value) }}" alt="{{ $set->name }}" id="{{ $set->key }}-image" width="8%">
                                                                 <div class="input-group">
-                                                                    <input type="hidden" name="key[]" value="{{ $set->key }}">
-                                                                    <input type="text" readonly class="form-control" placeholder="{{ $set->name }}" name="value[]" id="{{ $set->key }}" value="{{ $set->value }}" readonly required>
+                                                                    <input type="hidden" name="{{ $set->key }}" value="{{ $set->key }}">
+                                                                    <input type="text" readonly class="form-control" placeholder="{{ $set->name }}" name="{{ $set->key }}" id="{{ $set->key }}" value="{{ $set->value }}" readonly required>
                                                                     {{-- <div class="input-group-append">
                                                                         <button class="btn btn-primary" type="button" id="{{ $set->key }}button">Pilih Foto</button>
                                                                     </div> --}}
