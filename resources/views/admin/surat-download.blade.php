@@ -89,7 +89,7 @@
         }
 
         .tb-m{
-            margin-bottom: 87px;
+            margin-bottom: 80px;
         }
 
         
@@ -167,13 +167,9 @@
                                 <td class="col-xs-1 h-6 p-1"><p class="text-center">4</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
                                     <p class="text-left  mb-5">Maksud Perjalanan Dinas </p>
-                                    <br/>
-                                    <br/>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
                                     <p class="text-left  mb-5">{{ $perjadin[0]->plan }}</p>
-                                    <br/>
-                                    <br/>
                                 </td>
                             </tr>
                             <tr class="d-flex">
@@ -290,7 +286,7 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td><p>l.</p></td>
+                                <td><p>I.</p></td>
                                 <td colspan="2" class="col-xs-5 h-6 p-1">
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
@@ -300,53 +296,50 @@
                                 </td>
                             </tr>
                             <tr class="d-flex">
-                                <td><p>ll.</p></td>
-                                <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p>Tiba di    : {{ $perjadin[0]->destination }}</p>
-                                    <p>Pada Tanggal    : </p>
-                                    <p class="tb-m"></p>
+                                <td><p>II.</p></td>
+                                <td colspan="2" class="col-xs-5 h-6 p-1" style="vertical-align: top;">
+                                    <p>Tiba di : {{ $perjadin[0]->destination }}</p>
+                                    <p>Pada Tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->leave_date)->isoFormat('D MMMM Y') }}</p>
                                 </td>
                                 @if( $perjadin[0]->destination != '' )
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
-                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
-                                        <p class="text-left">Ke : {{ $perjadin[0]->destination_two }}</p>
-                                        <p class="text-left tb-m">Pada tanggal : </p>
+                                        <p class="text-left">Berangkat dari : {{ $perjadin[0]->destination }} </p>
+                                        <p class="text-left">Ke : SMAN 6 Cimahi</p>
+                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
                                     </td>
                                 @else
-                                    <td colspan="2" class="col-xs-6 h-6 p-1">
-                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination }} </p>
-                                        <p class="text-left">Ke : SMAN 6 Cimahi</p>
-                                        <p class="text-left tb-m">Pada tanggal : </p>
+                                    <td colspan="2" class="col-xs-7 h-6 p-1">
+                                        <p class="text-left">Berangkat dari : {{ $perjadin[0]->destination }} </p>
+                                        <p class="text-left">Ke : {{ $perjadin[0]->destination_two }}</p>
+                                        <p class="text-left tb-m">Pada tanggal : {{ \Carbon\Carbon::parse($perjadin[0]->return_date)->isoFormat('D MMMM Y') }}</p>
                                     </td>
                                 @endif
                             </tr>
                             <tr class="d-flex">
-                                <td><p>lll.</p></td>
-                                    <td colspan="2" class="col-xs-5 h-6 p-1">
-                                        <p>Tiba di    : {{ $perjadin[0]->destination_two }}</p>
-                                        <p>Pada Tanggal    : </p>
-                                        <p class="tb-m"></p>
+                                <td><p>III.</p></td>
+                                    <td colspan="2" class="col-xs-5 h-6 p-1" style="vertical-align: top;">
+                                        <p>Tiba di : {{ $perjadin[0]->destination_two }}</p>
+                                        <p>Pada Tanggal : </p>
                                     </td>
                                 @if( $perjadin[0]->destination_three != '' )
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
-                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination_two }} </p>
-                                        <p class="text-left">Ke : {{ $perjadin[0]->destination_three }}</p>
+                                        <p class="text-left">Berangkat dari : {{ $perjadin[0]->destination_two }} </p>
+                                        <p class="text-left">Ke : SMAN 6 Cimahi</p>
                                         <p class="text-left tb-m">Pada tanggal : </p>
                                     </td>
                                 @else
                                     <td colspan="2" class="col-xs-6 h-6 p-1">
-                                        <p class="text-left">Berangkat dari :{{ $perjadin[0]->destination_two }} </p>
-                                        <p class="text-left">Ke : SMAN 6 Cimahi</p>
+                                        <p class="text-left">Berangkat dari : {{ $perjadin[0]->destination_two }} </p>
+                                        <p class="text-left">Ke : {{ $perjadin[0]->destination_three }}</p>
                                         <p class="text-left tb-m">Pada tanggal : </p>
                                     </td>
                                 @endif
                             </tr>
                             <tr class="d-flex">
-                                <td><p>lV.</p></td>
-                                <td colspan="2" class="col-xs-5 h-6 p-1">
-                                    <p>Tiba di    : </p>
-                                    <p>Pada Tanggal    : </p>
-                                    <p class="tb-m"></p>
+                                <td><p>IV.</p></td>
+                                <td colspan="2" class="col-xs-5 h-6 p-1" style="vertical-align: top;">
+                                    <p>Tiba di : </p>
+                                    <p>Pada Tanggal : </p>
                                 </td>
                                 <td colspan="2" class="col-xs-6 h-6 p-1">
                                     <p class="text-left">Berangkat dari :  </p>
