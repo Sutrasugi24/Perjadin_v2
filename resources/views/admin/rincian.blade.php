@@ -259,7 +259,7 @@
                                 <p class="hidden">x</p>
                             </td>
                             <td>
-                                <p class="text-center">Cimahi, {{ \Carbon\Carbon::parse($perjadin[0]->surat->document_date)->isoFormat('D MMMM Y')}}</p>
+                                <p class="text-center">Cimahi, {{ \Carbon\Carbon::parse($perjadin[0]->kuitansi->kuitansi_date)->isoFormat('D MMMM Y')}}</p>
                             </td>
                         </tr>
                         <tr>
