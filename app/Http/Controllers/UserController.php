@@ -30,8 +30,8 @@ class UserController extends Controller
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'  => ['required', 'string'],
             'role'      => ['required'],
-            'nip'       => ['required', 'string', 'unique:users'],
-            'nips'      => ['required', 'string', 'unique:users'],
+            'nip'       => ['nullable', 'string', 'unique:users'],
+            'nips'      => ['nullable', 'string', 'unique:users'],
             'jabatan'   => ['nullable', 'string'],
             'pangkat'   => ['nullable', 'string'],
             'golongan'  => ['nullable', 'string']
@@ -93,18 +93,18 @@ class UserController extends Controller
         }
 
         if ($request->nip != $request->old_nip) {
-            $rules['nip'] = ['required', 'string', 'unique:users'];
+            $rules['nip'] = ['nullable', 'string', 'unique:users'];
             $validator = Validator::make($request->all(), $rules);
         } else {
-            $rules['nip'] = ['required', 'string'];
+            $rules['nip'] = ['nullable', 'string'];
             $validator = Validator::make($request->all(), $rules);
         }
 
         if ($request->nips != $request->old_nips) {
-            $rules['nips'] = ['required', 'string', 'unique:users'];
+            $rules['nips'] = ['nullable', 'string', 'unique:users'];
             $validator = Validator::make($request->all(), $rules);
         } else {
-            $rules['nips'] = ['required', 'string'];
+            $rules['nips'] = ['nullable', 'string'];
             $validator = Validator::make($request->all(), $rules);
         }
 
