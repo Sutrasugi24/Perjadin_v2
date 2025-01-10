@@ -49,7 +49,7 @@ class KuitansiController extends Controller
 
             $kuitansi = Kuitansi::create([
                 'kuitansi_number' => $request->kuitansi_number,
-                'kuitansi_date' => Carbon::now(),
+                'kuitansi_date' => $request->kuitansi_date,
                 'cost_total' => $total_biaya,
                 'perjadin_id' => $request->perjadin_id,
                 'biaya_id' => $request->biaya_id,
@@ -82,7 +82,7 @@ class KuitansiController extends Controller
 
         $data = [
             'kuitansi_number' => $request->kuitansi_number,
-            'kuitansi_date' => Carbon::now(),
+            'kuitansi_date' => $request->kuitansi_date,
             'cost_total' => $total_biaya,
             'perjadin_id' => $request->perjadin_id,
             'biaya_id' => $request->biaya_id,
