@@ -164,7 +164,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Riskihajar\Terbilang\TerbilangServiceProvider::class,
 
@@ -198,7 +197,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Alert'         => RealRashid\SweetAlert\Facades\Alert::class,
-        'ReCaptcha'     => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Setting'       => App\Helpers\SettingHelper::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
