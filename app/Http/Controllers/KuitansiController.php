@@ -10,12 +10,12 @@ use App\Models\User;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Number;
 use Spatie\Permission\Models\Role;
 use App\Http\Resources\KuitansiResource;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
-use Laraindo\RupiahFormat;
 
 class KuitansiController extends Controller
 {
@@ -125,7 +125,7 @@ class KuitansiController extends Controller
         $x['title'] = 'Kuitansi';
         $x['data'] = $kuitansi;
         
-        $x['terbilang'] = RupiahFormat::terbilang($kuitansi->cost_total);
+        $x['terbilang'] = Number::spell($kuitansi->cost_total, locale: 'id');
         $x['perjadin'] = $perjadin; // Pass perjadin data to the view
         $x['user'] = User::all();
 
@@ -184,7 +184,7 @@ class KuitansiController extends Controller
             'members' => $members,
             'user' => User::all(),
             'cost_per_id' => $perjadin->kuitansi->cost_total / $totalMembers,
-            'terbilang' => RupiahFormat::terbilang($perjadin->kuitansi->cost_total),
+            'terbilang' => Number::spell($perjadin->kuitansi->cost_total, locale: 'id'),
         ];
     }
 
