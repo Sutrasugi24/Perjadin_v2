@@ -274,9 +274,11 @@
                         <div class="input-group">
                             <label>ID Perjadin</label>
                             <div class="input-group">
-                                <select id="perjadin_id" class="form-control" id="id_perjadin" name="perjadin_id">
+                                <select class="form-control" id="id_perjadin" name="perjadin_id">
                                     @foreach ($perjadin as $i)
-                                        <option value="{{ $i->id }}">{{ $i->id }} - {{ $i->plan }}</option>
+                                        <option value="{{ $i->id }}" {{ old('perjadin_id') == $i->id ? 'selected' : '' }}>
+                                            {{ $i->id }} - {{ $i->plan }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('perjadin_id')
@@ -289,9 +291,11 @@
                         <div class="input-group">
                             <label>Jenis Kegiatan</label>
                             <div class="input-group">
-                                <select id="biaya_id" class="form-control" id="id_biaya" name="biaya_id">
+                                <select class="form-control" id="id_biaya" name="biaya_id">
                                     @foreach ($biaya as $i)
-                                        <option value="{{ $i->id }}">{{ $i->type }}</option>
+                                        <option value="{{ $i->id }}" {{ old('biaya_id') == $i->id ? 'selected' : '' }}>
+                                            {{ $i->type }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('biaya_id')
